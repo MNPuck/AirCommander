@@ -172,13 +172,14 @@ public class WorldController extends InputAdapter {
 		
 			//call player module
 			float wuXAxis = tsOutput.x;
-			Player.inputTouchScreen(wuXAxis);
+			float wuYAxis = tsOutput.y;
+			Player.inputTouchScreen(wuXAxis, wuYAxis);
 				
 		}
 		
 		if (!Gdx.input.isTouched()) {
 				
-			Player.inputTouchScreen(0);
+			Player.inputTouchScreen(-99, -99);
 			
 		}
 				

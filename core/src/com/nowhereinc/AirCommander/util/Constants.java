@@ -3,15 +3,15 @@ package com.nowhereinc.AirCommander.util;
 public class Constants {
 
 	// Visible game world is 16 meters wide
-	public static final float VIEWPORT_WIDTH = 16.0f;
+	public static final float VIEWPORT_WIDTH = 9.0f;
 
 	// Visible game world is 9 meters tall
-	public static final float VIEWPORT_HEIGHT = 9.0f;
+	public static final float VIEWPORT_HEIGHT = 16.0f;
 	
 	// GameWorld Border
 	
-	public static final float GAMEBOARD_WIDTH = 16.0f;
-	public static final float GAMEBOARD_HEIGHT = 9.0f;
+	public static final float GAMEBOARD_WIDTH = 9.0f;
+	public static final float GAMEBOARD_HEIGHT = 16.0f;
 	
 	// Level Size Input Size
 	public static final float LEVEL_INPUT_WIDTH = 32.0f;
@@ -99,13 +99,13 @@ public class Constants {
 		public static final float BOX_TO_WORLD = 120f;
 	
 	// Max Player Velocity Android
-		public static final float MAX_PLAYER_VELOCITY_A = 6.0f;
+		public static final float MAX_PLAYER_VELOCITY_A = 12.0f;
 		
 	// Max Ball Velocity Android
 		public static final float MAX_BULLET_VELOCITY = 6.0f;
 		
 	// Player Velocity Increment Android
-		public static final float PLAYER_VELOCITY_INC_A = .80f;
+		public static final float PLAYER_VELOCITY_INC_A = 2.0f;
 		
 	// Max Player Velocity Desktop
 		public static final float MAX_PLAYER_VELOCITY_D = 6.0f;

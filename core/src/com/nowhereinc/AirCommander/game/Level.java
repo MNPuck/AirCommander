@@ -126,11 +126,13 @@ public class Level {
 			
 		playerPos = player.returnPlayerPosition();
 		
+		// init bullets if enough time has passed
+		
 		// bullets update
 		
 		for (Bullet bullet : bullets) {
 			
-			bullet.update(world, deltaTime, playerPos);
+			bullet.update(world, deltaTime);
 			
 		}
 		

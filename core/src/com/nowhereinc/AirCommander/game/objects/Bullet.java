@@ -80,7 +80,12 @@ public class Bullet {
 	
 	}
 	
-	public void update (World world, float deltaTime, Vector2 playerPos) {
+	public void initShot (World world, float deltaTime, Vector2 playerPos) {
+		
+		
+	}
+	
+	public void update (World world, float deltaTime) {
 		
 		Vector2 vel = this.body.getLinearVelocity();
 		Vector2 pos = this.body.getPosition();

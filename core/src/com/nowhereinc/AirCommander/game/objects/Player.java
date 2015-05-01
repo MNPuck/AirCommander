@@ -25,10 +25,7 @@ public class Player {
 	private static boolean yButton;
 
 	private static float tsXAxis;
-	private static boolean isGreenActivated;
-	private static boolean isRedActivated;
-	private static boolean isBlueActivated;
-	private static boolean isYellowActivated;	
+	private static float tsYAxis;
 	
 	// Body
 	public Body body;
@@ -100,9 +97,10 @@ public class Player {
 	
 	}
 	
-	public static void inputTouchScreen (float tsXAxisIn) {
+	public static void inputTouchScreen (float tsXAxisIn, float tsYAxisIn) {
 		
 		tsXAxis = tsXAxisIn;
+		tsYAxis = tsYAxisIn;
 	
 	}
 	
@@ -137,70 +135,117 @@ public class Player {
 		Vector2 vel = this.body.getLinearVelocity();
 		Vector2 pos = this.body.getPosition();
 		
-		boolean onRightEdge = false;
-		boolean onLeftEdge = false;
+		Vector2 playerCenter;
+		
+		playerCenter = new Vector2(0,0);
+		
+		playerCenter.x = this.body.getPosition().x + boxXSize;
+		playerCenter.y = this.body.getPosition().y + boxYSize;
 		
 		float maxPlayerVelocity = 0f;
 		 
 		maxPlayerVelocity = Constants.MAX_PLAYER_VELOCITY_A;
 		
-		// stop if right of screen is reached
+		// stop if right edge is reached
 		
-		if (pos.x >= (Constants.SCREEN_SIDE_EDGES) - boxXSize &&
-					  !onRightEdge) {
-					
-			vel.x = 0;
-			this.body.setLinearVelocity(vel.x , 0);
-			onRightEdge = true;
-		
-		}
-		
-		// stop if left of screen is reached
-		
-		if (pos.x <=  (- Constants.SCREEN_SIDE_EDGES) + boxXSize &&
-					   !onLeftEdge) {
+		if (pos.x >= (Constants.GAMEBOARD_WIDTH / 2) - boxXSize &&
+			!onRightEdge) {
 			
 			vel.x = 0;
-			this.body.setLinearVelocity(vel.x, 0);
+			onRightEdge = true;
+			
+		}
+		
+		// stop if left edge is reached
+		
+		if (pos.x <= (- Constants.GAMEBOARD_WIDTH / 2) + boxXSize &&
+			!onLeftEdge) {
+			
+			vel.x = 0;
 			onLeftEdge = true;
 			
 		}
 		
-		// move right if screen touched to right of object
+		// stop if bottom edge is reached
 		
-		if (tsXAxis > pos.x - boxXSize &&
-			tsXAxis != 0 &&
-			vel.x < maxPlayerVelocity &&
-			pos.x < (Constants.SCREEN_SIDE_EDGES) - (boxXSize * 2) &&
-			!onRightEdge) {
+		if (pos.y <= (- Constants.GAMEBOARD_HEIGHT / 2) + boxYSize &&
+			!onBottomEdge) {
 			
-			vel.x += Constants.PLAYER_VELOCITY_INC_A;
-			this.body.setLinearVelocity(vel.x , 0);
-			onLeftEdge = false;
+			vel.y = 0;
+			onBottomEdge = true;
+			
+		}
+		
+		// stop if top edge is reached
+		
+		if (pos.y >= (Constants.GAMEBOARD_HEIGHT / 2) - boxYSize &&
+			!onTopEdge) {
+			
+			vel.y = 0;
+			onTopEdge = true;
+			
+		}
+		
+		// move right
+		
+		if (tsXAxis > playerCenter.x &&
+			tsXAxis != -99 &&
+			vel.x < maxPlayerVelocity &&
+			pos.x < (Constants.GAMEBOARD_WIDTH / 2) - (boxXSize * 2) &&
+			!onRightEdge) {
+				
+				vel.x += Constants.PLAYER_VELOCITY_INC_A;
+				onLeftEdge = false;
 		
 		}
 		
-		// move left if screen touch to left of object
+		// move left
 		
-		if (tsXAxis < pos.x + boxXSize &&
-			tsXAxis != 0 &&
+		if (tsXAxis < playerCenter.x &&
+			tsXAxis != -99 &&
 			vel.x > - maxPlayerVelocity &&
-			pos.x > (- Constants.SCREEN_SIDE_EDGES) &&
+			pos.x > (- Constants.GAMEBOARD_WIDTH / 2) &&
 			!onLeftEdge) {
 			
 			vel.x += -Constants.PLAYER_VELOCITY_INC_A;
-			this.body.setLinearVelocity(vel.x, 0);
 			onRightEdge = false;
 			
 		}
 		
+		// move up
+		
+		if (tsYAxis > playerCenter.y &&
+			tsYAxis != -99 &&
+			vel.y < maxPlayerVelocity &&
+			pos.y < (Constants.GAMEBOARD_HEIGHT / 2) - (boxYSize * 2) &&
+			!onTopEdge) {
+			
+				vel.y += Constants.PLAYER_VELOCITY_INC_A;
+				onBottomEdge = false;
+		}
+		
+		// move down
+		
+		if (tsYAxis < playerCenter.y &&
+			tsYAxis != -99 &&
+			vel.y > - maxPlayerVelocity &&
+			pos.y > ( - Constants.GAMEBOARD_HEIGHT / 2) &&
+			!onBottomEdge) {
+			
+				vel.y += -Constants.PLAYER_VELOCITY_INC_A;
+				onTopEdge = false;
+		}
+		
 		// no move so stop movement
-		if (tsXAxis == 0) {
+		if (tsXAxis == -99 &&
+			tsYAxis == -99) {
 			
 			vel.x = 0;
-			this.body.setLinearVelocity(vel.x, 0);
+			vel.y = 0;
 		
 		}
+		
+		this.body.setLinearVelocity(vel.x, vel.y);
 		
 	}
 	
