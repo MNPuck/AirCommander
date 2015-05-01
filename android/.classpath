@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Brian/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-android/1.5.5/16bbdb750c6e557693820bbcd31dd992c0f6839f/gdx-backend-android-1.5.5.jar" sourcepath="C:/Users/Brian/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-android/1.5.5/8344027a50c825bc4162070d34bb2a31cf195a4a/gdx-backend-android-1.5.5-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Brian/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d/1.5.5/8931a097fc80279c6b9ee695560a85c1e280c7ea/gdx-box2d-1.5.5.jar" sourcepath="C:/Users/Brian/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d/1.5.5/a293e269341d905ebe0c596b4afd42f44f03b5d2/gdx-box2d-1.5.5-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Brian/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-controllers/1.5.5/bfe9e5573613704d0af80c6c74d3411a45b2cc15/gdx-controllers-1.5.5.jar" sourcepath="C:/Users/Brian/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-controllers/1.5.5/7219c6076a59df4153729d54f99d7653bb8ec826/gdx-controllers-1.5.5-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Brian/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-controllers-android/1.5.5/a0e9942091523aaf76980abd4cdc5da425d8792/gdx-controllers-android-1.5.5.jar" sourcepath="C:/Users/Brian/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-controllers-android/1.5.5/e094f6bdb4ea87db80ba7b52848b2512811b125e/gdx-controllers-android-1.5.5-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Brian/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-ai/1.5.0/5f694a1d54a6e15884ac50b83b7927df771d69b0/gdx-ai-1.5.0.jar" sourcepath="C:/Users/Brian/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-ai/1.5.0/1ecf751f2ed8e80f693a018219f3aa5e74b10da4/gdx-ai-1.5.0-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Brian/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.5.5/9896d723afaeaae8229546119f9abffac5f8dbc7/gdx-1.5.5.jar" sourcepath="C:/Users/Brian/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.5.5/23a5d06da04fd9a381aa225425722facf7de96c1/gdx-1.5.5-sources.jar"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
+	<classpathentry kind="src" path="gen"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/AirCommander-core"/>
+	<classpathentry kind="output" path="bin/classes"/>
+</classpath>

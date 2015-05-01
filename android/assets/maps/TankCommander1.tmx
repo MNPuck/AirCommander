@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="grass" tilewidth="32" tileheight="32">
+  <image source="Tiles/grass.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="17" name="Sand" tilewidth="32" tileheight="32">
+  <image source="Tiles/sand.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="33" name="rock_7" tilewidth="32" tileheight="32">
+  <image source="Tiles/rock_7.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="37" name="road_3" tilewidth="32" tileheight="32">
+  <image source="Tiles/road_3.png" width="64" height="192"/>
+ </tileset>
+ <tileset firstgid="49" name="road_4" tilewidth="32" tileheight="32">
+  <image source="Tiles/road_4.png" width="64" height="192"/>
+ </tileset>
+ <tileset firstgid="61" name="road_5" tilewidth="32" tileheight="32">
+  <image source="Tiles/road_5.png" width="192" height="64"/>
+ </tileset>
+ <tileset firstgid="73" name="road_corner_1" tilewidth="32" tileheight="32">
+  <image source="Tiles/road_corner_1.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="77" name="road_corner_3" tilewidth="32" tileheight="32">
+  <image source="Tiles/road_corner_3.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="81" name="road_corner_4" tilewidth="32" tileheight="32">
+  <image source="Tiles/road_corner_4.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="85" name="road_asphalt_clean_to_damaged_hor" tilewidth="32" tileheight="32">
+  <image source="Tiles/road_asphalt_clean_to_damaged_hor.png" width="128" height="100"/>
+ </tileset>
+ <tileset firstgid="97" name="road_asphalt_clean_to_damaged_vert" tilewidth="32" tileheight="32">
+  <image source="Tiles/road_asphalt_clean_to_damaged_vert.png" width="100" height="128"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="64" height="64">
+  <data encoding="base64" compression="zlib">
+   eJzt1EsKgzAYhdFYtQ/b/a/XfwUWKckpcgd38BFIJofMrbWlNtVutblT97r3137UnrW1du/Yo9452+/ap/aqbR171Dtne5Szf/Ee//Ef//Ef//Ef/8dOpi/n8R//V/af/z/+4z/+r+xf+9Ot/enW/nRrf7q1P93an27tT7f2p1v706396db+dGt/urU/3dqfbu1Pt/anW/vTrf3p1v50a3+6tT/d2p9u7U+39qdb+9Ot/enW/nRrf7q1P93an27tT7f2p1v706396db+dGt/urU/3dqfbu1Pt/anW/vTrf3p1v50a3+6tT/dO2iPZ0Q=
+  </data>
+ </layer>
+ <layer name="Tile Layer 2" width="64" height="64">
+  <data encoding="base64" compression="zlib">
+   eJzt1sENhDAMBEBa4aD/Gg8KuMeRgNdoRsozyAprJ8sCwButx/oU7E2xHWsv2PvLG850xB1nClCh8zxfJ3yj8zzfqgsACNX5bpuh891WLSE7lTUkZCehhn8l5KZSx39WSV7khRp6T++RI7Efn6wpsR8TawIAGJH45nyS9919ZEu2RszIT+cMzsiPDHJV596ZQe8AScxkMxng9AWfggn5
+  </data>
+ </layer>
+</map>
