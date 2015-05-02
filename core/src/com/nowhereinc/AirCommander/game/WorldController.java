@@ -22,10 +22,10 @@ public class WorldController extends InputAdapter {
 	
 	private Controller player1Controller;
 	
-	private static boolean startPressed;
-	private static boolean selectPressed;
-	public static boolean escPressed;
-	public static boolean gameOver;
+	private boolean startPressed;
+	private boolean selectPressed;
+	public boolean escPressed;
+	public boolean gameOver;
 	
 	private float tsXAxis;
 	private float tsYAxis;
@@ -64,25 +64,27 @@ public class WorldController extends InputAdapter {
 		
 	}
 	
-	public static boolean isGameOver () {
+	public boolean isGameOver () {
 		return gameOver;
 	}
 	
-	public static boolean isEscPressed () {
+	public boolean isEscPressed () {
 		return escPressed;
 	}
 	
-	public static boolean isStartPressed() {
+	public boolean isStartPressed() {
 		return startPressed;
 	}
 	
-	public static boolean isSelectPressed() {
+	public boolean isSelectPressed() {
 		return selectPressed;
 	}
 	
 	public void update (float deltaTime, WorldRenderer worldRenderer) {
 		
 		//handleDebugInput(deltaTime);
+		
+		gameOver = level.returnIsGameOver();
 		
 		if (!gameOver) {
 		
@@ -112,7 +114,6 @@ public class WorldController extends InputAdapter {
 		
 		}
 		
-
 		switch (Gdx.app.getType()) {
 		
 		case Desktop: 
@@ -173,13 +174,13 @@ public class WorldController extends InputAdapter {
 			//call player module
 			float wuXAxis = tsOutput.x;
 			float wuYAxis = tsOutput.y;
-			Player.inputTouchScreen(wuXAxis, wuYAxis);
+			level.player.inputTouchScreen(wuXAxis, wuYAxis);
 				
 		}
 		
 		if (!Gdx.input.isTouched()) {
 				
-			Player.inputTouchScreen(-99, -99);
+			level.player.inputTouchScreen(-99, -99);
 			
 		}
 				

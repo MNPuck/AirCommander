@@ -49,8 +49,8 @@ public class GameScreen extends AbstractGameScreen {
 		
 		// Change this back to old if statement that includes Game Over Check after testing is done
 		
-		if (WorldController.isEscPressed() ||
-			WorldController.isSelectPressed()) hide();
+		if (worldController.isEscPressed() ||
+			worldController.isSelectPressed()) hide();
 		
 	}
 

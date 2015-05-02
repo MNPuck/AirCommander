@@ -17,15 +17,15 @@ public class Player {
 	
 	private TextureRegion Player;
 	
-	private static float leftXAxis;
-	private static float leftYAxis;
-	private static boolean aButton;
-	private static boolean bButton;
-	private static boolean xButton;
-	private static boolean yButton;
+	private float leftXAxis;
+	private float leftYAxis;
+	private boolean aButton;
+	private boolean bButton;
+	private boolean xButton;
+	private boolean yButton;
 
-	private static float tsXAxis;
-	private static float tsYAxis;
+	private float tsXAxis;
+	private float tsYAxis;
 	
 	// Body
 	public Body body;
@@ -84,7 +84,7 @@ public class Player {
 		
 	}
 	
-	public static void inputController (float leftXAxisIn, float leftYAxisIn, boolean aButtonIn,
+	public void inputController (float leftXAxisIn, float leftYAxisIn, boolean aButtonIn,
 			                            boolean bButtonIn, boolean xButtonIn,
 			                            boolean yButtonIn) {
 		
@@ -97,7 +97,7 @@ public class Player {
 	
 	}
 	
-	public static void inputTouchScreen (float tsXAxisIn, float tsYAxisIn) {
+	public void inputTouchScreen (float tsXAxisIn, float tsYAxisIn) {
 		
 		tsXAxis = tsXAxisIn;
 		tsYAxis = tsYAxisIn;

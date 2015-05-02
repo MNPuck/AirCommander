@@ -54,6 +54,9 @@ public class Level {
 	// player position
 	private Vector2 playerPos;
 	
+	// game over boolean
+	public boolean isGameOver;
+	
 	
 	public Level () {
 
@@ -94,6 +97,9 @@ public class Level {
 	
 		// init player pos 
 		playerPos = new Vector2(0,0);
+		
+		// level game over init
+		isGameOver = false;
 		
 		newLevel();
 		
@@ -153,7 +159,7 @@ public class Level {
 		// if level greater then max level set game over
 		
 		if (levelNumber > Constants.NUMBEROFLEVELS)
-			WorldController.gameOver = true;
+			isGameOver = true;
 		
 		// create levels
 
@@ -172,6 +178,11 @@ public class Level {
 		
 		player.setDeleteFlag();
 		
+	}
+	
+	public boolean returnIsGameOver() {
+		
+		return isGameOver;
 	}
 
 	public void render (SpriteBatch batch, float deltaTime) {
