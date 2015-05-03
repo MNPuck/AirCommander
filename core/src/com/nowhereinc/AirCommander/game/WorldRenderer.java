@@ -107,7 +107,7 @@ public class WorldRenderer implements Disposable {
 		BitmapFont fpsFont = Assets.instance.fonts.defaultBig;
 		
 		fpsFont.setColor(0, 1, 0, 1); // green
-		fpsFont.draw(batch, "Score " + worldController.level.score , x, y);
+		fpsFont.draw(batch, "Score " + worldController.level.returnScore() , x, y);
 		fpsFont.setColor(1, 1, 1, 1); // white
 	
 	}
@@ -127,7 +127,7 @@ public class WorldRenderer implements Disposable {
 		BitmapFont fpsFont = Assets.instance.fonts.defaultBig;
 		
 		fpsFont.setColor(0, 1, 0, 1);
-		fpsFont.draw(batch, "Lives: " + worldController.level.lives, x , y);		
+		fpsFont.draw(batch, "Lives: " + worldController.level.returnLives(), x , y);		
 		fpsFont.setColor(1, 1, 1, 1); // white
 		
 	}
@@ -167,7 +167,7 @@ public class WorldRenderer implements Disposable {
 		BitmapFont fpsFont = Assets.instance.fonts.defaultBig;
 		
 		fpsFont.setColor(1, 1, 1, 1); // white
-		fpsFont.draw(batch, "Level: " + worldController.level.levelNumber , x, y);
+		fpsFont.draw(batch, "Level: " + worldController.level.returnLevelNumber() , x, y);
 		fpsFont.setColor(1, 1, 1, 1); // white
 
 	}

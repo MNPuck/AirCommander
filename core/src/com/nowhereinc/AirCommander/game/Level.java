@@ -1,6 +1,7 @@
 package com.nowhereinc.AirCommander.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
@@ -40,13 +41,13 @@ public class Level {
 	public LevelBuilder levels;
 	
 	// variable to store level number
-	public static int levelNumber;
+	public int levelNumber;
 	
 	// variable to store score
-	public static int score;
+	public int score;
 	
 	// variable to store lives
-	public static int lives;
+	public int lives;
 	
 	// variable to see if this is new game
 	private boolean newGame; 
@@ -138,18 +139,7 @@ public class Level {
 		
 		for (Bullet bullet : bullets) {
 			
-			if (bullet.returnOffEdge()) {
-				
-				bullet.setDeleteFlag();
-				bullets.removeValue(bullet, true);
-				
-			}
-			
-			else {
-			
-				bullet.update(world, deltaTime);
-			
-			}
+			bullet.update(world, deltaTime);
 			
 		}
 		
@@ -159,11 +149,36 @@ public class Level {
 		
 		if (timeSinceLastBullet > Constants.BULLET_SPAWN_TIME) {
 			
-			bullet = null;
-			bullet = new Bullet(world, playerPos);
-			bullets.add((Bullet)bullet);
+			switch (Gdx.app.getType()) {
 			
-			timeSinceLastBullet = 0;
+				case Desktop: 
+				
+					if (player.returnAButton()) {
+					
+						bullet = null;
+						bullet = new Bullet(world, playerPos);
+						bullets.add((Bullet)bullet);
+					
+						timeSinceLastBullet = 0;
+					
+					}
+				
+					break;
+				
+				case Android:
+				
+					bullet = null;
+					bullet = new Bullet(world, playerPos);
+					bullets.add((Bullet)bullet);
+				
+					timeSinceLastBullet = 0;
+				
+					break;
+				
+				default:
+					break;
+		
+			}
 			
 		}
 			
@@ -173,7 +188,11 @@ public class Level {
 		
 		for (Bullet bullet : bullets) {
 			
-			bullet.deleteBullet(world);
+			if (bullet.deleteBullet(world)) {
+				
+				bullets.removeValue(bullet, true);
+				
+			}
 			
 		}
 		
@@ -207,6 +226,24 @@ public class Level {
 	private void resetPlayer() {
 		
 		player.setDeleteFlag();
+		
+	}
+	
+	public int returnLevelNumber() {
+		
+		return levelNumber;
+		
+	}
+	
+	public int returnLives() {
+		
+		return lives;
+		
+	}
+	
+	public int returnScore() {
+		
+		return score;
 		
 	}
 	

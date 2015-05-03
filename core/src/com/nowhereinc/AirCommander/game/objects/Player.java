@@ -52,14 +52,11 @@ public class Player {
 	}
 	
 	private void init(World world) {
-		
-		// set texture
-		// Player = Assets.instance.player.player;
 	
 		// create body def for player
 		bodyDefPlayer = new BodyDef();
 		bodyDefPlayer.position.set(0f, -4.40f);
-		bodyDefPlayer.type = BodyDef.BodyType.KinematicBody;
+		bodyDefPlayer.type = BodyDef.BodyType.DynamicBody;
 		body = world.createBody(bodyDefPlayer);
 		
 		// set user data
@@ -384,6 +381,12 @@ public class Player {
 			init(world);
 		
 		}
+		
+	}
+	
+	public boolean returnAButton() {
+		
+		return aButton;
 		
 	}
 	

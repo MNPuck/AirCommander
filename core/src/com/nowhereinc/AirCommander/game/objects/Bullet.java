@@ -31,12 +31,6 @@ public class Bullet {
 	private float boxXSize;
 	private float boxYSize;
 	
-	// first time switch
-	private boolean firstTime;
-	
-	// off edge switch
-	private boolean offEdge;
-	
 	public Bullet (World world, Vector2 playerPos) {
 		init(world, playerPos);
 	}
@@ -70,9 +64,6 @@ public class Bullet {
 		fixtureDefBullet.restitution = 1;
 		body.createFixture(fixtureDefBullet).setUserData("bullet");
 		
-		firstTime = true;
-		offEdge = false;
-		
 		shape.dispose();
 	
 	}
@@ -83,24 +74,7 @@ public class Bullet {
 
 		if (pos.y > Constants.GAMEBOARD_HEIGHT * .5) {
 			
-			offEdge = true;
-			
-		}
-		
-	}
-	
-	private void moveBullet (Vector2 vel, Vector2 pos) {
-		
-		float maxBulletVelocity = 0f;
-		
-		maxBulletVelocity = Constants.MAX_BULLET_VELOCITY;
-		
-		// move bullet up to it's max speed
-		
-		if (vel.y < maxBulletVelocity) {
-			
-			// move up
-			
+			setDeleteFlag();
 			
 		}
 		
@@ -114,7 +88,7 @@ public class Bullet {
 		
 	}
 	
-	public void deleteBullet(World world) {
+	public boolean deleteBullet(World world) {
 		
 		if(body.getUserData() == "delete") {
 		
@@ -123,14 +97,16 @@ public class Bullet {
 			body.setActive(false);
 			body.setUserData(null);
 			body = null;
+			
+			return true;
 		
 		}
 		
-	}
-	
-	public boolean returnOffEdge() {
-		
-		return offEdge;
+		else {
+			
+			return false;
+			
+		}
 		
 	}
 	
