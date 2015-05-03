@@ -57,6 +57,9 @@ public class Level {
 	// game over boolean
 	public boolean isGameOver;
 	
+	// time since last bullet
+	private float timeSinceLastBullet;
+	
 	
 	public Level () {
 
@@ -80,11 +83,7 @@ public class Level {
 		// bullets
 		bullets = new Array<Bullet>();
 		
-		// add bullets to list
-		bullet = null;
-		bullet = new Bullet(world);
-		bullets.add((Bullet)bullet);
-		bulletsCounter++;
+		bulletsCounter = 0;
 		
 		// set to new game
 		newGame = true;
@@ -100,6 +99,9 @@ public class Level {
 		
 		// level game over init
 		isGameOver = false;
+		
+		// init time since last bullet to 0
+		timeSinceLastBullet = 0;
 		
 		newLevel();
 		
@@ -132,21 +134,49 @@ public class Level {
 			
 		playerPos = player.returnPlayerPosition();
 		
-		// init bullets if enough time has passed
-		
 		// bullets update
 		
 		for (Bullet bullet : bullets) {
 			
-			bullet.update(world, deltaTime);
+			if (bullet.returnOffEdge()) {
+				
+				bullet.setDeleteFlag();
+				bullets.removeValue(bullet, true);
+				
+			}
+			
+			else {
+			
+				bullet.update(world, deltaTime);
+			
+			}
 			
 		}
 		
+		// if time since last bullet > constant, spawn a bullet
+		
+		timeSinceLastBullet += deltaTime;
+		
+		if (timeSinceLastBullet > Constants.BULLET_SPAWN_TIME) {
+			
+			bullet = null;
+			bullet = new Bullet(world, playerPos);
+			bullets.add((Bullet)bullet);
+			
+			timeSinceLastBullet = 0;
+			
+		}
+			
 	}	
 	
 	public void deleteFlaggedItems() {
 		
-		bullet.deleteBullet(world);
+		for (Bullet bullet : bullets) {
+			
+			bullet.deleteBullet(world);
+			
+		}
+		
 		player.deletePlayer(world);
 		
 	}

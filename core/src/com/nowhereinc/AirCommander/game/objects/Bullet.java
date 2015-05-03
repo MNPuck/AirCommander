@@ -37,26 +37,26 @@ public class Bullet {
 	// off edge switch
 	private boolean offEdge;
 	
-	// is bullet active
-	private boolean isActive;
-	
-	public Bullet (World world) {
-		init(world);
+	public Bullet (World world, Vector2 playerPos) {
+		init(world, playerPos);
 	}
 	
-	private void init(World world) {
+	private void init(World world, Vector2 PlayerPos) {
 		
 		// set texture
 		Bullet = Assets.instance.bullet.bullet;
 		
 		// create body def for bullet
 		bodyDefBullet = new BodyDef();
-		bodyDefBullet.position.set(0,0);
+		bodyDefBullet.position.set(PlayerPos);
 		bodyDefBullet.type = BodyDef.BodyType.DynamicBody;
 		body = world.createBody(bodyDefBullet);
 		
 		// set user data
 		body.setUserData(Bullet);
+		
+		// apply movement
+		body.applyLinearImpulse(0, Constants.MAX_BULLET_VELOCITY, PlayerPos.x, PlayerPos.y, true);
 	
 		CircleShape shape = new CircleShape();
 	
@@ -73,36 +73,15 @@ public class Bullet {
 		firstTime = true;
 		offEdge = false;
 		
-		// set to isActive to false
-		isActive = false;
-		
 		shape.dispose();
 	
 	}
 	
-	public void initShot (World world, float deltaTime, Vector2 playerPos) {
-		
-		
-	}
-	
 	public void update (World world, float deltaTime) {
 		
-		Vector2 vel = this.body.getLinearVelocity();
 		Vector2 pos = this.body.getPosition();
-		
-		if (firstTime) {
-		
-		
-		}
 
-		
-		if (!offEdge) {
-					
-			moveBullet(vel, pos);
-					
-		}
-		
-		if (pos.y < -4.5f) {
+		if (pos.y > Constants.GAMEBOARD_HEIGHT * .5) {
 			
 			offEdge = true;
 			
@@ -114,52 +93,15 @@ public class Bullet {
 		
 		float maxBulletVelocity = 0f;
 		
-		boolean moveSet = false;
-		
 		maxBulletVelocity = Constants.MAX_BULLET_VELOCITY;
 		
-		// if moving right and less then max velocity continue in that direction
+		// move bullet up to it's max speed
 		
-		if (vel.x > 0 &&
-			vel.x < maxBulletVelocity &&
-			!moveSet) {
-			
-			// move right
-			this.body.applyLinearImpulse(.80f, 0, pos.x, pos.y, true);
-			
-		}
-	
-		// if moving left and less then max velocity continue in that direction
-	
-		if (vel.x < 0 &&
-			vel.x > - maxBulletVelocity &&
-			!moveSet) {
-		
-			// move left
-			this.body.applyLinearImpulse(-.80f, 0, pos.x, pos.y, true);
-		
-		}
-		
-		// if moving up continue in that direction
-		
-		if (vel.y > 0 &&
-			vel.y < maxBulletVelocity &&
-			!moveSet) {
+		if (vel.y < maxBulletVelocity) {
 			
 			// move up
-			this.body.applyLinearImpulse(0, .80f, pos.x, pos.y, true);
 			
-		}
-	
-		// if moving down continue in that direction
-	
-		if (vel.y < 0 &&
-			vel.y > - maxBulletVelocity &&
-			!moveSet) {
-		
-			// move down
-			this.body.applyLinearImpulse(0, -.80f, pos.x, pos.y, true);
-		
+			
 		}
 		
 	}
@@ -194,8 +136,7 @@ public class Bullet {
 	
 	public void render (SpriteBatch batch) {
 		
-		if (body.getUserData() != "delete" &&
-			isActive) {
+		if (body.getUserData() != "delete") {
 		
 			Vector2 position = this.body.getPosition();
 			float rotation = (MathUtils.radiansToDegrees * this.body.getAngle());

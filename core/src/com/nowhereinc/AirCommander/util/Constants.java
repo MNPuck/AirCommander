@@ -95,28 +95,33 @@ public class Constants {
 	public static final String PREFERENCES = "pong.prefs";
 	
 	// World to Box
-		public static final float WORLD_TO_BOX = .0083f;
-		public static final float BOX_TO_WORLD = 120f;
+	public static final float WORLD_TO_BOX = .0083f;
+	public static final float BOX_TO_WORLD = 120f;
 	
 	// Max Player Velocity Android
-		public static final float MAX_PLAYER_VELOCITY_A = 12.0f;
+	public static final float MAX_PLAYER_VELOCITY_A = 6.0f;
 		
 	// Max Ball Velocity Android
-		public static final float MAX_BULLET_VELOCITY = 6.0f;
+	public static final float MAX_BULLET_VELOCITY = 8.0f;
 		
 	// Player Velocity Increment Android
-		public static final float PLAYER_VELOCITY_INC_A = 2.0f;
+	public static final float PLAYER_VELOCITY_INC_A = 2.0f;
 		
 	// Max Player Velocity Desktop
-		public static final float MAX_PLAYER_VELOCITY_D = 6.0f;
+	public static final float MAX_PLAYER_VELOCITY_D = 6.0f;
 		
 	// Player Velocity Increment Desktop
-		public static final float PLAYER_VELOCITY_INC_D = .80f;
+	public static final float PLAYER_VELOCITY_INC_D = .80f;
 		
 	// Screen Side Edges Location
-		public static final float SCREEN_SIDE_EDGES = 5.5f;
+	public static final float SCREEN_SIDE_EDGES = 5.5f;
 		
 	// Max Number of Bullets
-		public static final int MAX_BULLETS = 20;
+	public static final int MAX_BULLETS = 20;
+	
+	// Interval to fire bullets
+	public static final float BULLET_SPAWN_TIME = .20f;
+	
+	
 		
 }

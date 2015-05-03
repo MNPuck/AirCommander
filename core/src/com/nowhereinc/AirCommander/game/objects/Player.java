@@ -115,18 +115,18 @@ public class Player {
 		
 	}
 	
-	// return player position to level so it can pass to ball while green power up is active
+	// return player x top and y center to fire bullet from
 	
 	public Vector2 returnPlayerPosition() {
 		
-		Vector2 playerCenter;
+		Vector2 playerTopMiddle;
 		
-		playerCenter = new Vector2(0,0);
+		playerTopMiddle = new Vector2(0,0);
 		
-		playerCenter.x = this.body.getPosition().x + boxXSize;
-		playerCenter.y = this.body.getPosition().y + boxYSize;
+		playerTopMiddle.x = this.body.getPosition().x;
+		playerTopMiddle.y = this.body.getPosition().y + boxYSize;
 		
-		return playerCenter;
+		return playerTopMiddle;
 			
 	}
 	
