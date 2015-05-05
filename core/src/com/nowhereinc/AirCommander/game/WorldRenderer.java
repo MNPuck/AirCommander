@@ -25,6 +25,7 @@ public class WorldRenderer implements Disposable {
 	private OrthographicCamera camera;
 	private OrthographicCamera cameraGUI;
 	private SpriteBatch batch;
+	private TiledMapRenderer renderer;
 	private WorldController worldController;
 	
 	private Box2DDebugRenderer debugRenderer;
@@ -44,6 +45,7 @@ public class WorldRenderer implements Disposable {
 		cameraGUI.position.set(0, 0, 0);
 		cameraGUI.setToOrtho(true); // flip y-axis
 		cameraGUI.update();
+		renderer = new OrthogonalTiledMapRenderer(Assets.instance.map, 1f / 32f);
 		
 		//debugMatrix = new Matrix4(camera.combined);
 		//debugMatrix.scale(Constants.BOX_TO_WORLD, Constants.BOX_TO_WORLD, 1f);
@@ -53,14 +55,29 @@ public class WorldRenderer implements Disposable {
 
 	public void render (float deltaTime) {
 		
-		if (!worldController.gameOver)		
+		renderMap(renderer);
+		
+		if (!worldController.gameOver)	
 			renderWorld(batch, deltaTime);
 		
 		renderGui(batch);
 	}
+	
+	private void renderMap(TiledMapRenderer renderer) {
+		
+		float width = (float) (Constants.GAMEBOARD_WIDTH * .5);
+		float height = (float) (Constants.GAMEBOARD_HEIGHT * .5);
+		
+		camera.translate(width, height);
+		camera.update();
+		renderer.setView(camera);
+		renderer.render();
+		
+	}
 
 	private void renderWorld (SpriteBatch batch, float deltaTime) {
 		
+		worldController.cameraHelper.applyTo(camera);
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
 		//debugRenderer.render(worldController.level.world, camera.combined);

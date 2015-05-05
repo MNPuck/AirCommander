@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="32" tileheight="32" nextobjectid="1">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="9" height="32" tilewidth="32" tileheight="32" nextobjectid="1">
  <tileset firstgid="1" name="grass" tilewidth="32" tileheight="32">
   <image source="Tiles/grass.png" width="128" height="128"/>
  </tileset>
@@ -33,14 +33,14 @@
  <tileset firstgid="97" name="road_asphalt_clean_to_damaged_vert" tilewidth="32" tileheight="32">
   <image source="Tiles/road_asphalt_clean_to_damaged_vert.png" width="100" height="128"/>
  </tileset>
- <layer name="Tile Layer 1" width="64" height="64">
+ <layer name="Tile Layer 1" width="9" height="32">
   <data encoding="base64" compression="zlib">
-   eJzt1EsKgzAYhdFYtQ/b/a/XfwUWKckpcgd38BFIJofMrbWlNtVutblT97r3137UnrW1du/Yo9452+/ap/aqbR171Dtne5Szf/Ee//Ef//Ef//Ef/8dOpi/n8R//V/af/z/+4z/+r+xf+9Ot/enW/nRrf7q1P93an27tT7f2p1v706396db+dGt/urU/3dqfbu1Pt/anW/vTrf3p1v50a3+6tT/d2p9u7U+39qdb+9Ot/enW/nRrf7q1P93an27tT7f2p1v706396db+dGt/urU/3dqfbu1Pt/anW/vTrf3p1v50a3+6tT/dO2iPZ0Q=
+   eJxjZmBgYAFiRiBmAmJmLHx2IOYAYlYgZsPB5wZiHiDmBGIuHHxsZo/aRZxdjMPUX6TYhc8OGB+fHchhicsOGH/ULvrYBQAN4Aca
   </data>
  </layer>
- <layer name="Tile Layer 2" width="64" height="64">
+ <layer name="Tile Layer 2" width="9" height="32">
   <data encoding="base64" compression="zlib">
-   eJzt1sENhDAMBEBa4aD/Gg8KuMeRgNdoRsozyAprJ8sCwButx/oU7E2xHWsv2PvLG850xB1nClCh8zxfJ3yj8zzfqgsACNX5bpuh891WLSE7lTUkZCehhn8l5KZSx39WSV7khRp6T++RI7Efn6wpsR8TawIAGJH45nyS9919ZEu2RszIT+cMzsiPDHJV596ZQe8AScxkMxng9AWfggn5
+   eJxjYBh5QBGIlQioUQZiFTq4ZRTQD4zG++ADALG2ARU=
   </data>
  </layer>
 </map>

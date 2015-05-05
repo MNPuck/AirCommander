@@ -7,10 +7,9 @@ import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.math.Vector3;
-import com.nowhereinc.AirCommander.game.objects.Player;
 import com.nowhereinc.AirCommander.screens.DirectedGame;
+import com.nowhereinc.AirCommander.util.CameraHelper;
 import com.nowhereinc.AirCommander.util.Xbox360Pad;
-import com.badlogic.gdx.controllers.PovDirection;
 
 
 public class WorldController extends InputAdapter {
@@ -29,6 +28,8 @@ public class WorldController extends InputAdapter {
 	
 	private float tsXAxis;
 	private float tsYAxis;
+	
+	public CameraHelper cameraHelper;
 
 	public WorldController (DirectedGame game) {
 		this.game = game;
@@ -39,6 +40,7 @@ public class WorldController extends InputAdapter {
 		
 		Gdx.input.setInputProcessor(this);
 		Gdx.input.setCatchBackKey(true);
+		cameraHelper = new CameraHelper();
 		
 		switch (Gdx.app.getType()) {
 		
@@ -64,6 +66,15 @@ public class WorldController extends InputAdapter {
 		
 	}
 	
+	private void initLevel() {
+		
+		level = new Level();
+		
+		cameraHelper.setTarget(level.player.body);
+	
+
+	}
+	
 	public boolean isGameOver () {
 		return gameOver;
 	}
@@ -82,7 +93,7 @@ public class WorldController extends InputAdapter {
 	
 	public void update (float deltaTime, WorldRenderer worldRenderer) {
 		
-		//handleDebugInput(deltaTime);
+		// handleDebugInput(deltaTime);
 		
 		gameOver = level.returnIsGameOver();
 		
@@ -105,6 +116,9 @@ public class WorldController extends InputAdapter {
 			
 			level.update(deltaTime);
 			level.deleteFlaggedItems();
+			
+			cameraHelper.update(deltaTime);
+			
 		
 			if (level.lives == 0) {
 			
@@ -204,35 +218,6 @@ public class WorldController extends InputAdapter {
 		//select check
 		selectPressed =  player1Controller.getButton(Xbox360Pad.BUTTON_BACK);
 		
-	}
-	
-	private void initLevel() {
-	
-		level = new Level();
-
-	}
-	
-	private void handleDebugInput (float deltaTime) {
-		if (Gdx.app.getType() != ApplicationType.Desktop) return;
-
-		// Camera Controls (move)
-		float camMoveSpeed = 5 * deltaTime;
-		float camMoveSpeedAccelerationFactor = 5;
-		if (Gdx.input.isKeyPressed(Keys.SHIFT_LEFT)) camMoveSpeed *= camMoveSpeedAccelerationFactor;
-		if (Gdx.input.isKeyPressed(Keys.LEFT)) moveCamera(-camMoveSpeed, 0);
-		if (Gdx.input.isKeyPressed(Keys.RIGHT)) moveCamera(camMoveSpeed, 0);
-		if (Gdx.input.isKeyPressed(Keys.UP)) moveCamera(0, camMoveSpeed);
-		if (Gdx.input.isKeyPressed(Keys.DOWN)) moveCamera(0, -camMoveSpeed);
-
-		// Camera Controls (zoom)
-		float camZoomSpeed = 1 * deltaTime;
-		float camZoomSpeedAccelerationFactor = 5;
-		if (Gdx.input.isKeyPressed(Keys.SHIFT_LEFT)) camZoomSpeed *= camZoomSpeedAccelerationFactor;
-	
-	}
-
-	private void moveCamera (float x, float y) {
-	
 	}
 	
 	@Override

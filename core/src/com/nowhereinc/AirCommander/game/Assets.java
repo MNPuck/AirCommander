@@ -14,6 +14,8 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.utils.Disposable;
 import com.nowhereinc.AirCommander.util.Constants;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 
 public class Assets implements Disposable, AssetErrorListener {
 
@@ -23,6 +25,7 @@ public class Assets implements Disposable, AssetErrorListener {
 
 	private AssetManager assetManager;
 	
+	public TiledMap map;
 	public AssetFonts fonts;
 	public AssetBullet bullet;
 	public AssetPlayer player;	
@@ -113,6 +116,10 @@ public class Assets implements Disposable, AssetErrorListener {
 		// set asset manager error handler
 		assetManager.setErrorListener(this);
 		
+		// load tiled map
+		assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
+		assetManager.load("../android/assets/maps/AirCommander1.tmx", TiledMap.class);
+		
 		// load texture atlas
 		assetManager.load(Constants.TEXTURE_ATLAS_OBJECTS, TextureAtlas.class);
 		
@@ -131,6 +138,8 @@ public class Assets implements Disposable, AssetErrorListener {
 		for (String a : assetManager.getAssetNames()) {
 			Gdx.app.debug(TAG, "asset: " + a);
 		}
+		
+		map = assetManager.get("../android/assets/maps/AirCommander1.tmx");
 
 		TextureAtlas atlas = assetManager.get(Constants.TEXTURE_ATLAS_OBJECTS);
 

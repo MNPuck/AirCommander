@@ -55,7 +55,7 @@ public class Player {
 	
 		// create body def for player
 		bodyDefPlayer = new BodyDef();
-		bodyDefPlayer.position.set(0f, -4.40f);
+		bodyDefPlayer.position.set(0f, -7f);
 		bodyDefPlayer.type = BodyDef.BodyType.DynamicBody;
 		body = world.createBody(bodyDefPlayer);
 		
@@ -254,7 +254,7 @@ public class Player {
 		float maxPlayerVelocity = 0f;
 	 
 		maxPlayerVelocity = Constants.MAX_PLAYER_VELOCITY_D;
-		
+	
 		// stop if right edge is reached
 		
 		if (pos.x >= (Constants.GAMEBOARD_WIDTH / 2) - boxXSize &&
