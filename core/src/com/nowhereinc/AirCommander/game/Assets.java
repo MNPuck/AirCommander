@@ -118,7 +118,7 @@ public class Assets implements Disposable, AssetErrorListener {
 		
 		// load tiled map
 		assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
-		assetManager.load("../android/assets/maps/AirCommander1.tmx", TiledMap.class);
+		assetManager.load("maps/AirCommander1.tmx", TiledMap.class);
 		
 		// load texture atlas
 		assetManager.load(Constants.TEXTURE_ATLAS_OBJECTS, TextureAtlas.class);
@@ -139,7 +139,7 @@ public class Assets implements Disposable, AssetErrorListener {
 			Gdx.app.debug(TAG, "asset: " + a);
 		}
 		
-		map = assetManager.get("../android/assets/maps/AirCommander1.tmx");
+		map = assetManager.get("maps/AirCommander1.tmx");
 
 		TextureAtlas atlas = assetManager.get(Constants.TEXTURE_ATLAS_OBJECTS);
 
