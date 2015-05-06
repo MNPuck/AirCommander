@@ -55,7 +55,7 @@ public class Player {
 	
 		// create body def for player
 		bodyDefPlayer = new BodyDef();
-		bodyDefPlayer.position.set(0f, -7f);
+		bodyDefPlayer.position.set(0f, 0f);
 		bodyDefPlayer.type = BodyDef.BodyType.DynamicBody;
 		body = world.createBody(bodyDefPlayer);
 		
@@ -277,7 +277,7 @@ public class Player {
 		
 		// stop if bottom edge is reached
 		
-		if (pos.y <= (- cameraPosition.y / 2) + boxYSize &&
+		if (pos.y <= - ((Constants.GAMEBOARD_HEIGHT / 2) - cameraPosition.y) + boxYSize &&
 			!onBottomEdge) {
 			
 			vel.y = 0;
@@ -285,13 +285,24 @@ public class Player {
 			
 		}
 		
+		else {
+			
+			onBottomEdge = false;
+		}
+		
 		// stop if top edge is reached
 		
-		if (pos.y >= (cameraPosition.y / 2) - boxYSize &&
+		if (pos.y >= (cameraPosition.y + (Constants.GAMEBOARD_HEIGHT / 2)) - boxYSize &&
 			!onTopEdge) {
 			
 			vel.y = 0;
 			onTopEdge = true;
+			
+		}
+		
+		else {
+			
+			onTopEdge = false;
 			
 		}
 
@@ -323,7 +334,7 @@ public class Player {
 		
 		if (leftYAxis < - Constants.LEFTJOYADJUSTMENT &&
 			vel.y < maxPlayerVelocity &&
-			pos.y < (cameraPosition.y) - (boxYSize * 2) &&
+			pos.y < (cameraPosition.y + (Constants.GAMEBOARD_HEIGHT / 2)) - (boxYSize * 2) &&
 			!onTopEdge) {
 			
 				vel.y += -leftYAxis;
@@ -334,7 +345,7 @@ public class Player {
 		
 		if (leftYAxis > Constants.LEFTJOYADJUSTMENT &&
 			vel.y > - maxPlayerVelocity &&
-			pos.y > ( - cameraPosition.y) &&
+			pos.y > - ((Constants.GAMEBOARD_HEIGHT / 2) - cameraPosition.y) &&
 			!onBottomEdge) {
 			
 				vel.y += -leftYAxis;

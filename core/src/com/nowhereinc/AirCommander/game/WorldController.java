@@ -117,16 +117,16 @@ public class WorldController extends InputAdapter {
 	
 			}
 			
-			level.update(deltaTime, cameraPosition);
-			level.deleteFlaggedItems();
-			
-			// cameraHelper.update(deltaTime);
-			
 			// set up camera vertical scroll of map
 			
 			cameraPosition = cameraHelper.getPosition();
 			cameraPosition.y += deltaTime;
 			cameraHelper.setPosition(cameraPosition.x, cameraPosition.y);
+			
+			level.update(deltaTime, cameraPosition);
+			level.deleteFlaggedItems();
+			
+			// cameraHelper.update(deltaTime);
 			
 			if (level.lives == 0) {
 			

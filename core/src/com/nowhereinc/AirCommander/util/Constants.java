@@ -2,10 +2,10 @@ package com.nowhereinc.AirCommander.util;
 
 public class Constants {
 
-	// Visible game world is 16 meters wide
+	// Visible game world is 9 meters wide
 	public static final float VIEWPORT_WIDTH = 9.0f;
 
-	// Visible game world is 9 meters tall
+	// Visible game world is 16 meters tall
 	public static final float VIEWPORT_HEIGHT = 16.0f;
 	
 	// GameWorld Border
