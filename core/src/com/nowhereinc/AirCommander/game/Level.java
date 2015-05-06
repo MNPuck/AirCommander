@@ -109,7 +109,7 @@ public class Level {
 		
 	}
 	
-	public void update (float deltaTime) {
+	public void update (float deltaTime, Vector2 cameraPosition) {
 		
 		// step world
 		
@@ -120,11 +120,11 @@ public class Level {
 		switch (Gdx.app.getType()) {
 		
 			case Desktop: 
-				player.updateDesktop(deltaTime);
+				player.updateDesktop(deltaTime, cameraPosition);
 				break;
 			
 			case Android:
-				 player.updateAndroid(deltaTime);
+				 player.updateAndroid(deltaTime, cameraPosition);
 				 break;
 			
 			default:

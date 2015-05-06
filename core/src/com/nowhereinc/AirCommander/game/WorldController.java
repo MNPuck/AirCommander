@@ -6,6 +6,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.Controllers;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.nowhereinc.AirCommander.screens.DirectedGame;
 import com.nowhereinc.AirCommander.util.CameraHelper;
@@ -30,6 +31,8 @@ public class WorldController extends InputAdapter {
 	private float tsYAxis;
 	
 	public CameraHelper cameraHelper;
+	
+	Vector2 cameraPosition;
 
 	public WorldController (DirectedGame game) {
 		this.game = game;
@@ -71,8 +74,8 @@ public class WorldController extends InputAdapter {
 		level = new Level();
 		
 		cameraHelper.setTarget(level.player.body);
+		cameraPosition = cameraHelper.getPosition();
 	
-
 	}
 	
 	public boolean isGameOver () {
@@ -114,12 +117,17 @@ public class WorldController extends InputAdapter {
 	
 			}
 			
-			level.update(deltaTime);
+			level.update(deltaTime, cameraPosition);
 			level.deleteFlaggedItems();
 			
-			cameraHelper.update(deltaTime);
+			// cameraHelper.update(deltaTime);
 			
-		
+			// set up camera vertical scroll of map
+			
+			cameraPosition = cameraHelper.getPosition();
+			cameraPosition.y += deltaTime;
+			cameraHelper.setPosition(cameraPosition.x, cameraPosition.y);
+			
 			if (level.lives == 0) {
 			
 				gameOver = true;

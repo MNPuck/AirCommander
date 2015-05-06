@@ -127,7 +127,7 @@ public class Player {
 			
 	}
 	
-	public void updateAndroid (float deltaTime) {
+	public void updateAndroid (float deltaTime, Vector2 cameraPosition) {
 		
 		Vector2 vel = this.body.getLinearVelocity();
 		Vector2 pos = this.body.getPosition();
@@ -246,7 +246,7 @@ public class Player {
 		
 	}
 	
-	public void updateDesktop (float deltaTime) {
+	public void updateDesktop (float deltaTime, Vector2 cameraPosition) {
 		
 		Vector2 vel = this.body.getLinearVelocity();
 		Vector2 pos = this.body.getPosition();
@@ -277,7 +277,7 @@ public class Player {
 		
 		// stop if bottom edge is reached
 		
-		if (pos.y <= (- Constants.GAMEBOARD_HEIGHT / 2) + boxYSize &&
+		if (pos.y <= (- cameraPosition.y / 2) + boxYSize &&
 			!onBottomEdge) {
 			
 			vel.y = 0;
@@ -287,7 +287,7 @@ public class Player {
 		
 		// stop if top edge is reached
 		
-		if (pos.y >= (Constants.GAMEBOARD_HEIGHT / 2) - boxYSize &&
+		if (pos.y >= (cameraPosition.y / 2) - boxYSize &&
 			!onTopEdge) {
 			
 			vel.y = 0;
@@ -323,7 +323,7 @@ public class Player {
 		
 		if (leftYAxis < - Constants.LEFTJOYADJUSTMENT &&
 			vel.y < maxPlayerVelocity &&
-			pos.y < (Constants.GAMEBOARD_HEIGHT / 2) - (boxYSize * 2) &&
+			pos.y < (cameraPosition.y) - (boxYSize * 2) &&
 			!onTopEdge) {
 			
 				vel.y += -leftYAxis;
@@ -334,7 +334,7 @@ public class Player {
 		
 		if (leftYAxis > Constants.LEFTJOYADJUSTMENT &&
 			vel.y > - maxPlayerVelocity &&
-			pos.y > ( - Constants.GAMEBOARD_HEIGHT / 2) &&
+			pos.y > ( - cameraPosition.y) &&
 			!onBottomEdge) {
 			
 				vel.y += -leftYAxis;

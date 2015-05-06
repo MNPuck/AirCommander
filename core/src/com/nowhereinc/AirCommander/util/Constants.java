@@ -10,7 +10,7 @@ public class Constants {
 	
 	// GameWorld Border
 	
-	public static final float GAMEBOARD_WIDTH = 9.0f;
+	public static final float GAMEBOARD_WIDTH = 12.0f;
 	public static final float GAMEBOARD_HEIGHT = 16.0f;
 	
 	// Level Size Input Size
