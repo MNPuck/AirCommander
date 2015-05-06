@@ -121,12 +121,13 @@ public class WorldController extends InputAdapter {
 			
 			cameraPosition = cameraHelper.getPosition();
 			cameraPosition.y += deltaTime;
-			cameraHelper.setPosition(cameraPosition.x, cameraPosition.y);
 			
 			level.update(deltaTime, cameraPosition);
 			level.deleteFlaggedItems();
 			
-			// cameraHelper.update(deltaTime);
+			// camera helper changed to only target scroll on the x Position, update y position to deltaTime
+			
+			cameraHelper.update(deltaTime, cameraPosition);
 			
 			if (level.lives == 0) {
 			

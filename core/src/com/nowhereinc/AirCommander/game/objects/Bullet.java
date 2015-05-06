@@ -40,9 +40,19 @@ public class Bullet {
 		// set texture
 		Bullet = Assets.instance.bullet.bullet;
 		
+		// set box size here to use in position set
+		boxXSize = .20f;
+		boxYSize = .20f;
+		
+		// create Vector2 to adjust postion to the bullets center
+		Vector2 adjustedPosition = PlayerPos;
+		
+		adjustedPosition.x -= boxXSize * .5f;
+		adjustedPosition.y -= boxYSize * .5f;
+		
 		// create body def for bullet
 		bodyDefBullet = new BodyDef();
-		bodyDefBullet.position.set(PlayerPos);
+		bodyDefBullet.position.set(adjustedPosition);
 		bodyDefBullet.type = BodyDef.BodyType.DynamicBody;
 		body = world.createBody(bodyDefBullet);
 		
@@ -55,9 +65,6 @@ public class Bullet {
 		CircleShape shape = new CircleShape();
 	
 		shape.setRadius(.10f);
-		
-		boxXSize = .20f;
-		boxYSize = .20f;
 	
 		fixtureDefBullet = new FixtureDef();
 		fixtureDefBullet.shape = shape;
@@ -68,11 +75,11 @@ public class Bullet {
 	
 	}
 	
-	public void update (World world, float deltaTime) {
+	public void update (World world, float deltaTime, Vector2 cameraPosition) {
 		
 		Vector2 pos = this.body.getPosition();
 
-		if (pos.y > Constants.GAMEBOARD_HEIGHT * .5) {
+		if (pos.y >= (cameraPosition.y + (Constants.GAMEBOARD_HEIGHT / 2))) {
 			
 			setDeleteFlag();
 			

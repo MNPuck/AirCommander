@@ -122,6 +122,9 @@ public class Constants {
 	// Interval to fire bullets
 	public static final float BULLET_SPAWN_TIME = .20f;
 	
+	// Object Scroll adjustment
+	public static final int OBJECT_SCROLL_ADJUSTMENT = 60;
+	
 	
 		
 }

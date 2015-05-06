@@ -25,9 +25,14 @@ public class CameraHelper {
 		zoom = 1.0f;
 	}
 
-	public void update (float deltaTime) {
+	public void update (float deltaTime, Vector2 cameraPosition) {
 		if (!hasTarget()) return;
-		position.lerp(target.getPosition(), FOLLOW_SPEED * deltaTime);
+		
+		// change to only follow on the x Axis
+		Vector2 scrollPosition = target.getPosition();
+		scrollPosition.y = cameraPosition.y;
+		
+		position.lerp(scrollPosition, FOLLOW_SPEED * deltaTime);
 		
 		// Prevent camera from moving too far
 	

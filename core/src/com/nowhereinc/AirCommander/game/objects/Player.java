@@ -165,20 +165,20 @@ public class Player {
 		
 		// stop if bottom edge is reached
 		
-		if (pos.y <= (- Constants.GAMEBOARD_HEIGHT / 2) + boxYSize &&
+		if (pos.y <= - ((Constants.GAMEBOARD_HEIGHT / 2) - cameraPosition.y) + boxYSize &&
 			!onBottomEdge) {
 			
-			vel.y = 0;
+			vel.y = deltaTime * Constants.OBJECT_SCROLL_ADJUSTMENT;
 			onBottomEdge = true;
 			
 		}
 		
 		// stop if top edge is reached
 		
-		if (pos.y >= (Constants.GAMEBOARD_HEIGHT / 2) - boxYSize &&
+		if (pos.y >= (cameraPosition.y + (Constants.GAMEBOARD_HEIGHT / 2)) - boxYSize &&
 			!onTopEdge) {
 			
-			vel.y = 0;
+			vel.y = deltaTime * Constants.OBJECT_SCROLL_ADJUSTMENT;
 			onTopEdge = true;
 			
 		}
@@ -214,7 +214,7 @@ public class Player {
 		if (tsYAxis > playerCenter.y &&
 			tsYAxis != -99 &&
 			vel.y < maxPlayerVelocity &&
-			pos.y < (Constants.GAMEBOARD_HEIGHT / 2) - (boxYSize * 2) &&
+			pos.y < (cameraPosition.y + (Constants.GAMEBOARD_HEIGHT / 2)) - (boxYSize * 2) &&
 			!onTopEdge) {
 			
 				vel.y += Constants.PLAYER_VELOCITY_INC_A;
@@ -226,7 +226,7 @@ public class Player {
 		if (tsYAxis < playerCenter.y &&
 			tsYAxis != -99 &&
 			vel.y > - maxPlayerVelocity &&
-			pos.y > ( - Constants.GAMEBOARD_HEIGHT / 2) &&
+			pos.y > - ((Constants.GAMEBOARD_HEIGHT / 2) - cameraPosition.y) &&
 			!onBottomEdge) {
 			
 				vel.y += -Constants.PLAYER_VELOCITY_INC_A;
@@ -238,7 +238,7 @@ public class Player {
 			tsYAxis == -99) {
 			
 			vel.x = 0;
-			vel.y = 0;
+			vel.y =  deltaTime * Constants.OBJECT_SCROLL_ADJUSTMENT;
 		
 		}
 		
@@ -280,7 +280,7 @@ public class Player {
 		if (pos.y <= - ((Constants.GAMEBOARD_HEIGHT / 2) - cameraPosition.y) + boxYSize &&
 			!onBottomEdge) {
 			
-			vel.y = 0;
+			vel.y = deltaTime * Constants.OBJECT_SCROLL_ADJUSTMENT;
 			onBottomEdge = true;
 			
 		}
@@ -295,7 +295,7 @@ public class Player {
 		if (pos.y >= (cameraPosition.y + (Constants.GAMEBOARD_HEIGHT / 2)) - boxYSize &&
 			!onTopEdge) {
 			
-			vel.y = 0;
+			vel.y = deltaTime * Constants.OBJECT_SCROLL_ADJUSTMENT;
 			onTopEdge = true;
 			
 		}
@@ -359,7 +359,7 @@ public class Player {
 			leftYAxis > - Constants.LEFTJOYADJUSTMENT &&
 			leftYAxis < Constants.LEFTJOYADJUSTMENT) {
 
-			this.body.setLinearVelocity(0, 0);
+			this.body.setLinearVelocity(0, deltaTime * Constants.OBJECT_SCROLL_ADJUSTMENT);
 		
 		}
 		

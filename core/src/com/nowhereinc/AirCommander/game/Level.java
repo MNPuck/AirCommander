@@ -140,7 +140,7 @@ public class Level {
 		
 		for (Bullet bullet : bullets) {
 			
-			bullet.update(world, deltaTime);
+			bullet.update(world, deltaTime, cameraPosition);
 			
 		}
 		
