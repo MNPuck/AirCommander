@@ -25,17 +25,28 @@ public class CameraHelper {
 		zoom = 1.0f;
 	}
 
-	public void update (float deltaTime, Vector2 cameraPosition) {
+	public void update (float deltaTime, Vector2 cameraPosition, Vector2 playerPosition) {
 		if (!hasTarget()) return;
 		
 		// change to only follow on the x Axis
 		Vector2 scrollPosition = target.getPosition();
 		scrollPosition.y = cameraPosition.y;
 		
-		position.lerp(scrollPosition, FOLLOW_SPEED * deltaTime);
 		
-		// Prevent camera from moving too far
-	
+		if (playerPosition.x > (Constants.GAMEBOARD_WIDTH * .5f - Constants.VIEWPORT_WIDTH * .5f)) {
+			
+			scrollPosition.x = (Constants.GAMEBOARD_WIDTH * .5f - Constants.VIEWPORT_WIDTH * .5f);
+			
+		}
+		
+		if (playerPosition.x < (Constants.VIEWPORT_WIDTH * .5f - Constants.GAMEBOARD_WIDTH * .5f)) {
+			
+			scrollPosition.x = (Constants.VIEWPORT_WIDTH * .5f - Constants.GAMEBOARD_WIDTH * .5f);
+			
+		}
+		
+		
+		position.lerp(scrollPosition, FOLLOW_SPEED * deltaTime);
 		
 	}
 
