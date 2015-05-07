@@ -55,7 +55,7 @@ public class Player {
 	
 		// create body def for player
 		bodyDefPlayer = new BodyDef();
-		bodyDefPlayer.position.set(0f, 0f);
+		bodyDefPlayer.position.set(0f, -7f);
 		bodyDefPlayer.type = BodyDef.BodyType.DynamicBody;
 		body = world.createBody(bodyDefPlayer);
 		
