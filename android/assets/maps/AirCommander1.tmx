@@ -1,46 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="12" height="64" tilewidth="32" tileheight="32" nextobjectid="4">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="12" height="64" tilewidth="32" tileheight="32" nextobjectid="1">
  <tileset firstgid="1" name="grass" tilewidth="32" tileheight="32">
   <image source="Tiles/grass.png" width="128" height="128"/>
  </tileset>
- <tileset firstgid="17" name="Sand" tilewidth="32" tileheight="32">
-  <image source="Tiles/sand.png" width="128" height="128"/>
- </tileset>
- <tileset firstgid="33" name="rock_7" tilewidth="32" tileheight="32">
+ <tileset firstgid="17" name="rock_7" tilewidth="32" tileheight="32">
   <image source="Tiles/rock_7.png" width="64" height="64"/>
  </tileset>
- <tileset firstgid="37" name="road_3" tilewidth="32" tileheight="32">
-  <image source="Tiles/road_3.png" width="64" height="192"/>
- </tileset>
- <tileset firstgid="49" name="road_4" tilewidth="32" tileheight="32">
-  <image source="Tiles/road_4.png" width="64" height="192"/>
- </tileset>
- <tileset firstgid="61" name="road_5" tilewidth="32" tileheight="32">
-  <image source="Tiles/road_5.png" width="192" height="64"/>
- </tileset>
- <tileset firstgid="73" name="road_corner_1" tilewidth="32" tileheight="32">
-  <image source="Tiles/road_corner_1.png" width="64" height="64"/>
- </tileset>
- <tileset firstgid="77" name="road_corner_3" tilewidth="32" tileheight="32">
-  <image source="Tiles/road_corner_3.png" width="64" height="64"/>
- </tileset>
- <tileset firstgid="81" name="road_corner_4" tilewidth="32" tileheight="32">
-  <image source="Tiles/road_corner_4.png" width="64" height="64"/>
- </tileset>
- <tileset firstgid="85" name="road_asphalt_clean_to_damaged_hor" tilewidth="32" tileheight="32">
-  <image source="Tiles/road_asphalt_clean_to_damaged_hor.png" width="128" height="100"/>
- </tileset>
- <tileset firstgid="97" name="house_1" tilewidth="32" tileheight="32">
-  <image source="C:/Users/Brian/git/AirCommander/android/assets/maps/Tiles/house_1.png" width="120" height="114"/>
+ <tileset firstgid="21" name="house_1" tilewidth="32" tileheight="32">
+  <image source="Tiles/house_1.png" width="120" height="114"/>
  </tileset>
  <layer name="Tile Layer 1" width="12" height="64">
   <data encoding="base64" compression="zlib">
-   eJzt0jEOgzAQRFGDgZCQhNz/tEzj5stmUEThYospxhK7TzY5pTQpgzIqGZ3nD2VVZmWpdJ5vylt5Kq9K5zn3s3+Ur7IrvwseznEeznEeznEe+p2He52He52He888Q8XvPL39P715eJ8tR+mc03KU7r5385yHfudx+9ndfna3n53+u329v1fv7+F6+MMf/vCH/z//ATHKFyg=
+   eJztzqcBwDAQwMB3qlOd/ae1WKB/AIEDYioRMWHGgjLoFRt21EQfOHHhTvSDFw1foke//vvvv//++++///777//fHWjKGYE=
   </data>
  </layer>
  <layer name="Tile Layer 2" width="12" height="64">
   <data encoding="base64" compression="zlib">
-   eJxjYCAPKAKxEgniykCsQoL4UAC4/IoLDGW/DjQYDWvSwXANs+HmL0r9MxDhMdziAB/A51dscvj8OtjCYaDicSSlHxgYCn4eCm4kFwwFv9HbjQBhEwkr
+   eJzdVFsOwCAM8gp7v+9/zfG5GFGnddWR8GNMgJbUmG/Qgf2L/wM4NqxbkwemP4EzuETqr+AG7pG6B3iCV6I/htz52HohfVuvREd80O5PKqR8a+RvdeYMf8vzhGY2SW12jxlK3eMQXJl9c3BlztlBzV1m3tg781bSs1TPWCbWM+2bUnNvtHADutwItg==
   </data>
  </layer>
 </map>
