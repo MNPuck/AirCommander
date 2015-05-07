@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.nowhereinc.AirCommander.screens.DirectedGame;
 import com.nowhereinc.AirCommander.util.CameraHelper;
+import com.nowhereinc.AirCommander.util.Constants;
 import com.nowhereinc.AirCommander.util.Xbox360Pad;
 
 
@@ -120,7 +121,7 @@ public class WorldController extends InputAdapter {
 			// set up camera vertical scroll of map
 			
 			cameraPosition = cameraHelper.getPosition();
-			cameraPosition.y += deltaTime;
+			cameraPosition.y += Constants.SCROLL_SPEED * deltaTime;
 			
 			level.update(deltaTime, cameraPosition);
 			level.deleteFlaggedItems();

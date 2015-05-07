@@ -69,27 +69,9 @@ public class Constants {
 	public static final int NW = 7;
 	public static final int NIL = 8;
 	
-	// Time to spend on level until next level is triggered
-	public static final float LEVELTIMEAMOUNT = 5.0f;
-	
-	// Time for explosions, used to determine how long to show score
-	public static final float EXPLOSIONDURATION = 0.7f;
-	
-	// Size of blocks
-	public static final float BLOCKXSIZE = .25f;
-	public static final float BLOCKYSIZE = .10f;
-	
 	// Size of player
 	public static final float PLAYERXSIZE = .5f;
 	public static final float PLAYERYSIZE = .5f;
-	
-	// Size of sides
-	public static final float SIDESXSIZE = .02f;
-	public static final float SIDESYSIZE = 8.5f;
-	
-	// Size of top
-	public static final float TOPXSIZE = 11.0f;
-	public static final float TOPYSIZE = .02f;
 	
 	// Game preferences file
 	public static final String PREFERENCES = "pong.prefs";
@@ -124,5 +106,8 @@ public class Constants {
 	
 	// Object Scroll adjustment
 	public static final int OBJECT_SCROLL_ADJUSTMENT = 60;
+	
+	// Scroll speed
+	public static final float SCROLL_SPEED = 2.0f;
 		
 }

@@ -238,7 +238,7 @@ public class Player {
 			tsYAxis == -99) {
 			
 			vel.x = 0;
-			vel.y =  deltaTime * Constants.OBJECT_SCROLL_ADJUSTMENT;
+			vel.y =  deltaTime * Constants.SCROLL_SPEED * Constants.OBJECT_SCROLL_ADJUSTMENT;
 		
 		}
 		
@@ -359,7 +359,7 @@ public class Player {
 			leftYAxis > - Constants.LEFTJOYADJUSTMENT &&
 			leftYAxis < Constants.LEFTJOYADJUSTMENT) {
 
-			this.body.setLinearVelocity(0, deltaTime * Constants.OBJECT_SCROLL_ADJUSTMENT);
+			this.body.setLinearVelocity(0, deltaTime * Constants.SCROLL_SPEED * Constants.OBJECT_SCROLL_ADJUSTMENT);
 		
 		}
 		
