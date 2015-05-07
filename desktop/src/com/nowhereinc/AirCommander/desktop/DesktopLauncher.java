@@ -25,8 +25,8 @@ public class DesktopLauncher {
 		
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
 		cfg.title = "AirCommander";
-		cfg.width = 1600;
-		cfg.height = 900;
+		cfg.width = 1920;
+		cfg.height = 1080;
 		cfg.fullscreen = true;
 		cfg.vSyncEnabled = true;
 		

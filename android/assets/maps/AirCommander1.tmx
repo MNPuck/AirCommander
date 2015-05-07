@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="9" height="32" tilewidth="32" tileheight="32" nextobjectid="1">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="12" height="64" tilewidth="32" tileheight="32" nextobjectid="4">
  <tileset firstgid="1" name="grass" tilewidth="32" tileheight="32">
   <image source="Tiles/grass.png" width="128" height="128"/>
  </tileset>
@@ -30,17 +30,17 @@
  <tileset firstgid="85" name="road_asphalt_clean_to_damaged_hor" tilewidth="32" tileheight="32">
   <image source="Tiles/road_asphalt_clean_to_damaged_hor.png" width="128" height="100"/>
  </tileset>
- <tileset firstgid="97" name="road_asphalt_clean_to_damaged_vert" tilewidth="32" tileheight="32">
-  <image source="Tiles/road_asphalt_clean_to_damaged_vert.png" width="100" height="128"/>
+ <tileset firstgid="97" name="house_1" tilewidth="32" tileheight="32">
+  <image source="C:/Users/Brian/git/AirCommander/android/assets/maps/Tiles/house_1.png" width="120" height="114"/>
  </tileset>
- <layer name="Tile Layer 1" width="9" height="32">
+ <layer name="Tile Layer 1" width="12" height="64">
   <data encoding="base64" compression="zlib">
-   eJxjZmBgYAFiRiBmAmJmLHx2IOYAYlYgZsPB5wZiHiDmBGIuHHxsZo/aRZxdjMPUX6TYhc8OGB+fHchhicsOGH/ULvrYBQAN4Aca
+   eJzt0jEOgzAQRFGDgZCQhNz/tEzj5stmUEThYospxhK7TzY5pTQpgzIqGZ3nD2VVZmWpdJ5vylt5Kq9K5zn3s3+Ur7IrvwseznEeznEeznEe+p2He52He52He888Q8XvPL39P715eJ8tR+mc03KU7r5385yHfudx+9ndfna3n53+u329v1fv7+F6+MMf/vCH/z//ATHKFyg=
   </data>
  </layer>
- <layer name="Tile Layer 2" width="9" height="32">
+ <layer name="Tile Layer 2" width="12" height="64">
   <data encoding="base64" compression="zlib">
-   eJxjYBh5QBGIlQioUQZiFTq4ZRTQD4zG++ADALG2ARU=
+   eJxjYCAPKAKxEgniykCsQoL4UAC4/IoLDGW/DjQYDWvSwXANs+HmL0r9MxDhMdziAB/A51dscvj8OtjCYaDicSSlHxgYCn4eCm4kFwwFv9HbjQBhEwkr
   </data>
  </layer>
 </map>

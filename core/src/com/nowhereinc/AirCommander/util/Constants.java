@@ -99,16 +99,16 @@ public class Constants {
 	public static final float BOX_TO_WORLD = 120f;
 	
 	// Max Player Velocity Android
-	public static final float MAX_PLAYER_VELOCITY_A = 6.0f;
+	public static final float MAX_PLAYER_VELOCITY_A = 8.0f;
 		
 	// Max Ball Velocity Android
-	public static final float MAX_BULLET_VELOCITY = 8.0f;
+	public static final float MAX_BULLET_VELOCITY = 12.0f;
 		
 	// Player Velocity Increment Android
-	public static final float PLAYER_VELOCITY_INC_A = 2.0f;
+	public static final float PLAYER_VELOCITY_INC_A = 4.0f;
 		
 	// Max Player Velocity Desktop
-	public static final float MAX_PLAYER_VELOCITY_D = 6.0f;
+	public static final float MAX_PLAYER_VELOCITY_D = 8.0f;
 		
 	// Player Velocity Increment Desktop
 	public static final float PLAYER_VELOCITY_INC_D = .80f;
@@ -120,11 +120,9 @@ public class Constants {
 	public static final int MAX_BULLETS = 20;
 	
 	// Interval to fire bullets
-	public static final float BULLET_SPAWN_TIME = .20f;
+	public static final float BULLET_SPAWN_TIME = .33f;
 	
 	// Object Scroll adjustment
 	public static final int OBJECT_SCROLL_ADJUSTMENT = 60;
-	
-	
 		
 }
