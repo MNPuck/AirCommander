@@ -26,6 +26,12 @@ public class Plane1 extends Planes {
 	
 	public void update(float deltaTime, Vector2 cameraPosition) {
 		
+		if (body.getFixtureList().first().getUserData() == "delete") {
+			
+			setDeleteFlag();
+			
+		}
+		
 		this.body.setLinearVelocity(0, deltaTime * Constants.SCROLL_SPEED * Constants.OBJECT_SCROLL_ADJUSTMENT);
 	
 	}

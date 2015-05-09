@@ -24,14 +24,15 @@ public class AirCommanderContactListener implements ContactListener {
 		// ball hits block code
 		
 		String fixtureALong = fixtureA.getUserData().toString();
-		String fixtureAShort = fixtureALong.substring(0, Math.min(fixtureALong.length(), 4));
+		String fixtureAShort = fixtureALong.substring(0, Math.min(fixtureALong.length(), 6));
 		
 		String fixtureBLong = fixtureB.getUserData().toString();
 		String fixtureBShort = fixtureBLong.substring(0, Math.min(fixtureBLong.length(), 5));
 	
-		if (fixtureAShort.equals("ball") &&
-		    fixtureBShort.equals("block")) {
+		if (fixtureAShort.equals("bullet") &&
+		    fixtureBShort.equals("plane")) {
 			
+			fixtureA.setUserData("delete");
 			fixtureB.setUserData("delete");
 			
 		}
@@ -40,12 +41,13 @@ public class AirCommanderContactListener implements ContactListener {
 		fixtureAShort = fixtureALong.substring(0, Math.min(fixtureALong.length(), 5));
 		
 		fixtureBLong = fixtureB.getUserData().toString();
-		fixtureBShort = fixtureBLong.substring(0, Math.min(fixtureBLong.length(), 4));
+		fixtureBShort = fixtureBLong.substring(0, Math.min(fixtureBLong.length(), 6));
 		
-		if (fixtureAShort.equals("block") &&
-			fixtureBShort.equals("ball")) {
+		if (fixtureAShort.equals("plane") &&
+			fixtureBShort.equals("bullet")) {
 			
 			fixtureA.setUserData("delete");
+			fixtureB.setUserData("delete");
 		
 		}
 

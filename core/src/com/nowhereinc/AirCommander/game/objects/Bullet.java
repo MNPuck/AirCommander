@@ -85,6 +85,12 @@ public class Bullet {
 			
 		}
 		
+		if (body.getFixtureList().first().getUserData() == "delete") {
+			
+			setDeleteFlag();
+			
+		}
+		
 	}
 	
 	public void setDeleteFlag() {

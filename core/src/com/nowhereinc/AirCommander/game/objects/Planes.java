@@ -78,7 +78,7 @@ public class Planes {
 
 	}
 	
-	public void deletePlane(World world) {
+	public boolean deletePlane(World world) {
 		
 		if(body.getUserData() == "delete") {
 		
@@ -87,7 +87,15 @@ public class Planes {
 			body.setActive(false);
 			body.setUserData(null);
 			body = null;
+			
+			return true;
 		
+		}
+		
+		else {
+			
+			return false;
+			
 		}
 		
 	}

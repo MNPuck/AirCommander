@@ -223,6 +223,16 @@ public class Level {
 		
 		player.deletePlayer(world);
 		
+		for (Plane1 plane1 : plane1s) {
+			
+			if (plane1.deletePlane(world)) {
+				
+				plane1s.removeValue(plane1, true);
+				
+			}
+			
+		}
+		
 	}
 
 	private void newLevel() {
