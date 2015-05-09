@@ -6,74 +6,18 @@ filter: Nearest,Nearest
 repeat: none
 Aircraft
   rotate: false
-  xy: 2, 391
-  size: 110, 95
-  orig: 110, 95
-  offset: 0, 0
-  index: 5
-Aircraft
-  rotate: false
-  xy: 2, 198
-  size: 110, 94
-  orig: 110, 94
-  offset: 0, 0
-  index: 9
-Aircraft
-  rotate: false
   xy: 2, 104
   size: 110, 92
   orig: 110, 92
   offset: 0, 0
   index: 1
-Aircraft
+Aircraft_01_normal
   rotate: false
-  xy: 338, 400
-  size: 110, 86
-  orig: 110, 86
+  xy: 2, 104
+  size: 110, 92
+  orig: 110, 92
   offset: 0, 0
-  index: 2
-Aircraft
-  rotate: false
-  xy: 2, 16
-  size: 110, 86
-  orig: 110, 86
-  offset: 0, 0
-  index: 3
-Aircraft
-  rotate: false
-  xy: 114, 113
-  size: 110, 86
-  orig: 110, 86
-  offset: 0, 0
-  index: 6
-Aircraft
-  rotate: false
-  xy: 450, 314
-  size: 110, 84
-  orig: 110, 84
-  offset: 0, 0
-  index: 4
-Aircraft
-  rotate: false
-  xy: 338, 140
-  size: 110, 82
-  orig: 110, 82
-  offset: 0, 0
-  index: 7
-Aircraft
-  rotate: false
-  xy: 674, 410
-  size: 94, 76
-  orig: 94, 76
-  offset: 0, 0
-  index: 8
-Aircraft
-  rotate: false
-  xy: 338, 62
-  size: 94, 76
-  orig: 94, 76
-  offset: 0, 0
-  index: 10
+  index: -1
 Aircraft_01_hit
   rotate: false
   xy: 114, 201
@@ -90,33 +34,54 @@ Aircraft_01_shadow
   index: -1
 Aircraft_02_hit
   rotate: false
-  xy: 226, 210
+  xy: 338, 400
+  size: 110, 86
+  orig: 110, 86
+  offset: 0, 0
+  index: -1
+Aircraft_02_normal
+  rotate: false
+  xy: 2, 16
   size: 110, 86
   orig: 110, 86
   offset: 0, 0
   index: -1
 Aircraft_02_shadow
   rotate: false
-  xy: 338, 312
+  xy: 114, 113
   size: 110, 86
   orig: 110, 86
   offset: 0, 0
   index: -1
 Aircraft_03_hit
   rotate: false
-  xy: 450, 400
+  xy: 226, 210
+  size: 110, 86
+  orig: 110, 86
+  offset: 0, 0
+  index: -1
+Aircraft_03_normal
+  rotate: false
+  xy: 338, 312
   size: 110, 86
   orig: 110, 86
   offset: 0, 0
   index: -1
 Aircraft_03_shadow
   rotate: false
-  xy: 114, 25
+  xy: 450, 400
   size: 110, 86
   orig: 110, 86
   offset: 0, 0
   index: -1
 Aircraft_04_hit
+  rotate: false
+  xy: 450, 314
+  size: 110, 84
+  orig: 110, 84
+  offset: 0, 0
+  index: -1
+Aircraft_04_normal
   rotate: false
   xy: 562, 402
   size: 110, 84
@@ -132,6 +97,13 @@ Aircraft_04_shadow
   index: -1
 Aircraft_05_hit
   rotate: false
+  xy: 2, 391
+  size: 110, 95
+  orig: 110, 95
+  offset: 0, 0
+  index: -1
+Aircraft_05_normal
+  rotate: false
   xy: 2, 294
   size: 110, 95
   orig: 110, 95
@@ -145,6 +117,13 @@ Aircraft_05_shadow
   offset: 0, 0
   index: -1
 Aircraft_06_hit
+  rotate: false
+  xy: 114, 25
+  size: 110, 86
+  orig: 110, 86
+  offset: 0, 0
+  index: -1
+Aircraft_06_normal
   rotate: false
   xy: 226, 122
   size: 110, 86
@@ -160,6 +139,13 @@ Aircraft_06_shadow
   index: -1
 Aircraft_07_hit
   rotate: false
+  xy: 338, 140
+  size: 110, 82
+  orig: 110, 82
+  offset: 0, 0
+  index: -1
+Aircraft_07_normal
+  rotate: false
   xy: 450, 230
   size: 110, 82
   orig: 110, 82
@@ -174,19 +160,33 @@ Aircraft_07_shadow
   index: -1
 Aircraft_08_hit
   rotate: false
-  xy: 450, 152
+  xy: 674, 410
+  size: 94, 76
+  orig: 94, 76
+  offset: 0, 0
+  index: -1
+Aircraft_08_normal
+  rotate: false
+  xy: 338, 62
   size: 94, 76
   orig: 94, 76
   offset: 0, 0
   index: -1
 Aircraft_08_shadow
   rotate: false
-  xy: 562, 240
+  xy: 450, 152
   size: 94, 76
   orig: 94, 76
   offset: 0, 0
   index: -1
 Aircraft_09_hit
+  rotate: false
+  xy: 2, 198
+  size: 110, 94
+  orig: 110, 94
+  offset: 0, 0
+  index: -1
+Aircraft_09_normal
   rotate: false
   xy: 114, 295
   size: 110, 94
@@ -201,6 +201,13 @@ Aircraft_09_shadow
   offset: 0, 0
   index: -1
 Aircraft_10_hit
+  rotate: false
+  xy: 562, 240
+  size: 94, 76
+  orig: 94, 76
+  offset: 0, 0
+  index: -1
+Aircraft_10_normal
   rotate: false
   xy: 674, 332
   size: 94, 76

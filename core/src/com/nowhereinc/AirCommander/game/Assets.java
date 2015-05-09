@@ -28,7 +28,17 @@ public class Assets implements Disposable, AssetErrorListener {
 	public TiledMap map;
 	public AssetFonts fonts;
 	public AssetBullet bullet;
-	public AssetPlayer player;	
+	
+	public AssetPlane1 plane1;	
+	public AssetPlane2 plane2;	
+	public AssetPlane3 plane3;	
+	public AssetPlane4 plane4;	
+	public AssetPlane5 plane5;	
+	public AssetPlane6 plane6;
+	public AssetPlane7 plane7;
+	public AssetPlane8 plane8;
+	public AssetPlane9 plane9;
+	public AssetPlane10 plane10;
 	
 	public AssetSounds sounds;
 	
@@ -74,15 +84,150 @@ public class Assets implements Disposable, AssetErrorListener {
 		
 	}
 	
-	public class AssetPlayer {
-		public final AtlasRegion player;
+	public class AssetPlane1 {
+		public final AtlasRegion plane1;
 
-		public AssetPlayer (TextureAtlas atlas) {
-			player = atlas.findRegion("Aircraft");
+		public AssetPlane1 (TextureAtlas atlas) {
+			plane1 = atlas.findRegion("Aircraft_01_normal");
 			
-			if (player == null) {
+			if (plane1 == null) {
 				
-				Gdx.app.debug(TAG,"Player is null");
+				Gdx.app.debug(TAG,"Plane1 is null");
+			}		
+			
+		}
+		
+	}
+	
+	public class AssetPlane2 {
+		public final AtlasRegion plane2;
+
+		public AssetPlane2 (TextureAtlas atlas) {
+			plane2 = atlas.findRegion("Aircraft_02_normal");
+			
+			if (plane2 == null) {
+				
+				Gdx.app.debug(TAG,"Plane2 is null");
+			}		
+			
+		}
+		
+	}
+	
+	public class AssetPlane3 {
+		public final AtlasRegion plane3;
+
+		public AssetPlane3 (TextureAtlas atlas) {
+			plane3 = atlas.findRegion("Aircraft_03_normal");
+			
+			if (plane3 == null) {
+				
+				Gdx.app.debug(TAG,"Plane3 is null");
+			}		
+			
+		}
+		
+	}
+	
+	public class AssetPlane4 {
+		public final AtlasRegion plane4;
+
+		public AssetPlane4 (TextureAtlas atlas) {
+			plane4 = atlas.findRegion("Aircraft_04_normal");
+			
+			if (plane4 == null) {
+				
+				Gdx.app.debug(TAG,"Plane4 is null");
+			}		
+			
+		}
+		
+	}
+	
+	public class AssetPlane5 {
+		public final AtlasRegion plane5;
+
+		public AssetPlane5 (TextureAtlas atlas) {
+			plane5 = atlas.findRegion("Aircraft_05_normal");
+			
+			if (plane5 == null) {
+				
+				Gdx.app.debug(TAG,"Plane5 is null");
+			}		
+			
+		}
+		
+	}
+	
+	public class AssetPlane6 {
+		public final AtlasRegion plane6;
+
+		public AssetPlane6 (TextureAtlas atlas) {
+			plane6 = atlas.findRegion("Aircraft_06_normal");
+			
+			if (plane6 == null) {
+				
+				Gdx.app.debug(TAG,"Plane6 is null");
+			}		
+			
+		}
+		
+	}
+	
+	public class AssetPlane7 {
+		public final AtlasRegion plane7;
+
+		public AssetPlane7 (TextureAtlas atlas) {
+			plane7 = atlas.findRegion("Aircraft_07_normal");
+			
+			if (plane7 == null) {
+				
+				Gdx.app.debug(TAG,"Plane7 is null");
+			}		
+			
+		}
+		
+	}
+	
+	public class AssetPlane8 {
+		public final AtlasRegion plane8;
+
+		public AssetPlane8 (TextureAtlas atlas) {
+			plane8 = atlas.findRegion("Aircraft_08_normal");
+			
+			if (plane8 == null) {
+				
+				Gdx.app.debug(TAG,"Plane8 is null");
+			}		
+			
+		}
+		
+	}
+	
+	public class AssetPlane9 {
+		public final AtlasRegion plane9;
+
+		public AssetPlane9 (TextureAtlas atlas) {
+			plane9 = atlas.findRegion("Aircraft_09_normal");
+			
+			if (plane9 == null) {
+				
+				Gdx.app.debug(TAG,"Plane9 is null");
+			}		
+			
+		}
+		
+	}
+	
+	public class AssetPlane10 {
+		public final AtlasRegion plane10;
+
+		public AssetPlane10 (TextureAtlas atlas) {
+			plane10 = atlas.findRegion("Aircraft_10_normal");
+			
+			if (plane10 == null) {
+				
+				Gdx.app.debug(TAG,"Plane10 is null");
 			}		
 			
 		}
@@ -151,7 +296,17 @@ public class Assets implements Disposable, AssetErrorListener {
 		// create game resource objects
 		fonts = new AssetFonts();
 		bullet = new AssetBullet(atlas);
-		player = new AssetPlayer(atlas);
+		
+		plane1 = new AssetPlane1(atlas);
+		plane2 = new AssetPlane2(atlas);
+		plane3 = new AssetPlane3(atlas);
+		plane4 = new AssetPlane4(atlas);
+		plane5 = new AssetPlane5(atlas);
+		plane6 = new AssetPlane6(atlas);
+		plane7 = new AssetPlane7(atlas);
+		plane8 = new AssetPlane8(atlas);
+		plane9 = new AssetPlane9(atlas);
+		plane10 = new AssetPlane10(atlas);
 		
 		sounds = new AssetSounds(assetManager);
 		

@@ -73,6 +73,10 @@ public class Constants {
 	public static final float PLAYERXSIZE = .5f;
 	public static final float PLAYERYSIZE = .5f;
 	
+	// Size of planes
+	public static final float PLANEXSIZE = .5f;
+	public static final float PLANEYSIZE = .5f;
+	
 	// Game preferences file
 	public static final String PREFERENCES = "pong.prefs";
 	

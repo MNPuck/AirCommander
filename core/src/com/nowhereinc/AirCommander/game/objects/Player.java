@@ -60,7 +60,7 @@ public class Player {
 		body = world.createBody(bodyDefPlayer);
 		
 		// set user data
-		body.setUserData(Assets.instance.player.player);
+		body.setUserData(Assets.instance.plane10.plane10);
 		
 		PolygonShape shape = new PolygonShape();
 		
@@ -99,17 +99,6 @@ public class Player {
 		tsXAxis = tsXAxisIn;
 		tsYAxis = tsYAxisIn;
 	
-	}
-	
-	public void checkPlayerPowerUpReset() {
-		
-		if (body.getFixtureList().get(0).getUserData() == "player_reset") {
-			
-			body.setUserData(Assets.instance.player.player);
-			body.getFixtureList().get(0).setUserData("player");
-			
-		}
-		
 	}
 	
 	// return player x top and y center to fire bullet from
@@ -168,7 +157,7 @@ public class Player {
 		if (pos.y <= - ((Constants.GAMEBOARD_HEIGHT / 2) - cameraPosition.y) + boxYSize &&
 			!onBottomEdge) {
 			
-			vel.y = deltaTime * Constants.OBJECT_SCROLL_ADJUSTMENT;
+			vel.y = deltaTime * Constants.SCROLL_SPEED * Constants.OBJECT_SCROLL_ADJUSTMENT;
 			onBottomEdge = true;
 			
 		}
@@ -178,7 +167,7 @@ public class Player {
 		if (pos.y >= (cameraPosition.y + (Constants.GAMEBOARD_HEIGHT / 2)) - boxYSize &&
 			!onTopEdge) {
 			
-			vel.y = deltaTime * Constants.OBJECT_SCROLL_ADJUSTMENT;
+			vel.y = deltaTime * Constants.SCROLL_SPEED * Constants.OBJECT_SCROLL_ADJUSTMENT;
 			onTopEdge = true;
 			
 		}
@@ -277,10 +266,10 @@ public class Player {
 		
 		// stop if bottom edge is reached
 		
-		if (pos.y <= - ((Constants.GAMEBOARD_HEIGHT / 2) - cameraPosition.y) + boxYSize &&
+		if (pos.y <= - ((Constants.GAMEBOARD_HEIGHT / 2) - cameraPosition.y) + (boxYSize * 2) &&
 			!onBottomEdge) {
 			
-			vel.y = deltaTime * Constants.OBJECT_SCROLL_ADJUSTMENT;
+			vel.y = deltaTime *  Constants.SCROLL_SPEED * Constants.OBJECT_SCROLL_ADJUSTMENT;
 			onBottomEdge = true;
 			
 		}
@@ -295,7 +284,7 @@ public class Player {
 		if (pos.y >= (cameraPosition.y + (Constants.GAMEBOARD_HEIGHT / 2)) - boxYSize &&
 			!onTopEdge) {
 			
-			vel.y = deltaTime * Constants.OBJECT_SCROLL_ADJUSTMENT;
+			vel.y = deltaTime *  Constants.SCROLL_SPEED * Constants.OBJECT_SCROLL_ADJUSTMENT;
 			onTopEdge = true;
 			
 		}

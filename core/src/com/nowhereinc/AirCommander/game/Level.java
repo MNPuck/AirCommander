@@ -13,6 +13,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.nowhereinc.AirCommander.util.AudioManager;
 import com.nowhereinc.AirCommander.util.CameraHelper;
 import com.nowhereinc.AirCommander.game.objects.Bullet;
+import com.nowhereinc.AirCommander.game.objects.Plane1;
 import com.nowhereinc.AirCommander.game.objects.Player;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
@@ -37,6 +38,12 @@ public class Level {
 	
 	// Player
 	public Player player;
+	
+	// plane 1 single
+	public Plane1 plane1;
+	
+	// plane1 array
+	public Array<Plane1> plane1s;
 	
 	// level objects
 	public LevelBuilder levels;
@@ -81,6 +88,15 @@ public class Level {
 		
 		// player
 		player = new Player(world);
+		
+		// plane1s
+		plane1s = new Array<Plane1>();
+		
+		// create a single plane1
+		
+		plane1 = null;
+		plane1 = new Plane1(world);
+		plane1s.add((Plane1)plane1);
 		
 		// bullets
 		bullets = new Array<Bullet>();
@@ -135,6 +151,14 @@ public class Level {
 		// get player position
 			
 		playerPos = player.returnPlayerPosition();
+		
+		// plane1s update
+		
+		for (Plane1 plane1 : plane1s) {
+			
+			plane1.update(deltaTime, cameraPosition);
+			
+		}
 		
 		// bullets update
 		
@@ -257,6 +281,10 @@ public class Level {
 							
 		// draw player
 		player.render(batch);
+		
+		// draw plane1
+		for (Plane1 plane1 : plane1s)
+			plane1.render(batch);
 		
 		// draw bullets
 		for (Bullet bullet : bullets) 

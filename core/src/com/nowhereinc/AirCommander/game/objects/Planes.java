@@ -17,10 +17,10 @@ public class Planes {
 	// Body
 	public Body body;
 	
-	// player body
+	// planes body
 	public BodyDef bodyDefPlane;
 	
-	// player fixture
+	// plane fixture
 	public FixtureDef fixtureDefPlane;
 	
 	// box size
@@ -57,8 +57,15 @@ public class Planes {
 	
 	public Vector2 returnPlanePosition() {
 		
-		return this.body.getPosition();
-			
+		Vector2 planeCenter;
+		
+		planeCenter = new Vector2(0,0);
+		
+		planeCenter.x = this.body.getPosition().x + boxXSize;
+		planeCenter.y = this.body.getPosition().y + boxYSize;
+		
+		return planeCenter;
+				
 	}
 	
 	public void update() {
