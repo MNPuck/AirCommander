@@ -15,12 +15,16 @@ public class LevelBuilder {
 	public enum BLOCK_TYPE {
 		
 		EMPTY(0, 0, 0), // black
-		BLOCK0(255, 255, 255), //white
-		BLOCK1(76, 255, 0), // green
-		BLOCK2(0, 33, 255), // blue
-		BLOCK3(255, 0, 21), // red
-		BLOCK4(255, 239, 17), // yellow
-		BLOCK5(250, 0, 255); // purple
+		PLANE1(255, 0, 0), //red
+		PLANE2(255, 106, 0), // orange
+		PLANE3(255, 216, 0), // yellow
+		PLANE4(182, 255, 0), // light green
+		PLANE5(76, 255, 0), // green
+		PLANE6(0, 255, 255), // light blue
+		PLANE7(0, 38, 255), // blue
+		PLANE8(178, 0, 255), // purple
+		PLANE9(255, 0, 220), // violet
+		PLANE10(255, 0, 110); // pink
 		
 
 		private int color;
@@ -39,15 +43,15 @@ public class LevelBuilder {
 		
 	} 
 	
-	// block position coordinates
-	public float[] blockCoordX;
-	public float[] blockCoordY;
+	// plane position coordinates
+	public float[] planeCoordX;
+	public float[] planeCoordY;
 	
-	// block color 
-	public int[] blockColor;
+	// plane type 
+	public int[] planeType;
 	
-	// block Indexes
-	public int blockIndex;
+	// plane Indexes
+	public int planeIndex;
 
 	
 	public LevelBuilder (String filename) {
@@ -59,11 +63,11 @@ public class LevelBuilder {
 	
 	private void init() {
 		
-		blockCoordX = new float[150];
-		blockCoordY = new float[150];
-		blockColor = new int[150];
+		planeCoordX = new float[150];
+		planeCoordY = new float[150];
+		planeType = new int[150];
 		
-		blockIndex = 0;
+		planeIndex = 0;
 		
 	}
 	
@@ -91,65 +95,105 @@ public class LevelBuilder {
 				
 				}
 				
-				// block white
-				else if (BLOCK_TYPE.BLOCK0.sameColor(currentPixel)) {
+				// block red, plane 1
+				else if (BLOCK_TYPE.PLANE1.sameColor(currentPixel)) {
 					
 					calculateAdjustedPixels(pixelX, pixelY);					
-					blockColor[blockIndex] = 0;
+					planeType[planeIndex] = 1;
 					
-					blockIndex++;
+					planeIndex++;
 					
 				}
-						
-				// block green
-				else if (BLOCK_TYPE.BLOCK1.sameColor(currentPixel)) {
+				
+				// block orange, plane 2
+				else if (BLOCK_TYPE.PLANE2.sameColor(currentPixel)) {
 					
 					calculateAdjustedPixels(pixelX, pixelY);					
-					blockColor[blockIndex] = 1;
+					planeType[planeIndex] = 1;
 					
-					blockIndex++;
+					planeIndex++;
 					
 				}
 				
-				// block blue
-				else if (BLOCK_TYPE.BLOCK2.sameColor(currentPixel)) {
+				// block yellow, plane 3
+				else if (BLOCK_TYPE.PLANE3.sameColor(currentPixel)) {
 					
-					calculateAdjustedPixels(pixelX, pixelY);
-					blockColor[blockIndex] = 2;
+					calculateAdjustedPixels(pixelX, pixelY);					
+					planeType[planeIndex] = 1;
 					
-					blockIndex++;
-								
+					planeIndex++;
+					
+				}	
+				
+				// block light green, plane 4
+				else if (BLOCK_TYPE.PLANE4.sameColor(currentPixel)) {
+					
+					calculateAdjustedPixels(pixelX, pixelY);					
+					planeType[planeIndex] = 1;
+					
+					planeIndex++;
+					
 				}
 				
-				// block red
-				else if (BLOCK_TYPE.BLOCK3.sameColor(currentPixel)) {
+				// block green, plane 5
+				else if (BLOCK_TYPE.PLANE5.sameColor(currentPixel)) {
 					
-					calculateAdjustedPixels(pixelX, pixelY);
-					blockColor[blockIndex] = 3;
+					calculateAdjustedPixels(pixelX, pixelY);					
+					planeType[planeIndex] = 1;
 					
-					blockIndex++;
-								
-				}
+					planeIndex++;
+					
+				}	
 				
-				// block yellow
-				else if (BLOCK_TYPE.BLOCK4.sameColor(currentPixel)) {
+				// block light blue, plane 6
+				else if (BLOCK_TYPE.PLANE6.sameColor(currentPixel)) {
 					
-					calculateAdjustedPixels(pixelX, pixelY);
-					blockColor[blockIndex] = 4;
+					calculateAdjustedPixels(pixelX, pixelY);					
+					planeType[planeIndex] = 1;
 					
-					blockIndex++;
-								
-				}
+					planeIndex++;
+					
+				}	
 				
-				// block purple
-				else if (BLOCK_TYPE.BLOCK5.sameColor(currentPixel)) {
+				// block blue, plane 7
+				else if (BLOCK_TYPE.PLANE7.sameColor(currentPixel)) {
 					
-					calculateAdjustedPixels(pixelX, pixelY);
-					blockColor[blockIndex] = 5;
+					calculateAdjustedPixels(pixelX, pixelY);					
+					planeType[planeIndex] = 1;
 					
-					blockIndex++;
-
-				}
+					planeIndex++;
+					
+				}	
+				
+				// block purple, plane 8
+				else if (BLOCK_TYPE.PLANE8.sameColor(currentPixel)) {
+					
+					calculateAdjustedPixels(pixelX, pixelY);					
+					planeType[planeIndex] = 1;
+					
+					planeIndex++;
+					
+				}	
+				
+				// block violet, plane 9
+				else if (BLOCK_TYPE.PLANE9.sameColor(currentPixel)) {
+					
+					calculateAdjustedPixels(pixelX, pixelY);					
+					planeType[planeIndex] = 1;
+					
+					planeIndex++;
+					
+				}	
+				
+				// block pink, plane 10
+				else if (BLOCK_TYPE.PLANE10.sameColor(currentPixel)) {
+					
+					calculateAdjustedPixels(pixelX, pixelY);					
+					planeType[planeIndex] = 1;
+					
+					planeIndex++;
+					
+				}	
 				
 				// unknown object/pixel color
 				else {
@@ -210,8 +254,8 @@ public class LevelBuilder {
 		else
 			adjustedPositionY = adjustedPixelY;
 		
-		blockCoordX[blockIndex] = adjustedPositionX;
-		blockCoordY[blockIndex] = adjustedPositionY;
+		planeCoordX[planeIndex] = adjustedPositionX;
+		planeCoordY[planeIndex] = adjustedPositionY;
 		
 	}
 
