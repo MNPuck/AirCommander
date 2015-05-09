@@ -246,15 +246,35 @@ public class Level {
 			isGameOver = true;
 		
 		// create levels
-
-		/*
 		 
 		levels = null;
 		levels = new LevelBuilder(("levels/level-") + (levelNumber) + (".png"));
 		
 		loadLevel();
 		
-		*/
+	}
+	
+	private void loadLevel() {
+		
+		if (newGame) {
+			
+			addPlanes();
+			newGame = false;
+			
+		}
+		
+		else {
+			
+			addPlanes();
+			resetPlayer();
+			
+		}
+			
+	}
+	
+	private void addPlanes() {
+		
+
 		
 	}
 	
