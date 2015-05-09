@@ -14,8 +14,8 @@ public class Constants {
 	public static final float GAMEBOARD_HEIGHT = 16.0f;
 	
 	// Level Size Input Size
-	public static final float LEVEL_INPUT_WIDTH = 32.0f;
-	public static final float LEVEL_INPUT_HEIGHT = 45.0f;
+	public static final float LEVEL_INPUT_WIDTH = 12.0f;
+	public static final float LEVEL_INPUT_HEIGHT = 64.0f;
 
 	// GUI Width
 	public static final float VIEWPORT_GUI_WIDTH = 1920.0f;
@@ -28,7 +28,7 @@ public class Constants {
 	"images/AirCommander.pack.atlas";
 	
 	// Number of Levels
-	public static final int NUMBEROFLEVELS = 5;
+	public static final int NUMBEROFLEVELS = 1;
 	
 	// Amount of extra lives at level start
 	public static final int LIVES_START = 9;
