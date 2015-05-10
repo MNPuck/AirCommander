@@ -9,7 +9,6 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.nowhereinc.AirCommander.game.Assets;
 import com.nowhereinc.AirCommander.game.WorldRenderer;
 import com.nowhereinc.AirCommander.util.Constants;
-import com.badlogic.gdx.controllers.PovDirection;
 
 public class Player {
 	

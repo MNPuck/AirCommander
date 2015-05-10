@@ -27,15 +27,15 @@ public class Planes {
 	private float boxXSize;
 	private float boxYSize;
 	
-	public Planes (World world, String planeNumber) {
-		init(world, planeNumber);
+	public Planes (World world, String planeNumber, float posX, float posY) {
+		init(world, planeNumber, posX, posY);
 	}
 	
-	private void init(World world, String planeNumber) {
+	private void init(World world, String planeNumber, float posX, float posY) {
 		
 		// create body def for player
 		bodyDefPlane = new BodyDef();
-		bodyDefPlane.position.set(0f, 0f);
+		bodyDefPlane.position.set(posX, posY);
 		bodyDefPlane.type = BodyDef.BodyType.DynamicBody;
 		body = world.createBody(bodyDefPlane);
 		
@@ -50,6 +50,10 @@ public class Planes {
 		fixtureDefPlane.shape = shape;
 		fixtureDefPlane.restitution = 0;
 		body.createFixture(fixtureDefPlane).setUserData(planeNumber);
+		
+		// set to inactive
+		body.setActive(false);
+		
 		
 		shape.dispose();
 		
@@ -102,7 +106,8 @@ public class Planes {
 
 	public void render (SpriteBatch batch) {
 			
-		if (body.getUserData() != "delete") {
+		if (body.getUserData() != "delete" &&
+			body.isActive() != false) {
 					
 			Vector2 position = this.body.getPosition();
 				

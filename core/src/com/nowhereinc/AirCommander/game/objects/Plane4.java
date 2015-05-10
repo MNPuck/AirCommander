@@ -1,19 +1,15 @@
 package com.nowhereinc.AirCommander.game.objects;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.nowhereinc.AirCommander.game.Assets;
-import com.nowhereinc.AirCommander.game.WorldRenderer;
 import com.nowhereinc.AirCommander.util.Constants;
 
 public class Plane4 extends Planes {
 	
-	public Plane4(World world) {
+	public Plane4(World world, float posX, float posY) {
 		
-		super(world, "plane4");
+		super(world, "plane4", posX, posY);
 		init();
 		
 	}
@@ -32,7 +28,7 @@ public class Plane4 extends Planes {
 			
 		}
 		
-		this.body.setLinearVelocity(0, deltaTime * Constants.SCROLL_SPEED * Constants.OBJECT_SCROLL_ADJUSTMENT);
+		// this.body.setLinearVelocity(0, deltaTime * Constants.SCROLL_SPEED * Constants.OBJECT_SCROLL_ADJUSTMENT);
 	
 	}
 

@@ -113,5 +113,8 @@ public class Constants {
 	
 	// Scroll speed
 	public static final float SCROLL_SPEED = 2.0f;
+	
+	// Tile Size
+	public static final int TILE_SIZE = 32;
 		
 }

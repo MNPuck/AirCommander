@@ -1,25 +1,17 @@
 package com.nowhereinc.AirCommander.game;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.controllers.Controllers;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.g2d.ParticleEffect;
-import com.badlogic.gdx.graphics.g2d.ParticleEffectPool;
-import com.badlogic.gdx.graphics.g2d.ParticleEffectPool.PooledEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.math.MathUtils;
-import com.nowhereinc.AirCommander.util.AudioManager;
-import com.nowhereinc.AirCommander.util.CameraHelper;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.nowhereinc.AirCommander.game.objects.Bullet;
 import com.nowhereinc.AirCommander.game.objects.Plane1;
 import com.nowhereinc.AirCommander.game.objects.Player;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.nowhereinc.AirCommander.util.Constants;
-import java.util.Random;
 import com.nowhereinc.AirCommander.game.Assets;
 
 public class Level {
@@ -276,22 +268,37 @@ public class Level {
 		
 		for (MapObject obj : Assets.instance.mapObjectLayer.getObjects()) {
 			
-			if ("Plane1".equals(obj.getProperties().get("type", String.class)) ) {
+			if (obj instanceof RectangleMapObject) {
+			
+				Rectangle rect = ((RectangleMapObject) obj).getRectangle();
 				
-				addPlane1();
+				float conPosX = ConvertPosition(rect.x);
+				float conPosY = ConvertPosition(rect.y);
 				
+				if ("Plane1".equals(obj.getProperties().get("type", String.class)) ) {
+			
+					addPlane1(conPosX, conPosY);
+				}
+			
 			}
 				
 		}
 
 	}
 	
-	private void addPlane1() {
+	private float ConvertPosition(float pos) {
+		
+		return pos / Constants.TILE_SIZE;
+		
+	}
+	
+	private void addPlane1(float posX, float posY) {
+
 		
 		// create a single plane1
 		
 		plane1 = null;
-		plane1 = new Plane1(world);
+		plane1 = new Plane1(world, posX, posY);
 		plane1s.add((Plane1)plane1);
 		
 	}
