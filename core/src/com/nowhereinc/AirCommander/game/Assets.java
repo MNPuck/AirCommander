@@ -11,9 +11,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.nowhereinc.AirCommander.util.Constants;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 
@@ -26,6 +29,9 @@ public class Assets implements Disposable, AssetErrorListener {
 	private AssetManager assetManager;
 	
 	public TiledMap map;
+	public MapObjects mapObjects;
+	public MapLayer mapObjectLayer;
+	
 	public AssetFonts fonts;
 	public AssetBullet bullet;
 	
@@ -285,7 +291,10 @@ public class Assets implements Disposable, AssetErrorListener {
 		}
 		
 		map = assetManager.get("maps/AirCommander1.tmx");
-
+		mapObjectLayer = map.getLayers().get("Object Layer 1");
+		
+		mapObjects = mapObjectLayer.getObjects();
+		
 		TextureAtlas atlas = assetManager.get(Constants.TEXTURE_ATLAS_OBJECTS);
 
 		// enable texture filtering for pixel smoothing

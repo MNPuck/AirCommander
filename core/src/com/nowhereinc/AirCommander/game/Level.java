@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.ParticleEffectPool;
 import com.badlogic.gdx.graphics.g2d.ParticleEffectPool.PooledEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.math.MathUtils;
 import com.nowhereinc.AirCommander.util.AudioManager;
 import com.nowhereinc.AirCommander.util.CameraHelper;
@@ -19,6 +20,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.nowhereinc.AirCommander.util.Constants;
 import java.util.Random;
+import com.nowhereinc.AirCommander.game.Assets;
 
 public class Level {
 
@@ -91,12 +93,6 @@ public class Level {
 		
 		// plane1s
 		plane1s = new Array<Plane1>();
-		
-		// create a single plane1
-		
-		plane1 = null;
-		plane1 = new Plane1(world);
-		plane1s.add((Plane1)plane1);
 		
 		// bullets
 		bullets = new Array<Bullet>();
@@ -242,15 +238,17 @@ public class Level {
 		
 		// if level greater then max level set game over
 		
-		if (levelNumber > Constants.NUMBEROFLEVELS)
+		if (levelNumber > Constants.NUMBEROFLEVELS) {
+			
 			isGameOver = true;
+			
+		}
 		
-		// create levels
-		 
-		levels = null;
-		levels = new LevelBuilder(("levels/level-") + (levelNumber) + (".png"));
+		else {
 		
-		loadLevel();
+			loadLevel();
+		
+		}
 		
 	}
 	
@@ -274,7 +272,27 @@ public class Level {
 	
 	private void addPlanes() {
 		
+		// loop thru object layer and look for planes
+		
+		for (MapObject obj : Assets.instance.mapObjectLayer.getObjects()) {
+			
+			if ("Plane1".equals(obj.getProperties().get("type", String.class)) ) {
+				
+				addPlane1();
+				
+			}
+				
+		}
 
+	}
+	
+	private void addPlane1() {
+		
+		// create a single plane1
+		
+		plane1 = null;
+		plane1 = new Plane1(world);
+		plane1s.add((Plane1)plane1);
 		
 	}
 	
