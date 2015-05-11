@@ -124,7 +124,16 @@ public class Plane {
 			
 		}
 		
-		// this.body.setLinearVelocity(0, deltaTime * Constants.SCROLL_SPEED * Constants.OBJECT_SCROLL_ADJUSTMENT);
+		if (body.getPosition().y < (cameraPosition.y + (Constants.GAMEBOARD_WIDTH / 2))) {
+			
+			body.setActive(true);
+		}
+		
+		if (body.isActive()) {
+		
+			this.body.setLinearVelocity(0, deltaTime * Constants.SCROLL_SPEED * Constants.OBJECT_SCROLL_ADJUSTMENT);
+			
+		}
 	
 	}
 	
@@ -158,7 +167,8 @@ public class Plane {
 
 	public void render (SpriteBatch batch) {
 			
-		if (body.getUserData() != "delete") {
+		if (body.getUserData() != "delete" &&
+			body.isActive() != false) {
 					
 			Vector2 position = this.body.getPosition();
 				
