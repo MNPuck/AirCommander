@@ -5,10 +5,11 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.nowhereinc.AirCommander.game.Assets;
 import com.nowhereinc.AirCommander.game.WorldRenderer;
 import com.nowhereinc.AirCommander.util.Constants;
 
-public class Planes {
+public class Plane {
 	
 	private static final String TAG = WorldRenderer.class.getName();
 	
@@ -27,7 +28,7 @@ public class Planes {
 	private float boxXSize;
 	private float boxYSize;
 	
-	public Planes (World world, String planeNumber, float posX, float posY) {
+	public Plane (World world, String planeNumber, float posX, float posY) {
 		init(world, planeNumber, posX, posY);
 	}
 	
@@ -51,9 +52,52 @@ public class Planes {
 		fixtureDefPlane.restitution = 0;
 		body.createFixture(fixtureDefPlane).setUserData(planeNumber);
 		
+		switch (planeNumber) {
+		
+			case "plane1":
+				body.setUserData(Assets.instance.plane1.plane1);
+				break;
+				
+			case "plane2":
+				body.setUserData(Assets.instance.plane2.plane2);
+				break;
+				
+			case "plane3":
+				body.setUserData(Assets.instance.plane3.plane3);
+				break;
+				
+			case "plane4":
+				body.setUserData(Assets.instance.plane4.plane4);
+				break;
+				
+			case "plane5":
+				body.setUserData(Assets.instance.plane5.plane5);
+				break;
+				
+			case "plane6":
+				body.setUserData(Assets.instance.plane6.plane6);
+				break;
+				
+			case "plane7":
+				body.setUserData(Assets.instance.plane7.plane7);
+				break;
+				
+			case "plane8":
+				body.setUserData(Assets.instance.plane8.plane8);
+				break;
+				
+			case "plane9":
+				body.setUserData(Assets.instance.plane9.plane9);
+				break;
+				
+			case "plane10":
+				body.setUserData(Assets.instance.plane10.plane10);
+				break;
+		
+		}
+		
 		// set to inactive
 		body.setActive(false);
-		
 		
 		shape.dispose();
 		
@@ -72,8 +116,16 @@ public class Planes {
 				
 	}
 	
-	public void update() {
+	public void update(float deltaTime, Vector2 cameraPosition) {
 		
+		if (body.getFixtureList().first().getUserData() == "delete") {
+			
+			setDeleteFlag();
+			
+		}
+		
+		// this.body.setLinearVelocity(0, deltaTime * Constants.SCROLL_SPEED * Constants.OBJECT_SCROLL_ADJUSTMENT);
+	
 	}
 	
 	public void setDeleteFlag() {
@@ -106,8 +158,7 @@ public class Planes {
 
 	public void render (SpriteBatch batch) {
 			
-		if (body.getUserData() != "delete" &&
-			body.isActive() != false) {
+		if (body.getUserData() != "delete") {
 					
 			Vector2 position = this.body.getPosition();
 				

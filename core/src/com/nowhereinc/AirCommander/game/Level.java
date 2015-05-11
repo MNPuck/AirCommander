@@ -6,7 +6,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.nowhereinc.AirCommander.game.objects.Bullet;
-import com.nowhereinc.AirCommander.game.objects.Plane1;
+import com.nowhereinc.AirCommander.game.objects.Plane;
 import com.nowhereinc.AirCommander.game.objects.Player;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -27,17 +27,14 @@ public class Level {
 	// bullets array
 	public Array<Bullet> bullets;
 	
-	// bullets counter
-	public int bulletsCounter;
-	
 	// Player
 	public Player player;
 	
-	// plane 1 single
-	public Plane1 plane1;
+	// plane single
+	public Plane plane;
 	
-	// plane1 array
-	public Array<Plane1> plane1s;
+	// plane array
+	public Array<Plane> planes;
 	
 	// level objects
 	public LevelBuilder levels;
@@ -83,13 +80,11 @@ public class Level {
 		// player
 		player = new Player(world);
 		
-		// plane1s
-		plane1s = new Array<Plane1>();
+		// planes
+		planes = new Array<Plane>();
 		
 		// bullets
 		bullets = new Array<Bullet>();
-		
-		bulletsCounter = 0;
 		
 		// set to new game
 		newGame = true;
@@ -140,11 +135,11 @@ public class Level {
 			
 		playerPos = player.returnPlayerPosition();
 		
-		// plane1s update
+		// planes update
 		
-		for (Plane1 plane1 : plane1s) {
+		for (Plane plane : planes) {
 			
-			plane1.update(deltaTime, cameraPosition);
+			plane.update(deltaTime, cameraPosition);
 			
 		}
 		
@@ -211,11 +206,11 @@ public class Level {
 		
 		player.deletePlayer(world);
 		
-		for (Plane1 plane1 : plane1s) {
+		for (Plane plane : planes) {
 			
-			if (plane1.deletePlane(world)) {
+			if (plane.deletePlane(world)) {
 				
-				plane1s.removeValue(plane1, true);
+				planes.removeValue(plane, true);
 				
 			}
 			
@@ -272,12 +267,58 @@ public class Level {
 			
 				Rectangle rect = ((RectangleMapObject) obj).getRectangle();
 				
-				float conPosX = ConvertPosition(rect.x);
-				float conPosY = ConvertPosition(rect.y);
+				Vector2 conPos = new Vector2(rect.x, rect.y);
 				
-				if ("Plane1".equals(obj.getProperties().get("type", String.class)) ) {
+				conPos = ConvertPosition(conPos);
+				
+				if ("plane1".equals(obj.getProperties().get("type", String.class)) ) {
 			
-					addPlane1(conPosX, conPosY);
+					addPlane("plane1", conPos.x, conPos.y);
+				}
+				
+				if ("plane2".equals(obj.getProperties().get("type", String.class)) ) {
+					
+					addPlane("plane2", conPos.x, conPos.y);
+				}
+				
+				if ("plane3".equals(obj.getProperties().get("type", String.class)) ) {
+					
+					addPlane("plane3", conPos.x, conPos.y);
+				}
+				
+				if ("plane4".equals(obj.getProperties().get("type", String.class)) ) {
+					
+					addPlane("plane4", conPos.x, conPos.y);
+				}
+				
+				if ("plane5".equals(obj.getProperties().get("type", String.class)) ) {
+					
+					addPlane("plane5", conPos.x, conPos.y);
+				}
+				
+				if ("plane6".equals(obj.getProperties().get("type", String.class)) ) {
+					
+					addPlane("plane6", conPos.x, conPos.y);
+				}
+				
+				if ("plane7".equals(obj.getProperties().get("type", String.class)) ) {
+					
+					addPlane("plane7", conPos.x, conPos.y);
+				}
+				
+				if ("plane8".equals(obj.getProperties().get("type", String.class)) ) {
+					
+					addPlane("plane8", conPos.x, conPos.y);
+				}
+				
+				if ("plane9".equals(obj.getProperties().get("type", String.class)) ) {
+					
+					addPlane("plane9", conPos.x, conPos.y);
+				}
+				
+				if ("plane10".equals(obj.getProperties().get("type", String.class)) ) {
+					
+					addPlane("plane10", conPos.x, conPos.y);
 				}
 			
 			}
@@ -286,20 +327,28 @@ public class Level {
 
 	}
 	
-	private float ConvertPosition(float pos) {
+	private Vector2 ConvertPosition(Vector2 pos) {
 		
-		return pos / Constants.TILE_SIZE;
+		Vector2 tilePos = new Vector2(0,0);
+		
+		tilePos.x = pos.x / Constants.TILE_SIZE;
+		tilePos.y = pos.y / Constants.TILE_SIZE;
+	
+		float adjustedGameBoardWidth = Constants.GAMEBOARD_WIDTH / 2;
+		tilePos.x -= adjustedGameBoardWidth;
+		
+		float adjustedGameBoardHeight = Constants.GAMEBOARD_HEIGHT / 2;
+		tilePos.y -= adjustedGameBoardHeight;
+		
+		return tilePos;
 		
 	}
 	
-	private void addPlane1(float posX, float posY) {
-
+	private void addPlane(String planeNumber, float posX, float posY) {
 		
-		// create a single plane1
-		
-		plane1 = null;
-		plane1 = new Plane1(world, posX, posY);
-		plane1s.add((Plane1)plane1);
+		plane = null;
+		plane = new Plane(world, planeNumber, posX, posY);
+		planes.add((Plane)plane);
 		
 	}
 	
@@ -337,9 +386,9 @@ public class Level {
 		// draw player
 		player.render(batch);
 		
-		// draw plane1
-		for (Plane1 plane1 : plane1s)
-			plane1.render(batch);
+		// draw planes
+		for (Plane plane : planes)
+			plane.render(batch);
 		
 		// draw bullets
 		for (Bullet bullet : bullets) 
