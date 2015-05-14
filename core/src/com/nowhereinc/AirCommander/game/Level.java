@@ -126,6 +126,11 @@ public class Level {
 		
 		world.step(deltaTime, 8, 3);
 		
+		// add planes that are on screen
+		
+		addPlanes(cameraPosition);
+		
+		
 		// player update
 		
 		switch (Gdx.app.getType()) {
@@ -235,6 +240,115 @@ public class Level {
 	    */
 	}	
 	
+	private void addPlanes(Vector2 cameraPosition) {
+		
+		// loop thru object layer and look for planes that are on screen
+		
+		for (MapObject obj : Assets.instance.mapObjectLayer.getObjects()) {
+			
+			if (obj instanceof RectangleMapObject) {
+			
+				Rectangle rect = ((RectangleMapObject) obj).getRectangle();
+				
+				Vector2 conPos = new Vector2(rect.x, rect.y);
+				
+				conPos = ConvertPosition(conPos);
+				
+				if (conPos.y < cameraPosition.y + (Constants.GAMEBOARD_HEIGHT * .5f)) {
+			
+					if ("plane1".equals(obj.getName()) ) {
+			
+						addPlane(cameraPosition, "plane1", obj.getProperties().get("type", String.class));
+						obj.setName("done");
+					}
+				
+					if ("plane2".equals(obj.getName()) ) {
+					
+						addPlane(cameraPosition, "plane2", obj.getProperties().get("type", String.class));
+						obj.setName("done");
+					}
+				
+					if ("plane3".equals(obj.getName()) ) {
+					
+						addPlane(cameraPosition, "plane3", obj.getProperties().get("type", String.class));
+						obj.setName("done");
+					}
+				
+					if ("plane4".equals(obj.getName()) ) {
+					
+						addPlane(cameraPosition, "plane4", obj.getProperties().get("type", String.class));
+						obj.setName("done");
+					}
+				
+					if ("plane5".equals(obj.getName()) ) {
+					
+						addPlane(cameraPosition, "plane5", obj.getProperties().get("type", String.class));
+						obj.setName("done");
+					}
+				
+					if ("plane6".equals(obj.getName()) ) {
+					
+						addPlane(cameraPosition, "plane6", obj.getProperties().get("type", String.class));
+						obj.setName("done");
+					}
+				
+					if ("plane7".equals(obj.getName()) ) {
+					
+						addPlane(cameraPosition, "plane7", obj.getProperties().get("type", String.class));
+						obj.setName("done");
+					}
+				
+					if ("plane8".equals(obj.getProperties().get("name", String.class)) ) {
+					
+						addPlane(cameraPosition, "plane8", obj.getProperties().get("type", String.class));
+						obj.setName("done");
+					}
+				
+					if ("plane9".equals(obj.getProperties().get("name", String.class)) ) {
+					
+						addPlane(cameraPosition, "plane9", obj.getProperties().get("type", String.class));
+						obj.setName("done");
+					}
+				
+					if ("plane10".equals(obj.getProperties().get("name", String.class)) ) {
+					
+						addPlane(cameraPosition, "plane10", obj.getProperties().get("type", String.class));
+						obj.setName("done");
+					}
+				
+				}
+			
+			}
+				
+		}
+
+	}
+	
+	private Vector2 ConvertPosition(Vector2 pos) {
+		
+		Vector2 tilePos = new Vector2(0,0);
+		
+		tilePos.x = pos.x / Constants.TILE_SIZE;
+		tilePos.y = pos.y / Constants.TILE_SIZE;
+	
+		float adjustedGameBoardWidth = Constants.GAMEBOARD_WIDTH / 2;
+		tilePos.x -= adjustedGameBoardWidth;
+		
+		float adjustedGameBoardHeight = Constants.GAMEBOARD_HEIGHT / 2;
+		tilePos.y -= adjustedGameBoardHeight;
+		
+		return tilePos;
+		
+	}
+	
+	private void addPlane(Vector2 cameraPosition, String planeNumber, String planeOrigin) {
+		
+		plane = null;
+		plane = new Plane(world, cameraPosition, planeNumber, planeOrigin);
+		planes.add((Plane)plane);
+		
+	}
+	
 	public void deleteFlaggedItems() {
 		
 		for (Bullet bullet : bullets) {
@@ -286,113 +400,18 @@ public class Level {
 		
 		if (newGame) {
 			
-			addPlanes();
+			// addPlanes();
 			newGame = false;
 			
 		}
 		
 		else {
 			
-			addPlanes();
+			// addPlanes();
 			resetPlayer();
 			
 		}
 			
-	}
-	
-	private void addPlanes() {
-		
-		// loop thru object layer and look for planes
-		
-		for (MapObject obj : Assets.instance.mapObjectLayer.getObjects()) {
-			
-			if (obj instanceof RectangleMapObject) {
-			
-				Rectangle rect = ((RectangleMapObject) obj).getRectangle();
-				
-				Vector2 conPos = new Vector2(rect.x, rect.y);
-				
-				conPos = ConvertPosition(conPos);
-			
-				if ("plane1".equals(obj.getName()) ) {
-			
-					addPlane("plane1", obj.getProperties().get("type", String.class));
-				}
-				
-				if ("plane2".equals(obj.getName()) ) {
-					
-					addPlane("plane2", obj.getProperties().get("type", String.class));
-				}
-				
-				if ("plane3".equals(obj.getName()) ) {
-					
-					addPlane("plane3", obj.getProperties().get("type", String.class));
-				}
-				
-				if ("plane4".equals(obj.getName()) ) {
-					
-					addPlane("plane4", obj.getProperties().get("type", String.class));
-				}
-				
-				if ("plane5".equals(obj.getName()) ) {
-					
-					addPlane("plane5", obj.getProperties().get("type", String.class));
-				}
-				
-				if ("plane6".equals(obj.getName()) ) {
-					
-					addPlane("plane6", obj.getProperties().get("type", String.class));
-				}
-				
-				if ("plane7".equals(obj.getName()) ) {
-					
-					addPlane("plane7", obj.getProperties().get("type", String.class));
-				}
-				
-				if ("plane8".equals(obj.getProperties().get("name", String.class)) ) {
-					
-					addPlane("plane8", obj.getProperties().get("type", String.class));
-				}
-				
-				if ("plane9".equals(obj.getProperties().get("name", String.class)) ) {
-					
-					addPlane("plane9", obj.getProperties().get("type", String.class));
-				}
-				
-				if ("plane10".equals(obj.getProperties().get("name", String.class)) ) {
-					
-					addPlane("plane10", obj.getProperties().get("type", String.class));
-				}
-			
-			}
-				
-		}
-
-	}
-	
-	private Vector2 ConvertPosition(Vector2 pos) {
-		
-		Vector2 tilePos = new Vector2(0,0);
-		
-		tilePos.x = pos.x / Constants.TILE_SIZE;
-		tilePos.y = pos.y / Constants.TILE_SIZE;
-	
-		float adjustedGameBoardWidth = Constants.GAMEBOARD_WIDTH / 2;
-		tilePos.x -= adjustedGameBoardWidth;
-		
-		float adjustedGameBoardHeight = Constants.GAMEBOARD_HEIGHT / 2;
-		tilePos.y -= adjustedGameBoardHeight;
-		
-		return tilePos;
-		
-	}
-	
-	private void addPlane(String planeNumber, String planeOrigin) {
-		
-		plane = null;
-		plane = new Plane(world, planeNumber, planeOrigin);
-		planes.add((Plane)plane);
-		
 	}
 	
 	private void resetPlayer() {

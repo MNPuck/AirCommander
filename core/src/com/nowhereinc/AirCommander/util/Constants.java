@@ -107,9 +107,9 @@ public class Constants {
 	
 	// Computer Velocity Inc
 	public static final float COMPUTER_VELOCITY_INC = 1.0f;
-		
-	// Screen Side Edges Location
-	public static final float SCREEN_SIDE_EDGES = 5.5f;
+	
+	// Computer Side Velocity Inc
+	public static final float COMPUTER_SIDE_VELOCITY_INC = .05f;
 		
 	// Max Number of Bullets
 	public static final int MAX_BULLETS = 20;

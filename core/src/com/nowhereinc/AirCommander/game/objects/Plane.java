@@ -42,43 +42,43 @@ public class Plane {
 	private String savePlaneOrigin;
 	
 	
-	public Plane (World world, String planeNumber, String planeOrigin) {
+	public Plane (World world, Vector2 cameraPosition, String planeNumber, String planeOrigin) {
 		
 		savePlaneOrigin = planeOrigin;
-		Vector2 pos = initOrigin(world, planeOrigin);
+		Vector2 pos = initOrigin(world, cameraPosition, planeOrigin);
 		float rotation = initRotation(world, planeOrigin);
 		init(world, planeNumber, pos, rotation);
 	}
 	
-	private Vector2 initOrigin(World world, String planeOrigin) {
+	private Vector2 initOrigin(World world, Vector2 cameraPosition, String planeOrigin) {
 		
 		Vector2 tempPos = new Vector2(0,0);
 		
 		if (planeOrigin.equals("NE")) {
 			
 			tempPos.x = Constants.GAMEBOARD_WIDTH * .5f;
-			tempPos.y = Constants.GAMEBOARD_HEIGHT * .5f;
+			tempPos.y = cameraPosition.y + Constants.GAMEBOARD_HEIGHT * .5f;
 			
 		}
 		
 		if (planeOrigin.equals("NW")) {
 			
 			tempPos.x = - (Constants.GAMEBOARD_WIDTH * .5f);
-			tempPos.y = Constants.GAMEBOARD_HEIGHT * .5f;
+			tempPos.y = cameraPosition.y + Constants.GAMEBOARD_HEIGHT * .5f;
 			
 		}
 		
 		if (planeOrigin.equals("SE")) {
 			
 			tempPos.x = Constants.GAMEBOARD_WIDTH * .5f;
-			tempPos.y = - (Constants.GAMEBOARD_HEIGHT * .5f);
+			tempPos.y = cameraPosition.y - (Constants.GAMEBOARD_HEIGHT * .5f);
 			
 		}
 		
 		if (planeOrigin.equals("SW")) {
 			
 			tempPos.x = - (Constants.GAMEBOARD_WIDTH * .5f);
-			tempPos.y = - (Constants.GAMEBOARD_HEIGHT * .5f);
+			tempPos.y = cameraPosition.y - (Constants.GAMEBOARD_HEIGHT * .5f);
 			
 		}
 		
@@ -195,8 +195,8 @@ public class Plane {
 		
 		}
 		
-		// set to inactive
-		body.setActive(false);
+		// set to active
+		body.setActive(true);
 		
 		shape.dispose();
 		
@@ -228,17 +228,12 @@ public class Plane {
 			
 		}
 		
-		if (body.getPosition().y < (cameraPosition.y + (Constants.GAMEBOARD_HEIGHT / 2))) {
-			
-			body.setActive(true);
-		}
-		
 		if (body.isActive()) {
 		
 			switch (planeType) {
 		
 				case 1:
-					movePlane1(deltaTime, vel, pos);
+					movePlane1(deltaTime, cameraPosition, vel, pos);
 					break;
 			
 				case 2:
@@ -283,61 +278,203 @@ public class Plane {
 	
 	}
 	
-	private void movePlane1(float deltaTime, Vector2 vel, Vector2 pos) {
+	private void movePlane1(float deltaTime, Vector2 cameraPosition, Vector2 vel, Vector2 pos) {
+		
+		if (savePlaneOrigin.equals("NE")) {
+			
+			movePlane1NE(deltaTime, cameraPosition, vel, pos);
+			
+		}
+		
+		if (savePlaneOrigin.equals("NW")) {
+			
+			movePlane1NW(deltaTime, cameraPosition, vel, pos);
+			
+		}
+		
+		if (savePlaneOrigin.equals("SE")) {
+			
+			movePlane1SE(deltaTime, cameraPosition, vel, pos);
+			
+		}
+		
+		if (savePlaneOrigin.equals("SW")) {
+			
+			movePlane1SW(deltaTime, cameraPosition, vel, pos);
+			
+		}
+		
+	}
+	
+	private void movePlane1NE(float deltaTime, Vector2 cameraPosition, Vector2 vel, Vector2 pos) {
 		
 		float maxComputerVelocity = Constants.MAX_COMPUTER_VELOCITY;
 		
-		if (savePlaneOrigin.equals("NE") ||
-			savePlaneOrigin.equals("NW")) {
-
-			// if plane below bottom of screen set for deletion
+		// if plane below bottom of screen set for deletion
+		
+		if (pos.y < cameraPosition.y + (-Constants.GAMEBOARD_HEIGHT * .5f)) {
 			
-			if (pos.y < (-Constants.GAMEBOARD_HEIGHT * .5f)) {
+			setDeleteFlag();
+			vel.y = 0;
+			
+		}
+		
+		else {
+		
+			if (vel.y > - maxComputerVelocity) {
+		
+				// move plane down
+			
+				vel.y -= Constants.COMPUTER_VELOCITY_INC;
+		
+			}
+			
+			if (pos.y > cameraPosition.y) {
 				
-				setDeleteFlag();
-				vel.y = 0;
+				vel.x -= Constants.COMPUTER_SIDE_VELOCITY_INC;
 				
 			}
 			
-			else {
-			
-				if (vel.y > - maxComputerVelocity) {
-			
-					// move plane down
+			if (pos.y < cameraPosition.y) {
 				
-					vel.y -= Constants.COMPUTER_VELOCITY_INC;
-			
-				}
+				vel.x += Constants.COMPUTER_SIDE_VELOCITY_INC;
 				
 			}
 			
 		}
 		
-		if (savePlaneOrigin.equals("SE") ||
-			savePlaneOrigin.equals("SW")) {
+		
+		// apply movement
+		
+		this.body.setLinearVelocity(vel.x, vel.y);
+		
+	}
+	
+	private void movePlane1NW(float deltaTime, Vector2 cameraPosition, Vector2 vel, Vector2 pos) {
+		
+		float maxComputerVelocity = Constants.MAX_COMPUTER_VELOCITY;
+		
+		// if plane below bottom of screen set for deletion
+		
+		if (pos.y < cameraPosition.y + (-Constants.GAMEBOARD_HEIGHT * .5f)) {
 			
-			// if plane above top of screen set for deleteion
+			setDeleteFlag();
+			vel.y = 0;
 			
-			if (pos.y > (Constants.GAMEBOARD_HEIGHT * .5f)) {
-				
-				setDeleteFlag();
-				vel.y = 0;
-				
-			}
-			
-			else {
-				
-				if (vel.y < maxComputerVelocity) {
-				
-					// move plane up
-				
-					vel.y += Constants.COMPUTER_VELOCITY_INC;
-				
-				}
-			
-			}
-				
 		}
+		
+		else {
+		
+			if (vel.y > - maxComputerVelocity) {
+		
+				// move plane down
+			
+				vel.y -= Constants.COMPUTER_VELOCITY_INC;
+		
+			}
+			
+			if (pos.y > cameraPosition.y) {
+				
+				vel.x += Constants.COMPUTER_SIDE_VELOCITY_INC;
+				
+			}
+			
+			if (pos.y < cameraPosition.y) {
+				
+				vel.x -= Constants.COMPUTER_SIDE_VELOCITY_INC;
+				
+			}
+			
+		}
+
+		
+		// apply movement
+		
+		this.body.setLinearVelocity(vel.x, vel.y);
+		
+	}
+	
+	private void movePlane1SE(float deltaTime, Vector2 cameraPosition, Vector2 vel, Vector2 pos) {
+		
+		float maxComputerVelocity = Constants.MAX_COMPUTER_VELOCITY;
+		
+		// if plane above top of screen set for deletion
+		
+		if (pos.y > cameraPosition.y + (Constants.GAMEBOARD_HEIGHT * .5f)) {
+			
+			setDeleteFlag();
+			vel.y = 0;
+			
+		}
+		
+		else {
+		
+			if (vel.y < maxComputerVelocity) {
+		
+				// move plane up
+			
+				vel.y += Constants.COMPUTER_VELOCITY_INC;
+		
+			}
+			
+			if (pos.y > cameraPosition.y) {
+				
+				vel.x += Constants.COMPUTER_SIDE_VELOCITY_INC;
+				
+			}
+			
+			if (pos.y < cameraPosition.y) {
+				
+				vel.x -= Constants.COMPUTER_SIDE_VELOCITY_INC;
+				
+			}
+			
+		}
+		
+		
+		// apply movement
+		
+		this.body.setLinearVelocity(vel.x, vel.y);
+		
+	}
+	
+	private void movePlane1SW(float deltaTime, Vector2 cameraPosition, Vector2 vel, Vector2 pos) {
+		
+		float maxComputerVelocity = Constants.MAX_COMPUTER_VELOCITY;
+		
+		// if plane above top of screen set for deletion
+		
+		if (pos.y > cameraPosition.y + (Constants.GAMEBOARD_HEIGHT * .5f)) {
+			
+			setDeleteFlag();
+			vel.y = 0;
+			
+		}
+		
+		else {
+		
+			if (vel.y < maxComputerVelocity) {
+		
+				// move plane up
+			
+				vel.y += Constants.COMPUTER_VELOCITY_INC;
+		
+			}
+			
+			if (pos.y > cameraPosition.y) {
+				
+				vel.x -= Constants.COMPUTER_SIDE_VELOCITY_INC;
+				
+			}
+			
+			if (pos.y < cameraPosition.y) {
+				
+				vel.x += Constants.COMPUTER_SIDE_VELOCITY_INC;
+				
+			}
+			
+		}
+		
 		
 		// apply movement
 		
