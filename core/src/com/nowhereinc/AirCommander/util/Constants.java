@@ -87,8 +87,11 @@ public class Constants {
 	// Max Player Velocity Android
 	public static final float MAX_PLAYER_VELOCITY_A = 8.0f;
 		
-	// Max Ball Velocity Android
-	public static final float MAX_BULLET_VELOCITY = 12.0f;
+	// Max Bullet Velocity Player 
+	public static final float MAX_PLAYER_BULLET_VELOCITY = 12.0f;
+	
+	// Max Bullet Velocity Computer 
+	public static final float MAX_COMPUTER_BULLET_VELOCITY = 8.0f;
 		
 	// Player Velocity Increment Android
 	public static final float PLAYER_VELOCITY_INC_A = 4.0f;
@@ -98,6 +101,12 @@ public class Constants {
 		
 	// Player Velocity Increment Desktop
 	public static final float PLAYER_VELOCITY_INC_D = .80f;
+	
+	// Max Computer Velocity
+	public static final float MAX_COMPUTER_VELOCITY = 5.0f;
+	
+	// Computer Velocity Inc
+	public static final float COMPUTER_VELOCITY_INC = 1.0f;
 		
 	// Screen Side Edges Location
 	public static final float SCREEN_SIDE_EDGES = 5.5f;
@@ -106,7 +115,10 @@ public class Constants {
 	public static final int MAX_BULLETS = 20;
 	
 	// Interval to fire bullets
-	public static final float BULLET_SPAWN_TIME = .33f;
+	public static final float BULLET_SPAWN_TIME_PLAYER = .33f;
+	
+	// Interval to fire bullets
+	public static final float BULLET_SPAWN_TIME_COMPUTER = 1f;
 	
 	// Object Scroll adjustment
 	public static final int OBJECT_SCROLL_ADJUSTMENT = 60;

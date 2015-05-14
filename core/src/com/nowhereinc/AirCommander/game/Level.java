@@ -52,13 +52,19 @@ public class Level {
 	private boolean newGame; 
 	
 	// player position
-	private Vector2 playerPos;
+	private Vector2 playerPosition;
+	
+	// plane position
+	private Vector2 planePosition;
 	
 	// game over boolean
 	public boolean isGameOver;
 	
 	// time since last bullet
-	private float timeSinceLastBullet;
+	private float timeSinceLastBulletPlayer;
+	
+	// time since last bullet
+	private float timeSinceLastBulletComputer;
 	
 	
 	public Level () {
@@ -96,13 +102,19 @@ public class Level {
 		lives = Constants.LIVES_START;
 	
 		// init player pos 
-		playerPos = new Vector2(0,0);
+		playerPosition = new Vector2(0,0);
+		
+		// init plane pos 
+		planePosition = new Vector2(0,0);
 		
 		// level game over init
 		isGameOver = false;
 		
 		// init time since last bullet to 0
-		timeSinceLastBullet = 0;
+		timeSinceLastBulletPlayer = 0;
+		
+		// init time since last bullet to 0
+		timeSinceLastBulletComputer = 0;
 		
 		newLevel();
 		
@@ -133,13 +145,13 @@ public class Level {
 		
 		// get player position
 			
-		playerPos = player.returnPlayerPosition();
+		playerPosition = player.returnPlayerPosition();
 		
 		// planes update
 		
 		for (Plane plane : planes) {
 			
-			plane.update(deltaTime, cameraPosition);
+			plane.update(deltaTime, cameraPosition, playerPosition);
 			
 		}
 		
@@ -151,11 +163,13 @@ public class Level {
 			
 		}
 		
+		// player bullets spawn
+		
 		// if time since last bullet > constant, spawn a bullet
 		
-		timeSinceLastBullet += deltaTime;
+		timeSinceLastBulletPlayer += deltaTime;
 		
-		if (timeSinceLastBullet > Constants.BULLET_SPAWN_TIME) {
+		if (timeSinceLastBulletPlayer > Constants.BULLET_SPAWN_TIME_PLAYER) {
 			
 			switch (Gdx.app.getType()) {
 			
@@ -164,10 +178,10 @@ public class Level {
 					if (player.returnAButton()) {
 					
 						bullet = null;
-						bullet = new Bullet(world, playerPos);
+						bullet = new Bullet(world, playerPosition, Constants.MAX_PLAYER_BULLET_VELOCITY, 1, Constants.N);
 						bullets.add((Bullet)bullet);
 					
-						timeSinceLastBullet = 0;
+						timeSinceLastBulletPlayer = 0;
 					
 					}
 				
@@ -176,10 +190,10 @@ public class Level {
 				case Android:
 				
 					bullet = null;
-					bullet = new Bullet(world, playerPos);
+					bullet = new Bullet(world, playerPosition, Constants.MAX_PLAYER_BULLET_VELOCITY, 1, Constants.N);
 					bullets.add((Bullet)bullet);
 				
-					timeSinceLastBullet = 0;
+					timeSinceLastBulletPlayer = 0;
 				
 					break;
 				
@@ -189,7 +203,36 @@ public class Level {
 			}
 			
 		}
+		
+		// computer bullets spawn
+		
+		timeSinceLastBulletComputer += deltaTime;
+		
+		/*
+		
+		if (timeSinceLastBulletComputer > Constants.BULLET_SPAWN_TIME_COMPUTER) {
 			
+			// loop thru active planes and get their coordinates and init shot
+			
+			for (Plane plane : planes) {
+				
+				if (plane.body.isActive()) {
+				
+					planePosition = plane.returnPlanePosition();
+				
+					bullet = null;
+					bullet = new Bullet(world, planePosition, Constants.MAX_COMPUTER_BULLET_VELOCITY, 2, Constants.S);
+					bullets.add((Bullet)bullet);
+				
+				}
+							
+			}
+			
+			timeSinceLastBulletComputer = 0;
+			
+		}
+		
+	    */
 	}	
 	
 	public void deleteFlaggedItems() {
@@ -209,7 +252,7 @@ public class Level {
 		for (Plane plane : planes) {
 			
 			if (plane.deletePlane(world)) {
-				
+
 				planes.removeValue(plane, true);
 				
 			}
@@ -270,55 +313,55 @@ public class Level {
 				Vector2 conPos = new Vector2(rect.x, rect.y);
 				
 				conPos = ConvertPosition(conPos);
-				
-				if ("plane1".equals(obj.getProperties().get("type", String.class)) ) {
 			
-					addPlane("plane1", conPos.x, conPos.y);
+				if ("plane1".equals(obj.getName()) ) {
+			
+					addPlane("plane1", obj.getProperties().get("type", String.class));
 				}
 				
-				if ("plane2".equals(obj.getProperties().get("type", String.class)) ) {
+				if ("plane2".equals(obj.getName()) ) {
 					
-					addPlane("plane2", conPos.x, conPos.y);
+					addPlane("plane2", obj.getProperties().get("type", String.class));
 				}
 				
-				if ("plane3".equals(obj.getProperties().get("type", String.class)) ) {
+				if ("plane3".equals(obj.getName()) ) {
 					
-					addPlane("plane3", conPos.x, conPos.y);
+					addPlane("plane3", obj.getProperties().get("type", String.class));
 				}
 				
-				if ("plane4".equals(obj.getProperties().get("type", String.class)) ) {
+				if ("plane4".equals(obj.getName()) ) {
 					
-					addPlane("plane4", conPos.x, conPos.y);
+					addPlane("plane4", obj.getProperties().get("type", String.class));
 				}
 				
-				if ("plane5".equals(obj.getProperties().get("type", String.class)) ) {
+				if ("plane5".equals(obj.getName()) ) {
 					
-					addPlane("plane5", conPos.x, conPos.y);
+					addPlane("plane5", obj.getProperties().get("type", String.class));
 				}
 				
-				if ("plane6".equals(obj.getProperties().get("type", String.class)) ) {
+				if ("plane6".equals(obj.getName()) ) {
 					
-					addPlane("plane6", conPos.x, conPos.y);
+					addPlane("plane6", obj.getProperties().get("type", String.class));
 				}
 				
-				if ("plane7".equals(obj.getProperties().get("type", String.class)) ) {
+				if ("plane7".equals(obj.getName()) ) {
 					
-					addPlane("plane7", conPos.x, conPos.y);
+					addPlane("plane7", obj.getProperties().get("type", String.class));
 				}
 				
-				if ("plane8".equals(obj.getProperties().get("type", String.class)) ) {
+				if ("plane8".equals(obj.getProperties().get("name", String.class)) ) {
 					
-					addPlane("plane8", conPos.x, conPos.y);
+					addPlane("plane8", obj.getProperties().get("type", String.class));
 				}
 				
-				if ("plane9".equals(obj.getProperties().get("type", String.class)) ) {
+				if ("plane9".equals(obj.getProperties().get("name", String.class)) ) {
 					
-					addPlane("plane9", conPos.x, conPos.y);
+					addPlane("plane9", obj.getProperties().get("type", String.class));
 				}
 				
-				if ("plane10".equals(obj.getProperties().get("type", String.class)) ) {
+				if ("plane10".equals(obj.getProperties().get("name", String.class)) ) {
 					
-					addPlane("plane10", conPos.x, conPos.y);
+					addPlane("plane10", obj.getProperties().get("type", String.class));
 				}
 			
 			}
@@ -344,10 +387,10 @@ public class Level {
 		
 	}
 	
-	private void addPlane(String planeNumber, float posX, float posY) {
+	private void addPlane(String planeNumber, String planeOrigin) {
 		
 		plane = null;
-		plane = new Plane(world, planeNumber, posX, posY);
+		plane = new Plane(world, planeNumber, planeOrigin);
 		planes.add((Plane)plane);
 		
 	}

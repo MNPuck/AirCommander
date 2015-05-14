@@ -23,15 +23,6 @@
   </data>
  </layer>
  <objectgroup name="Object Layer 1">
-  <object id="18" name="Plane1" type="plane1" x="302" y="890"/>
-  <object id="20" name="Plane2" type="plane2" x="87" y="590"/>
-  <object id="22" name="Plane3" type="plane3" x="250" y="1569"/>
-  <object id="23" name="Plane4" type="plane4" x="162" y="1491"/>
-  <object id="24" name="Plane5" type="plane5" x="205" y="1391"/>
-  <object id="25" name="Plane6" type="plane6" x="279" y="1291"/>
-  <object id="26" name="Plane7" type="plane7" x="131" y="1216"/>
-  <object id="27" name="Plane8" type="plane8" x="262" y="1066"/>
-  <object id="28" name="Plane9" type="plane9" x="103" y="985"/>
-  <object id="29" name="Plane10" type="plane10" x="277" y="457"/>
+  <object id="20" name="plane1" type="NW" x="369" y="1645"/>
  </objectgroup>
 </map>

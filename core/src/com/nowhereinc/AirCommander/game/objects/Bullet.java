@@ -30,22 +30,35 @@ public class Bullet {
 	// box size
 	private float boxXSize;
 	private float boxYSize;
+;
 	
-	public Bullet (World world, Vector2 playerPos) {
-		init(world, playerPos);
+	public Bullet (World world, Vector2 planePosition, 
+			       float bulletSpeed, int bulletColor, int bulletDirection) {
+		init(world, planePosition, bulletSpeed, bulletColor, bulletDirection);
 	}
 	
-	private void init(World world, Vector2 PlayerPos) {
+	private void init(World world, Vector2 planePosition, float bulletSpeed, int bulletColor, int bulletDirection) {
 		
 		// set texture
-		Bullet = Assets.instance.bullet.bullet;
+		
+		if (bulletColor == 1) {
+		
+			Bullet = Assets.instance.bullet1.bullet1;
+		
+		}
+		
+		if (bulletColor == 2) {
+			
+			Bullet = Assets.instance.bullet2.bullet2;
+		
+		}
 		
 		// set box size here to use in position set
 		boxXSize = .20f;
 		boxYSize = .20f;
 		
 		// create Vector2 to adjust postion to the bullets center
-		Vector2 adjustedPosition = PlayerPos;
+		Vector2 adjustedPosition = planePosition;
 		
 		adjustedPosition.x -= boxXSize * .5f;
 		adjustedPosition.y -= boxYSize * .5f;
@@ -59,8 +72,8 @@ public class Bullet {
 		// set user data
 		body.setUserData(Bullet);
 		
-		// apply movement
-		body.applyLinearImpulse(0, Constants.MAX_BULLET_VELOCITY, PlayerPos.x, PlayerPos.y, true);
+		// set to bullet property to true
+		body.setBullet(true);
 	
 		CircleShape shape = new CircleShape();
 	
@@ -72,6 +85,39 @@ public class Bullet {
 		body.createFixture(fixtureDefBullet).setUserData("bullet");
 		
 		shape.dispose();
+		
+		switch (bulletDirection) {
+		
+			case Constants.N:
+				body.applyLinearImpulse(0, bulletSpeed, planePosition.x, planePosition.y, true);
+				break;
+			
+			case Constants.NE:
+				break;
+			
+			case Constants.NW:
+				break;
+			
+			case Constants.E:
+				break;
+			
+			case Constants.W:
+				break;
+			
+			case Constants.S:
+				body.applyLinearImpulse(0, - bulletSpeed, planePosition.x, planePosition.y, true);
+				break;
+			
+			case Constants.SW:
+				break;
+			
+			case Constants.SE:
+				break;
+			
+			case Constants.NIL:
+				break;
+				
+		}
 	
 	}
 	
@@ -84,6 +130,13 @@ public class Bullet {
 			setDeleteFlag();
 			
 		}
+		
+		if (pos.y <= (cameraPosition.y - (Constants.GAMEBOARD_HEIGHT / 2))) {
+			
+			setDeleteFlag();
+			
+		}
+		
 		
 		if (body.getFixtureList().first().getUserData() == "delete") {
 			

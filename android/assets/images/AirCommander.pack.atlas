@@ -221,9 +221,16 @@ Aircraft_10_shadow
   orig: 94, 76
   offset: 0, 0
   index: -1
-bullet_orange0000
+bullet_blue0000
   rotate: false
   xy: 2, 2
+  size: 12, 12
+  orig: 12, 12
+  offset: 0, 0
+  index: -1
+bullet_orange0000
+  rotate: false
+  xy: 338, 48
   size: 12, 12
   orig: 12, 12
   offset: 0, 0

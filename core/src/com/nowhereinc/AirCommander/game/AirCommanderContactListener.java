@@ -21,7 +21,7 @@ public class AirCommanderContactListener implements ContactListener {
 		Fixture fixtureA = contact.getFixtureA();
 		Fixture fixtureB = contact.getFixtureB();
 		
-		// ball hits block code
+		// bullet hits plane or player block code
 		
 		String fixtureALong = fixtureA.getUserData().toString();
 		String fixtureAShort = fixtureALong.substring(0, Math.min(fixtureALong.length(), 6));
@@ -34,6 +34,7 @@ public class AirCommanderContactListener implements ContactListener {
 			
 			fixtureA.setUserData("delete");
 			fixtureB.setUserData("delete");
+			Gdx.app.debug(TAG, "Setting delete flags");
 			
 		}
 		
@@ -48,6 +49,7 @@ public class AirCommanderContactListener implements ContactListener {
 			
 			fixtureA.setUserData("delete");
 			fixtureB.setUserData("delete");
+			Gdx.app.debug(TAG, "Setting delete flags");
 		
 		}
 

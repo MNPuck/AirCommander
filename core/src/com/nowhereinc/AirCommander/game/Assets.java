@@ -33,7 +33,10 @@ public class Assets implements Disposable, AssetErrorListener {
 	public MapLayer mapObjectLayer;
 	
 	public AssetFonts fonts;
-	public AssetBullet bullet;
+	
+	public AssetBullet1 bullet1;
+	public AssetBullet2 bullet2;
+	
 	
 	public AssetPlane1 plane1;	
 	public AssetPlane2 plane2;	
@@ -75,15 +78,30 @@ public class Assets implements Disposable, AssetErrorListener {
 		}
 	}
 	
-	public class AssetBullet {
-		public final AtlasRegion bullet;
+	public class AssetBullet1 {
+		public final AtlasRegion bullet1;
 
-		public AssetBullet (TextureAtlas atlas) {
-			bullet = atlas.findRegion("bullet_orange0000");
+		public AssetBullet1 (TextureAtlas atlas) {
+			bullet1 = atlas.findRegion("bullet_orange0000");
 			
-			if (bullet == null) {
+			if (bullet1 == null) {
 				
-				Gdx.app.debug(TAG,"Bullet is null");
+				Gdx.app.debug(TAG,"Bullet1 is null");
+			}
+
+		}
+		
+	}
+	
+	public class AssetBullet2 {
+		public final AtlasRegion bullet2;
+
+		public AssetBullet2 (TextureAtlas atlas) {
+			bullet2 = atlas.findRegion("bullet_blue0000");
+			
+			if (bullet2 == null) {
+				
+				Gdx.app.debug(TAG,"Bullet2 is null");
 			}
 
 		}
@@ -304,7 +322,9 @@ public class Assets implements Disposable, AssetErrorListener {
 
 		// create game resource objects
 		fonts = new AssetFonts();
-		bullet = new AssetBullet(atlas);
+		
+		bullet1 = new AssetBullet1(atlas);
+		bullet2 = new AssetBullet2(atlas);
 		
 		plane1 = new AssetPlane1(atlas);
 		plane2 = new AssetPlane2(atlas);

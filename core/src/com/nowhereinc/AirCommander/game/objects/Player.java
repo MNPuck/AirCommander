@@ -109,7 +109,7 @@ public class Player {
 		playerTopMiddle = new Vector2(0,0);
 		
 		playerTopMiddle.x = this.body.getPosition().x;
-		playerTopMiddle.y = this.body.getPosition().y + boxYSize;
+		playerTopMiddle.y = this.body.getPosition().y + boxYSize * 2;
 		
 		return playerTopMiddle;
 			
@@ -119,6 +119,12 @@ public class Player {
 		
 		Vector2 vel = this.body.getLinearVelocity();
 		Vector2 pos = this.body.getPosition();
+		
+		if (body.getFixtureList().first().getUserData() == "delete") {
+			
+			setDeleteFlag();
+			
+		}
 		
 		Vector2 playerCenter;
 		
@@ -239,6 +245,12 @@ public class Player {
 		Vector2 vel = this.body.getLinearVelocity();
 		Vector2 pos = this.body.getPosition();
 		
+		if (body.getFixtureList().first().getUserData() == "delete") {
+			
+			setDeleteFlag();
+			
+		}
+		
 		float maxPlayerVelocity = 0f;
 	 
 		maxPlayerVelocity = Constants.MAX_PLAYER_VELOCITY_D;
@@ -301,8 +313,8 @@ public class Player {
 			pos.x < (Constants.GAMEBOARD_WIDTH / 2) - (boxXSize * 2) &&
 			!onRightEdge) {
 				
-				vel.x += leftXAxis;
-				onLeftEdge = false;
+			vel.x += leftXAxis;
+			onLeftEdge = false;
 		
 		}
 		
@@ -313,8 +325,8 @@ public class Player {
 			pos.x > (- Constants.GAMEBOARD_WIDTH / 2) &&
 			!onLeftEdge) {
 				
-				vel.x += leftXAxis;
-				onRightEdge = false;
+			vel.x += leftXAxis;
+			onRightEdge = false;
 
 		}
 		
@@ -325,8 +337,9 @@ public class Player {
 			pos.y < (cameraPosition.y + (Constants.GAMEBOARD_HEIGHT / 2)) - (boxYSize * 2) &&
 			!onTopEdge) {
 			
-				vel.y += -leftYAxis;
-				onBottomEdge = false;
+			vel.y += -leftYAxis;
+			onBottomEdge = false;
+			
 		}
 		
 		// move down
@@ -336,8 +349,9 @@ public class Player {
 			pos.y > - ((Constants.GAMEBOARD_HEIGHT / 2) - cameraPosition.y) &&
 			!onBottomEdge) {
 			
-				vel.y += -leftYAxis;
-				onTopEdge = false;
+			vel.y += -leftYAxis;
+			onTopEdge = false;
+			
 		}
 		
 		// no move so stop movement, else apply movement
