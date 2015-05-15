@@ -124,7 +124,7 @@ public class WorldController extends InputAdapter {
 			cameraPosition.y += Constants.SCROLL_SPEED * deltaTime;
 			
 			level.update(deltaTime, cameraPosition);
-			level.deleteFlaggedItems();
+			level.deleteFlaggedItems(cameraPosition);
 			
 			// camera helper update
 			

@@ -344,15 +344,14 @@ public class Plane {
 		
 			}
 		
-			if (pos.x < 0 &&
-				vel.x < Constants.MAX_COMPUTER_SIDE_VELOCITY_DOWN) {
+			if (pos.y < cameraPosition.y) {
+		
 				
 				vel.x += Constants.COMPUTER_SIDE_VELOCITY_INC;
 						
 			}
 			
-			if (pos.x > 0 &&
-				vel.x > - Constants.MAX_COMPUTER_SIDE_VELOCITY_DOWN) {
+			if (pos.y > cameraPosition.y) {
 				
 				vel.x -= Constants.COMPUTER_SIDE_VELOCITY_INC;
 				
@@ -390,17 +389,16 @@ public class Plane {
 		
 			}
 			
-			if (pos.x < 0 &&
-				vel.x < Constants.MAX_COMPUTER_SIDE_VELOCITY_DOWN) {
+			if (pos.y < cameraPosition.y) {
+		
 				
-				vel.x += Constants.COMPUTER_SIDE_VELOCITY_INC;
+				vel.x -= Constants.COMPUTER_SIDE_VELOCITY_INC;
 						
 			}
 			
-			if (pos.x > 0 &&
-				vel.x > - Constants.MAX_COMPUTER_SIDE_VELOCITY_DOWN) {
+			if (pos.y > cameraPosition.y) {
 				
-				vel.x -= Constants.COMPUTER_SIDE_VELOCITY_INC;
+				vel.x += Constants.COMPUTER_SIDE_VELOCITY_INC;
 				
 			}
 			
@@ -554,6 +552,53 @@ public class Plane {
 		
 		body.setUserData("delete");
 
+	}
+	
+	public int returnPlaneScore() {
+		
+		if (body.getUserData().equals("delete")) {
+		
+			switch (planeType) {
+		
+				case 1:
+					return 10;
+			
+				case 2:
+					return 10;
+			
+				case 3:
+					return 10;
+			
+				case 4:
+					return 10;
+			
+				case 5:
+					return 10;
+			
+				case 6:
+					return 10;
+
+				case 7:
+					return 10;
+			
+				case 8:
+					return 10;
+				
+				case 9:
+					return 10;
+			
+				case 10:
+					return 10;
+			
+				default:
+					return 0;
+					
+			}
+	
+		}
+		
+		return 0;
+		
 	}
 	
 	public boolean deletePlane(World world) {

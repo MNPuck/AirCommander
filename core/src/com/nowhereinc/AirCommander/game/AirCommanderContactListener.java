@@ -8,9 +8,6 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 
-
-
-
 public class AirCommanderContactListener implements ContactListener {
 	
 	public static final String TAG = Level.class.getName();
@@ -50,6 +47,28 @@ public class AirCommanderContactListener implements ContactListener {
 			fixtureB.setUserData("delete");
 		
 		}
+		
+		// plane hits player block code
+		
+		fixtureAShort = fixtureBLong.substring(0, Math.min(fixtureBLong.length(), 5));
+	
+		if (fixtureAShort.equals("plane") &&
+		    fixtureBLong.equals("player")) {
+			
+			fixtureA.setUserData("delete");
+			fixtureB.setUserData("delete");
+			
+		}
+		
+		fixtureBShort = fixtureBLong.substring(0, Math.min(fixtureBLong.length(), 5));
+		
+		if (fixtureALong.equals("player") &&
+			fixtureBShort.equals("plane")) {
+			
+			fixtureA.setUserData("delete");
+			fixtureB.setUserData("delete");
+		
+		}
 
 	}
 	
@@ -58,11 +77,25 @@ public class AirCommanderContactListener implements ContactListener {
 	}
 	
 	public void preSolve(Contact contact, Manifold manifold) {
+		
+		Fixture fixtureA = contact.getFixtureA();
+		Fixture fixtureB = contact.getFixtureB();
+		
+		String fixtureALong = fixtureA.getUserData().toString();
+		String fixtureBLong = fixtureB.getUserData().toString();
+		
+		if (fixtureALong.equals("bullet") &&
+		    fixtureBLong.equals("bullet")) {
+			
+			Gdx.app.debug(TAG, "Setting contact enabled to false");
+			contact.setEnabled(false);
+
+		}
 	
 	}
 	
 	public void postSolve(Contact contact, ContactImpulse contactimpulse) {
-		
+			
 	}
 
 }

@@ -46,15 +46,15 @@ public class Player {
 	private boolean onBottomEdge = false;
 
 	
-	public Player (World world) {
-		init(world);
+	public Player (World world, Vector2 cameraPosition) {
+		init(world, cameraPosition);
 	}
 	
-	private void init(World world) {
+	private void init(World world, Vector2 cameraPosition) {
 	
 		// create body def for player
 		bodyDefPlayer = new BodyDef();
-		bodyDefPlayer.position.set(0f, -7f);
+		bodyDefPlayer.position.set(0f, cameraPosition.y - 7f);
 		bodyDefPlayer.type = BodyDef.BodyType.DynamicBody;
 		body = world.createBody(bodyDefPlayer);
 		
@@ -388,10 +388,6 @@ public class Player {
 			body.setActive(false);
 			body.setUserData(null);
 			body = null;
-		
-			// create via init
-		
-			init(world);
 			
 			return true;
 		

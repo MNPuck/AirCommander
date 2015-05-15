@@ -84,7 +84,7 @@ public class Level {
 		world.setContactListener(new AirCommanderContactListener());
 		
 		// player
-		player = new Player(world);
+		player = new Player(world, new Vector2(0f,0f));
 		
 		// planes
 		planes = new Array<Plane>();
@@ -130,7 +130,6 @@ public class Level {
 		
 		addPlanes(cameraPosition);
 		
-		
 		// player update
 		
 		switch (Gdx.app.getType()) {
@@ -157,6 +156,7 @@ public class Level {
 		for (Plane plane : planes) {
 			
 			plane.update(deltaTime, cameraPosition, playerPosition);
+			score += plane.returnPlaneScore();
 			
 		}
 		
@@ -358,7 +358,7 @@ public class Level {
 		
 	}
 	
-	public void deleteFlaggedItems() {
+	public void deleteFlaggedItems(Vector2 cameraPosition) {
 		
 		for (Bullet bullet : bullets) {
 			
@@ -372,15 +372,26 @@ public class Level {
 		
 		if (player.deletePlayer(world)) {
 			
-			isGameOver = true;
+			lives--;
+			
+			if (lives == 0) {
+				
+				isGameOver = true;
+				
+			}
+			
+			else {
+				
+				player = null;
+				player = new Player(world, cameraPosition);
+				
+			}
+			
 		}
-		
-		player.deletePlayer(world);
 		
 		for (Plane plane : planes) {
 			
 			if (plane.deletePlane(world)) {
-
 				planes.removeValue(plane, true);
 				
 			}
@@ -414,14 +425,12 @@ public class Level {
 		
 		if (newGame) {
 			
-			// addPlanes();
 			newGame = false;
 			
 		}
 		
 		else {
 			
-			// addPlanes();
 			resetPlayer();
 			
 		}

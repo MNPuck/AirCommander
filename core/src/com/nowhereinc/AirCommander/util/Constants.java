@@ -85,7 +85,7 @@ public class Constants {
 	public static final float BOX_TO_WORLD = 120f;
 	
 	// Max Player Velocity Android
-	public static final float MAX_PLAYER_VELOCITY_A = 8.0f;
+	public static final float MAX_PLAYER_VELOCITY_A = 6.0f;
 		
 	// Max Bullet Velocity Player 
 	public static final float MAX_PLAYER_BULLET_VELOCITY = 12.0f;
@@ -94,7 +94,7 @@ public class Constants {
 	public static final float MAX_COMPUTER_BULLET_VELOCITY = 8.0f;
 		
 	// Player Velocity Increment Android
-	public static final float PLAYER_VELOCITY_INC_A = 4.0f;
+	public static final float PLAYER_VELOCITY_INC_A = 2.0f;
 		
 	// Max Player Velocity Desktop
 	public static final float MAX_PLAYER_VELOCITY_D = 8.0f;
