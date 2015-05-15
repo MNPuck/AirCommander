@@ -41,10 +41,14 @@ public class Plane {
 	// plane Origin
 	private String savePlaneOrigin;
 	
+	// original camera position
+	private Vector2 cameraOrigPosition;
+	
 	
 	public Plane (World world, Vector2 cameraPosition, String planeNumber, String planeOrigin) {
 		
 		savePlaneOrigin = planeOrigin;
+		cameraOrigPosition = cameraPosition;
 		Vector2 pos = initOrigin(world, cameraPosition, planeOrigin);
 		float rotation = initRotation(world, planeOrigin);
 		init(world, planeNumber, pos, rotation);
@@ -206,14 +210,25 @@ public class Plane {
 	
 	public Vector2 returnPlanePosition() {
 		
-		Vector2 planeBottomMiddle;
+		Vector2 planePos;
 		
-		planeBottomMiddle = new Vector2(0,0);
+		planePos = new Vector2(0,0);
 		
-		planeBottomMiddle.x = this.body.getPosition().x - boxXSize * 2;
-		planeBottomMiddle.y = this.body.getPosition().y - boxYSize * 4;
+		if (this.bodyDefPlane.angle == 0f) {
 		
-		return planeBottomMiddle;
+			planePos.x = this.body.getPosition().x;
+			planePos.y = this.body.getPosition().y + boxYSize * 2;
+			
+		}
+		
+		if (this.bodyDefPlane.angle == 180f) {
+		
+			planePos.x = this.body.getPosition().x;
+			planePos.y = this.body.getPosition().y - boxYSize * 2;
+			
+		}
+		
+		return planePos;
 			
 	}
 	
@@ -320,24 +335,26 @@ public class Plane {
 		}
 		
 		else {
-		
+			
 			if (vel.y > - maxComputerVelocity) {
-		
+				
 				// move plane down
 			
 				vel.y -= Constants.COMPUTER_VELOCITY_INC;
 		
 			}
-			
-			if (pos.y > cameraPosition.y) {
-				
-				vel.x -= Constants.COMPUTER_SIDE_VELOCITY_INC;
-				
-			}
-			
-			if (pos.y < cameraPosition.y) {
+		
+			if (pos.x < 0 &&
+				vel.x < Constants.MAX_COMPUTER_SIDE_VELOCITY_DOWN) {
 				
 				vel.x += Constants.COMPUTER_SIDE_VELOCITY_INC;
+						
+			}
+			
+			if (pos.x > 0 &&
+				vel.x > - Constants.MAX_COMPUTER_SIDE_VELOCITY_DOWN) {
+				
+				vel.x -= Constants.COMPUTER_SIDE_VELOCITY_INC;
 				
 			}
 			
@@ -373,13 +390,15 @@ public class Plane {
 		
 			}
 			
-			if (pos.y > cameraPosition.y) {
+			if (pos.x < 0 &&
+				vel.x < Constants.MAX_COMPUTER_SIDE_VELOCITY_DOWN) {
 				
 				vel.x += Constants.COMPUTER_SIDE_VELOCITY_INC;
-				
+						
 			}
 			
-			if (pos.y < cameraPosition.y) {
+			if (pos.x > 0 &&
+				vel.x > - Constants.MAX_COMPUTER_SIDE_VELOCITY_DOWN) {
 				
 				vel.x -= Constants.COMPUTER_SIDE_VELOCITY_INC;
 				
@@ -417,13 +436,15 @@ public class Plane {
 		
 			}
 			
-			if (pos.y > cameraPosition.y) {
+			if (pos.x < 0 &&
+				vel.x < Constants.MAX_COMPUTER_SIDE_VELOCITY_UP) {
 				
 				vel.x += Constants.COMPUTER_SIDE_VELOCITY_INC;
-				
+						
 			}
 			
-			if (pos.y < cameraPosition.y) {
+			if (pos.x > 0 &&
+				vel.x > - Constants.MAX_COMPUTER_SIDE_VELOCITY_UP) {
 				
 				vel.x -= Constants.COMPUTER_SIDE_VELOCITY_INC;
 				
@@ -461,15 +482,17 @@ public class Plane {
 		
 			}
 			
-			if (pos.y > cameraPosition.y) {
-				
-				vel.x -= Constants.COMPUTER_SIDE_VELOCITY_INC;
-				
-			}
-			
-			if (pos.y < cameraPosition.y) {
+			if (pos.x < 0 &&
+				vel.x < Constants.MAX_COMPUTER_SIDE_VELOCITY_UP) {
 				
 				vel.x += Constants.COMPUTER_SIDE_VELOCITY_INC;
+						
+			}
+			
+			if (pos.x > 0 &&
+				vel.x > - Constants.MAX_COMPUTER_SIDE_VELOCITY_UP) {
+				
+				vel.x -= Constants.COMPUTER_SIDE_VELOCITY_INC;
 				
 			}
 			

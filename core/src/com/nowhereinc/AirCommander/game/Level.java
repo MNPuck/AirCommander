@@ -213,15 +213,14 @@ public class Level {
 		
 		timeSinceLastBulletComputer += deltaTime;
 		
-		/*
-		
 		if (timeSinceLastBulletComputer > Constants.BULLET_SPAWN_TIME_COMPUTER) {
 			
 			// loop thru active planes and get their coordinates and init shot
 			
 			for (Plane plane : planes) {
 				
-				if (plane.body.isActive()) {
+				if (plane.body.isActive() &&
+					plane.bodyDefPlane.angle == 180f) {
 				
 					planePosition = plane.returnPlanePosition();
 				
@@ -230,6 +229,17 @@ public class Level {
 					bullets.add((Bullet)bullet);
 				
 				}
+				
+				if (plane.body.isActive() &&
+						plane.bodyDefPlane.angle == 0f) {
+					
+						planePosition = plane.returnPlanePosition();
+					
+						bullet = null;
+						bullet = new Bullet(world, planePosition, Constants.MAX_COMPUTER_BULLET_VELOCITY, 2, Constants.N);
+						bullets.add((Bullet)bullet);
+					
+				}
 							
 			}
 			
@@ -237,7 +247,6 @@ public class Level {
 			
 		}
 		
-	    */
 	}	
 	
 	private void addPlanes(Vector2 cameraPosition) {

@@ -109,7 +109,13 @@ public class Constants {
 	public static final float COMPUTER_VELOCITY_INC = 1.0f;
 	
 	// Computer Side Velocity Inc
-	public static final float COMPUTER_SIDE_VELOCITY_INC = .05f;
+	public static final float COMPUTER_SIDE_VELOCITY_INC = .10f;
+	
+	// Max Computer Side Velocity Up
+	public static final float MAX_COMPUTER_SIDE_VELOCITY_UP = 1.25f;
+	
+	// Max Computer Side Velocity Down
+	public static final float MAX_COMPUTER_SIDE_VELOCITY_DOWN = 3.0f;
 		
 	// Max Number of Bullets
 	public static final int MAX_BULLETS = 20;
