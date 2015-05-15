@@ -205,7 +205,7 @@ public class Player {
 		
 		// move up
 		
-		if (tsYAxis > playerCenter.y &&
+		if (tsYAxis > playerCenter.y + boxYSize * 2 &&
 			tsYAxis != -99 &&
 			vel.y < maxPlayerVelocity &&
 			pos.y < (cameraPosition.y + (Constants.GAMEBOARD_HEIGHT / 2)) - (boxYSize * 2) &&
@@ -217,7 +217,7 @@ public class Player {
 		
 		// move down
 		
-		if (tsYAxis < playerCenter.y &&
+		if (tsYAxis < playerCenter.y - boxYSize * 2 &&
 			tsYAxis != -99 &&
 			vel.y > - maxPlayerVelocity &&
 			pos.y > - ((Constants.GAMEBOARD_HEIGHT / 2) - cameraPosition.y) &&
