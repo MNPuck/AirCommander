@@ -370,6 +370,11 @@ public class Level {
 			
 		}
 		
+		if (player.deletePlayer(world)) {
+			
+			isGameOver = true;
+		}
+		
 		player.deletePlayer(world);
 		
 		for (Plane plane : planes) {

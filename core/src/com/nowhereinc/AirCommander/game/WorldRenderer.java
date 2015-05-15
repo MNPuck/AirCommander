@@ -56,11 +56,9 @@ public class WorldRenderer implements Disposable {
 	public void render (float deltaTime) {
 		
 		renderMap(renderer);
-		
-		if (!worldController.gameOver)	
-			renderWorld(batch, deltaTime);
-		
+		renderWorld(batch, deltaTime);
 		renderGui(batch);
+		
 	}
 	
 	private void renderMap(TiledMapRenderer renderer) {

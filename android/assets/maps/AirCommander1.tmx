@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="12" height="64" tilewidth="32" tileheight="32" nextobjectid="33">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="12" height="128" tilewidth="32" tileheight="32" nextobjectid="58">
  <tileset firstgid="1" name="grass" tilewidth="32" tileheight="32">
   <image source="Tiles/grass.png" width="128" height="128"/>
  </tileset>
@@ -12,20 +12,44 @@
  <tileset firstgid="30" name="Aircraft_01_normal" tilewidth="32" tileheight="32">
   <image source="Tiles/Aircraft_01_normal.png" width="110" height="92"/>
  </tileset>
- <layer name="Tile Layer 1" width="12" height="64">
+ <layer name="Tile Layer 1" width="12" height="128">
   <data encoding="base64" compression="zlib">
-   eJztzqcBwDAQwMB3qlOd/ae1WKB/AIEDYioRMWHGgjLoFRt21EQfOHHhTvSDFw1foke//vvvv//++++///777//fHWjKGYE=
+   eJztzrcBwCAQwMDHEUe8/7RoA763ChXqrkTERDMtVAa/0kY71cQfdNJFd+IfeqnRl/iRV79+/fr169evX79+/fr169evX79+/fr16/+jvwPjgjMB
   </data>
  </layer>
- <layer name="Tile Layer 2" width="12" height="64">
+ <layer name="Tile Layer 2" width="12" height="128">
   <data encoding="base64" compression="zlib">
-   eJzdkkkKACAIRb1Cw/3PWssIfxKF0wM3EvwhiXQoc+rF+zanB9b15MFaX0Lb364n6e962fv5xS/fFvmjdo7IlmfFMlvmXhFc5lMPXOaXHjx3jryhPfIW4U48/wNHNL8aDMmKBhM=
+   eJztl0sOgCAMRLmCn/ufVZakaSVILZ0JL2FjTObN6EJLieGo5xy4/6rnBs7N5LA6v0e0n8zr5cs89n288PJe0R91cwu2Pi0ruzHvaqF1fttB6zyzQ+bNLTfruuWG8J5kfg4aKL4IngiOozB2+grbFjN99vfn/+x/hRi8XTN3z+wmQXFF8RyBsVOLZz/2rbzJvtcDan0LkQ==
   </data>
  </layer>
  <objectgroup name="Object Layer 1">
-  <object id="20" name="plane1" type="NE" x="369" y="1645"/>
-  <object id="30" name="plane1" type="NW" x="14" y="1168"/>
-  <object id="31" name="plane1" type="SE" x="366" y="720"/>
-  <object id="32" name="plane1" type="SW" x="20" y="304"/>
+  <object id="20" name="plane1" type="NE" x="370" y="3597"/>
+  <object id="30" name="plane1" type="NW" x="19" y="2249"/>
+  <object id="31" name="plane1" type="SE" x="369" y="1775"/>
+  <object id="32" name="plane1" type="SW" x="18" y="1772"/>
+  <object id="34" name="plane1" type="NE" x="372" y="1170"/>
+  <object id="35" name="plane1" type="NW" x="16" y="1165"/>
+  <object id="36" name="plane1" type="NW" x="17" y="784"/>
+  <object id="37" name="plane1" type="SE" x="368" y="1102"/>
+  <object id="38" name="plane1" type="SE" x="368" y="782"/>
+  <object id="39" name="plane1" type="SW" x="16" y="1098"/>
+  <object id="40" name="plane1" type="SW" x="18" y="717"/>
+  <object id="41" name="plane1" type="NE" x="369" y="2254"/>
+  <object id="42" name="plane1" type="NE" x="367" y="3532"/>
+  <object id="43" name="plane1" type="NE" x="368" y="3472"/>
+  <object id="44" name="plane1" type="NW" x="16" y="3313"/>
+  <object id="45" name="plane1" type="NW" x="17" y="3249"/>
+  <object id="46" name="plane1" type="NW" x="16" y="3183"/>
+  <object id="47" name="plane1" type="SE" x="369" y="2955"/>
+  <object id="48" name="plane1" type="SE" x="368" y="2895"/>
+  <object id="49" name="plane1" type="SE" x="368" y="2832"/>
+  <object id="50" name="plane1" type="SW" x="18" y="2542"/>
+  <object id="51" name="plane1" type="SW" x="18" y="2480"/>
+  <object id="52" name="plane1" type="SW" x="17" y="2418"/>
+  <object id="53" name="plane1" type="SE" x="367" y="718"/>
+  <object id="54" name="plane1" type="NW" x="15" y="656"/>
+  <object id="55" name="plane1" type="SE" x="366" y="652"/>
+  <object id="56" name="plane1" type="SE" x="366" y="588"/>
+  <object id="57" name="plane1" type="SW" x="19" y="589"/>
  </objectgroup>
 </map>

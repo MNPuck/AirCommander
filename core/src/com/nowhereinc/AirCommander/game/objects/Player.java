@@ -379,7 +379,7 @@ public class Player {
 
 	}
 	
-	public void deletePlayer(World world) {
+	public boolean deletePlayer(World world) {
 		
 		if(body.getUserData() == "delete") {
 		
@@ -392,9 +392,17 @@ public class Player {
 			// create via init
 		
 			init(world);
+			
+			return true;
 		
 		}
 		
+		else {
+			
+			return false;
+			
+		}
+
 	}
 	
 	public boolean returnAButton() {

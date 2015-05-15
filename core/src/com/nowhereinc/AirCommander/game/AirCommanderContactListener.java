@@ -27,29 +27,27 @@ public class AirCommanderContactListener implements ContactListener {
 		String fixtureAShort = fixtureALong.substring(0, Math.min(fixtureALong.length(), 6));
 		
 		String fixtureBLong = fixtureB.getUserData().toString();
-		String fixtureBShort = fixtureBLong.substring(0, Math.min(fixtureBLong.length(), 5));
+		String fixtureBShort = fixtureBLong.substring(0, Math.min(fixtureBLong.length(), 3));
 	
 		if (fixtureAShort.equals("bullet") &&
-		    fixtureBShort.equals("plane")) {
+		    fixtureBShort.equals("pla")) {
 			
 			fixtureA.setUserData("delete");
 			fixtureB.setUserData("delete");
-			Gdx.app.debug(TAG, "Setting delete flags");
 			
 		}
 		
 		fixtureALong = fixtureA.getUserData().toString();
-		fixtureAShort = fixtureALong.substring(0, Math.min(fixtureALong.length(), 5));
+		fixtureAShort = fixtureALong.substring(0, Math.min(fixtureALong.length(), 3));
 		
 		fixtureBLong = fixtureB.getUserData().toString();
 		fixtureBShort = fixtureBLong.substring(0, Math.min(fixtureBLong.length(), 6));
 		
-		if (fixtureAShort.equals("plane") &&
+		if (fixtureAShort.equals("pla") &&
 			fixtureBShort.equals("bullet")) {
 			
 			fixtureA.setUserData("delete");
 			fixtureB.setUserData("delete");
-			Gdx.app.debug(TAG, "Setting delete flags");
 		
 		}
 
