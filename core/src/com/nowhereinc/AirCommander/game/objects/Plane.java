@@ -32,23 +32,12 @@ public class Plane {
 	// plane type int
 	private int planeType;
 	
-	// edge booleans
-	private boolean onRightEdge = false;
-	private boolean onLeftEdge = false;
-	private boolean onTopEdge = false;
-	private boolean onBottomEdge = false;
-	
 	// plane Origin
 	private String savePlaneOrigin;
-	
-	// original camera position
-	private Vector2 cameraOrigPosition;
-	
 	
 	public Plane (World world, Vector2 cameraPosition, String planeNumber, String planeOrigin) {
 		
 		savePlaneOrigin = planeOrigin;
-		cameraOrigPosition = cameraPosition;
 		Vector2 pos = initOrigin(world, cameraPosition, planeOrigin);
 		float rotation = initRotation(world, planeOrigin);
 		init(world, planeNumber, pos, rotation);
@@ -56,69 +45,83 @@ public class Plane {
 	
 	private Vector2 initOrigin(World world, Vector2 cameraPosition, String planeOrigin) {
 		
-		Vector2 tempPos = new Vector2(0,0);
+		Vector2 position = new Vector2(0,0);
 		
 		if (planeOrigin.equals("NE")) {
 			
-			tempPos.x = Constants.GAMEBOARD_WIDTH * .5f;
-			tempPos.y = cameraPosition.y + Constants.GAMEBOARD_HEIGHT * .5f;
+			position.x = Constants.GAMEBOARD_WIDTH * .5f;
+			position.y = cameraPosition.y + Constants.GAMEBOARD_HEIGHT * .5f;
 			
 		}
 		
 		if (planeOrigin.equals("NW")) {
 			
-			tempPos.x = - (Constants.GAMEBOARD_WIDTH * .5f);
-			tempPos.y = cameraPosition.y + Constants.GAMEBOARD_HEIGHT * .5f;
+			position.x = - (Constants.GAMEBOARD_WIDTH * .5f);
+			position.y = cameraPosition.y + Constants.GAMEBOARD_HEIGHT * .5f;
 			
 		}
 		
+		if (planeOrigin.equals("N")) {
+			
+			position.x = 0f;
+			position.y = cameraPosition.y + Constants.GAMEBOARD_HEIGHT * .5f;
+			
+		}
+		
+		
 		if (planeOrigin.equals("SE")) {
 			
-			tempPos.x = Constants.GAMEBOARD_WIDTH * .5f;
-			tempPos.y = cameraPosition.y - (Constants.GAMEBOARD_HEIGHT * .5f);
+			position.x = Constants.GAMEBOARD_WIDTH * .5f;
+			position.y = cameraPosition.y - (Constants.GAMEBOARD_HEIGHT * .5f);
 			
 		}
 		
 		if (planeOrigin.equals("SW")) {
 			
-			tempPos.x = - (Constants.GAMEBOARD_WIDTH * .5f);
-			tempPos.y = cameraPosition.y - (Constants.GAMEBOARD_HEIGHT * .5f);
+			position.x = - (Constants.GAMEBOARD_WIDTH * .5f);
+			position.y = cameraPosition.y - (Constants.GAMEBOARD_HEIGHT * .5f);
 			
 		}
 		
-		return tempPos;
+		return position;
 		
 	}
 	
 	private float initRotation(World world, String planeOrigin) {
 		
-		float tempRotation = 0f;
+		float rotation = 0f;
 		
 		if (planeOrigin.equals("NE")) {
 			
-			tempRotation = 180f;
+			rotation = 180f;
 			
 		}
 		
 		if (planeOrigin.equals("NW")) {
 			
-			tempRotation = 180f;
+			rotation = 180f;
+			
+		}
+		
+		if (planeOrigin.equals("N")) {
+			
+			rotation = 180f;
 			
 		}
 		
 		if (planeOrigin.equals("SE")) {
 			
-			tempRotation = 0f;
+			rotation = 0f;
 			
 		}
 		
 		if (planeOrigin.equals("SW")) {
 			
-			tempRotation = 0f;
+			rotation = 0f;
 			
 		}
 		
-		return tempRotation;
+		return rotation;
 		
 	}
 	
@@ -127,23 +130,10 @@ public class Plane {
 		// create body def for player
 		bodyDefPlane = new BodyDef();
 		
-		// add logic for NE, NW, SE, SW pattern types
 		bodyDefPlane.angle = rotation;
 		bodyDefPlane.position.set(pos.x, pos.y);
 		bodyDefPlane.type = BodyDef.BodyType.DynamicBody;
 		body = world.createBody(bodyDefPlane);
-		
-		PolygonShape shape = new PolygonShape();
-		
-		boxXSize = Constants.PLANEXSIZE;
-		boxYSize = Constants.PLANEYSIZE;
-		
-		shape.setAsBox(boxXSize, boxYSize);
-		
-		fixtureDefPlane = new FixtureDef();
-		fixtureDefPlane.shape = shape;
-		fixtureDefPlane.restitution = 0;
-		body.createFixture(fixtureDefPlane).setUserData(planeNumber);
 		
 		switch (planeNumber) {
 		
@@ -151,53 +141,76 @@ public class Plane {
 				body.setUserData(Assets.instance.plane1.plane1);
 				planeType = 1;
 				break;
-				
+			
 			case "plane2":
 				body.setUserData(Assets.instance.plane2.plane2);
 				planeType = 2;
 				break;
-				
+			
 			case "plane3":
 				body.setUserData(Assets.instance.plane3.plane3);
 				planeType = 3;
 				break;
-				
+			
 			case "plane4":
 				body.setUserData(Assets.instance.plane4.plane4);
 				planeType = 4;
 				break;
-				
+			
 			case "plane5":
 				body.setUserData(Assets.instance.plane5.plane5);
 				planeType = 5;
 				break;
-				
+			
 			case "plane6":
 				body.setUserData(Assets.instance.plane6.plane6);
 				planeType = 6;
 				break;
-				
+			
 			case "plane7":
 				body.setUserData(Assets.instance.plane7.plane7);
 				planeType = 7;
 				break;
-				
+			
 			case "plane8":
 				body.setUserData(Assets.instance.plane8.plane8);
 				planeType = 8;
 				break;
-				
+			
 			case "plane9":
 				body.setUserData(Assets.instance.plane9.plane9);
 				planeType = 9;
 				break;
-				
+			
 			case "plane10":
 				body.setUserData(Assets.instance.plane10.plane10);
 				planeType = 10;
 				break;
-		
+	
 		}
+		
+		PolygonShape shape = new PolygonShape();
+		
+		if (planeType < 4) {
+			
+			boxXSize = Constants.PLANEXSIZE;
+			boxYSize = Constants.PLANEYSIZE;
+			
+		}
+			
+		else {
+			
+			boxXSize = Constants.PLANEXSIZE * 2.5f;
+			boxYSize = Constants.PLANEYSIZE * 2.5f;
+			
+		}
+		
+		shape.setAsBox(boxXSize, boxYSize);
+		
+		fixtureDefPlane = new FixtureDef();
+		fixtureDefPlane.shape = shape;
+		fixtureDefPlane.restitution = 0;
+		body.createFixture(fixtureDefPlane).setUserData(planeNumber);
 		
 		// set to active
 		body.setActive(true);
@@ -248,11 +261,11 @@ public class Plane {
 			switch (planeType) {
 		
 				case 1:
-					movePlane1(deltaTime, cameraPosition, vel, pos);
+					movePlane1(cameraPosition, vel, pos);
 					break;
 			
 				case 2:
-					movePlane2();
+					movePlane2(cameraPosition, vel, pos);
 					break;
 			
 				case 3:
@@ -260,7 +273,7 @@ public class Plane {
 					break;
 			
 				case 4:
-					movePlane4();
+					movePlane4(cameraPosition, vel, pos);
 					break;
 			
 				case 5:
@@ -293,37 +306,23 @@ public class Plane {
 	
 	}
 	
-	private void movePlane1(float deltaTime, Vector2 cameraPosition, Vector2 vel, Vector2 pos) {
+	private void movePlane1(Vector2 cameraPosition, Vector2 vel, Vector2 pos) {
 		
 		if (savePlaneOrigin.equals("NE")) {
 			
-			movePlane1NE(deltaTime, cameraPosition, vel, pos);
+			movePlane1NE(cameraPosition, vel, pos);
 			
 		}
 		
 		if (savePlaneOrigin.equals("NW")) {
 			
-			movePlane1NW(deltaTime, cameraPosition, vel, pos);
-			
-		}
-		
-		if (savePlaneOrigin.equals("SE")) {
-			
-			movePlane1SE(deltaTime, cameraPosition, vel, pos);
-			
-		}
-		
-		if (savePlaneOrigin.equals("SW")) {
-			
-			movePlane1SW(deltaTime, cameraPosition, vel, pos);
+			movePlane1NW(cameraPosition, vel, pos);
 			
 		}
 		
 	}
 	
-	private void movePlane1NE(float deltaTime, Vector2 cameraPosition, Vector2 vel, Vector2 pos) {
-		
-		float maxComputerVelocity = Constants.MAX_COMPUTER_VELOCITY;
+	private void movePlane1NE(Vector2 cameraPosition, Vector2 vel, Vector2 pos) {
 		
 		// if plane below bottom of screen set for deletion
 		
@@ -336,7 +335,7 @@ public class Plane {
 		
 		else {
 			
-			if (vel.y > - maxComputerVelocity) {
+			if (vel.y > - Constants.MAX_COMPUTER_VELOCITY) {
 				
 				// move plane down
 			
@@ -366,9 +365,7 @@ public class Plane {
 		
 	}
 	
-	private void movePlane1NW(float deltaTime, Vector2 cameraPosition, Vector2 vel, Vector2 pos) {
-		
-		float maxComputerVelocity = Constants.MAX_COMPUTER_VELOCITY;
+	private void movePlane1NW(Vector2 cameraPosition, Vector2 vel, Vector2 pos) {
 		
 		// if plane below bottom of screen set for deletion
 		
@@ -381,7 +378,7 @@ public class Plane {
 		
 		else {
 		
-			if (vel.y > - maxComputerVelocity) {
+			if (vel.y > - Constants.MAX_COMPUTER_VELOCITY) {
 		
 				// move plane down
 			
@@ -411,13 +408,27 @@ public class Plane {
 		
 	}
 	
-	private void movePlane1SE(float deltaTime, Vector2 cameraPosition, Vector2 vel, Vector2 pos) {
+	private void movePlane2(Vector2 cameraPosition, Vector2 vel, Vector2 pos) {
 		
-		float maxComputerVelocity = Constants.MAX_COMPUTER_VELOCITY;
+		if (savePlaneOrigin.equals("NE")) {
+			
+			movePlane2NE(cameraPosition, vel, pos);
+			
+		}
 		
-		// if plane above top of screen set for deletion
+		if (savePlaneOrigin.equals("NW")) {
+			
+			movePlane2NW(cameraPosition, vel, pos);
+			
+		}
 		
-		if (pos.y > cameraPosition.y + (Constants.GAMEBOARD_HEIGHT * .5f)) {
+	}
+	
+	private void movePlane2NE(Vector2 cameraPosition, Vector2 vel, Vector2 pos) {
+		
+		// if plane below bottom of screen set for deletion
+		
+		if (pos.y < cameraPosition.y + (-Constants.GAMEBOARD_HEIGHT * .5f)) {
 			
 			setDeleteFlag();
 			vel.y = 0;
@@ -425,31 +436,18 @@ public class Plane {
 		}
 		
 		else {
-		
-			if (vel.y < maxComputerVelocity) {
-		
-				// move plane up
 			
-				vel.y += Constants.COMPUTER_VELOCITY_INC;
+			if (vel.y > - Constants.MAX_COMPUTER_VELOCITY) {
+				
+				// move plane down
+			
+				vel.y -= Constants.COMPUTER_VELOCITY_INC;
 		
 			}
 			
-			if (pos.x < 0 &&
-				vel.x < Constants.MAX_COMPUTER_SIDE_VELOCITY_UP) {
-				
-				vel.x += Constants.COMPUTER_SIDE_VELOCITY_INC;
-						
-			}
-			
-			if (pos.x > 0 &&
-				vel.x > - Constants.MAX_COMPUTER_SIDE_VELOCITY_UP) {
-				
-				vel.x -= Constants.COMPUTER_SIDE_VELOCITY_INC;
-				
-			}
+			vel.x -= Constants.COMPUTER_SIDE_VELOCITY_INC * .5f;
 			
 		}
-		
 		
 		// apply movement
 		
@@ -457,13 +455,11 @@ public class Plane {
 		
 	}
 	
-	private void movePlane1SW(float deltaTime, Vector2 cameraPosition, Vector2 vel, Vector2 pos) {
+	private void movePlane2NW(Vector2 cameraPosition, Vector2 vel, Vector2 pos) {
 		
-		float maxComputerVelocity = Constants.MAX_COMPUTER_VELOCITY;
+		// if plane below bottom of screen set for deletion
 		
-		// if plane above top of screen set for deletion
-		
-		if (pos.y > cameraPosition.y + (Constants.GAMEBOARD_HEIGHT * .5f)) {
+		if (pos.y < cameraPosition.y + (-Constants.GAMEBOARD_HEIGHT * .5f)) {
 			
 			setDeleteFlag();
 			vel.y = 0;
@@ -471,40 +467,22 @@ public class Plane {
 		}
 		
 		else {
-		
-			if (vel.y < maxComputerVelocity) {
-		
-				// move plane up
 			
-				vel.y += Constants.COMPUTER_VELOCITY_INC;
+			if (vel.y > - Constants.MAX_COMPUTER_VELOCITY) {
+				
+				// move plane down
+			
+				vel.y -= Constants.COMPUTER_VELOCITY_INC;
 		
 			}
 			
-			if (pos.x < 0 &&
-				vel.x < Constants.MAX_COMPUTER_SIDE_VELOCITY_UP) {
-				
-				vel.x += Constants.COMPUTER_SIDE_VELOCITY_INC;
-						
-			}
-			
-			if (pos.x > 0 &&
-				vel.x > - Constants.MAX_COMPUTER_SIDE_VELOCITY_UP) {
-				
-				vel.x -= Constants.COMPUTER_SIDE_VELOCITY_INC;
-				
-			}
+			vel.x += Constants.COMPUTER_SIDE_VELOCITY_INC * .5f;
 			
 		}
-		
 		
 		// apply movement
 		
 		this.body.setLinearVelocity(vel.x, vel.y);
-		
-	}
-	
-	private void movePlane2() {
-		
 		
 	}
 	
@@ -513,7 +491,7 @@ public class Plane {
 		
 	}
 	
-	private void movePlane4() {
+	private void movePlane4(Vector2 cameraPosition, Vector2 vel, Vector2 pos) {
 		
 		
 	}
