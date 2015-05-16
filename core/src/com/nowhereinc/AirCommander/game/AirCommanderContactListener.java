@@ -78,6 +78,8 @@ public class AirCommanderContactListener implements ContactListener {
 	
 	public void preSolve(Contact contact, Manifold manifold) {
 		
+		// ignore bullet on bullet collisions
+		
 		Fixture fixtureA = contact.getFixtureA();
 		Fixture fixtureB = contact.getFixtureB();
 		
@@ -86,8 +88,7 @@ public class AirCommanderContactListener implements ContactListener {
 		
 		if (fixtureALong.equals("bullet") &&
 		    fixtureBLong.equals("bullet")) {
-			
-			Gdx.app.debug(TAG, "Setting contact enabled to false");
+		
 			contact.setEnabled(false);
 
 		}

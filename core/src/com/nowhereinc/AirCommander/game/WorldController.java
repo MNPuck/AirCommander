@@ -44,6 +44,7 @@ public class WorldController extends InputAdapter {
 		
 		Gdx.input.setInputProcessor(this);
 		Gdx.input.setCatchBackKey(true);
+		
 		cameraHelper = new CameraHelper();
 		
 		switch (Gdx.app.getType()) {
@@ -74,7 +75,8 @@ public class WorldController extends InputAdapter {
 		
 		level = new Level();
 		
-		cameraHelper.setTarget(level.player.body);
+		// cameraHelper.setTarget(level.player.body);
+		
 		cameraPosition = cameraHelper.getPosition();
 	
 	}
@@ -128,7 +130,7 @@ public class WorldController extends InputAdapter {
 			
 			// camera helper update
 			
-			cameraHelper.update(deltaTime, cameraPosition, level.player.returnPlayerPosition());
+			// cameraHelper.update(deltaTime, cameraPosition, level.player.returnPlayerPosition());
 			
 			if (level.lives == 0) {
 			
