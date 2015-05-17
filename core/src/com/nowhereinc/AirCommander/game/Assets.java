@@ -48,6 +48,7 @@ public class Assets implements Disposable, AssetErrorListener {
 	public AssetPlane8 plane8;
 	public AssetPlane9 plane9;
 	public AssetPlane10 plane10;
+	public AssetPlane10Hit plane10Hit;	
 	
 	public AssetSounds sounds;
 	
@@ -258,6 +259,21 @@ public class Assets implements Disposable, AssetErrorListener {
 		
 	}
 	
+	public class AssetPlane10Hit {
+		public final AtlasRegion plane10Hit;
+
+		public AssetPlane10Hit (TextureAtlas atlas) {
+			plane10Hit = atlas.findRegion("Aircraft_10_hit");
+			
+			if (plane10Hit == null) {
+				
+				Gdx.app.debug(TAG,"Plane10Hit is null");
+			}		
+			
+		}
+		
+	}
+	
 	public class AssetSounds {
 		
 		public final Sound shipShot;
@@ -336,6 +352,7 @@ public class Assets implements Disposable, AssetErrorListener {
 		plane8 = new AssetPlane8(atlas);
 		plane9 = new AssetPlane9(atlas);
 		plane10 = new AssetPlane10(atlas);
+		plane10Hit = new AssetPlane10Hit(atlas);
 		
 		sounds = new AssetSounds(assetManager);
 		

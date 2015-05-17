@@ -44,13 +44,19 @@ public class Player {
 	private boolean onLeftEdge = false;
 	private boolean onTopEdge = false;
 	private boolean onBottomEdge = false;
+	
+	// spawn time counter
+	private float spawnTime;
+	
+	// spawn boolean
+	private boolean isSpawning;
 
 	
-	public Player (World world, Vector2 cameraPosition) {
-		init(world, cameraPosition);
+	public Player (World world, Vector2 cameraPosition, boolean spawn) {
+		init(world, cameraPosition, spawn);
 	}
 	
-	private void init(World world, Vector2 cameraPosition) {
+	private void init(World world, Vector2 cameraPosition, boolean spawn) {
 	
 		// create body def for player
 		bodyDefPlayer = new BodyDef();
@@ -58,7 +64,6 @@ public class Player {
 		bodyDefPlayer.type = BodyDef.BodyType.DynamicBody;
 		body = world.createBody(bodyDefPlayer);
 		
-		// set user data
 		body.setUserData(Assets.instance.plane10.plane10);
 		
 		PolygonShape shape = new PolygonShape();
@@ -71,7 +76,24 @@ public class Player {
 		fixtureDefPlayer = new FixtureDef();
 		fixtureDefPlayer.shape = shape;
 		fixtureDefPlayer.restitution = 0;
-		body.createFixture(fixtureDefPlayer).setUserData("player");
+		
+		if (spawn) {
+			
+			isSpawning = true;
+			spawnTime = 0f;
+			body.createFixture(fixtureDefPlayer).setUserData("spawn");
+			body.setUserData(Assets.instance.plane10Hit.plane10Hit);
+			
+		}
+		
+		else {
+			
+			isSpawning = false;
+			body.createFixture(fixtureDefPlayer).setUserData("player");
+			body.setUserData(Assets.instance.plane10.plane10);
+			
+		}
+		
 		
 		shape.dispose();
 		
@@ -123,6 +145,20 @@ public class Player {
 		if (body.getFixtureList().first().getUserData() == "delete") {
 			
 			setDeleteFlag();
+		
+		}
+		
+		if (isSpawning) {
+			
+			spawnTime += deltaTime;
+			
+			if (spawnTime > Constants.PLAYER_SPAWN_TIME) {
+				
+				isSpawning = false;
+				body.getFixtureList().first().setUserData("player");
+				body.setUserData(Assets.instance.plane10.plane10);
+				
+			}
 			
 		}
 		
@@ -248,6 +284,20 @@ public class Player {
 		if (body.getFixtureList().first().getUserData() == "delete") {
 			
 			setDeleteFlag();
+			
+		}
+		
+		if (isSpawning) {
+			
+			spawnTime += deltaTime;
+			
+			if (spawnTime > Constants.PLAYER_SPAWN_TIME) {
+				
+				isSpawning = false;
+				body.getFixtureList().first().setUserData("player");
+				body.setUserData(Assets.instance.plane10.plane10);
+				
+			}
 			
 		}
 		

@@ -31,7 +31,7 @@ public class Constants {
 	public static final int NUMBEROFLEVELS = 1;
 	
 	// Amount of extra lives at level start
-	public static final int LIVES_START = 9;
+	public static final int LIVES_START = 3;
 	
 	// Amount of bombs at level start
 	public static final int BOMBS_START = 3;
@@ -101,6 +101,9 @@ public class Constants {
 		
 	// Player Velocity Increment Desktop
 	public static final float PLAYER_VELOCITY_INC_D = .80f;
+	
+	// Player spawnTime
+	public static final float PLAYER_SPAWN_TIME = 3f;
 	
 	// Max Computer Velocity
 	public static final float MAX_COMPUTER_VELOCITY = 5.0f;

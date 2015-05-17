@@ -35,6 +35,9 @@ public class Plane {
 	// plane Origin
 	private String savePlaneOrigin;
 	
+	// plane Hitpoints
+	private int hitPoints;
+	
 	public Plane (World world, Vector2 cameraPosition, String planeNumber, String planeOrigin) {
 		
 		savePlaneOrigin = planeOrigin;
@@ -64,6 +67,20 @@ public class Plane {
 		if (planeOrigin.equals("N")) {
 			
 			position.x = 0f;
+			position.y = (cameraPosition.y + Constants.GAMEBOARD_HEIGHT * .5f) - 2f;
+			
+		}
+		
+		if (planeOrigin.equals("NE2")) {
+			
+			position.x = Constants.GAMEBOARD_WIDTH * .25f;
+			position.y = cameraPosition.y + Constants.GAMEBOARD_HEIGHT * .5f;
+			
+		}
+		
+		if (planeOrigin.equals("NW2")) {
+			
+			position.x = - (Constants.GAMEBOARD_WIDTH * .25f);
 			position.y = cameraPosition.y + Constants.GAMEBOARD_HEIGHT * .5f;
 			
 		}
@@ -109,6 +126,18 @@ public class Plane {
 			
 		}
 		
+		if (planeOrigin.equals("NE2")) {
+			
+			rotation = 180f;
+			
+		}
+		
+		if (planeOrigin.equals("NW2")) {
+			
+			rotation = 180f;
+			
+		}
+		
 		if (planeOrigin.equals("SE")) {
 			
 			rotation = 0f;
@@ -140,21 +169,25 @@ public class Plane {
 			case "plane1":
 				body.setUserData(Assets.instance.plane1.plane1);
 				planeType = 1;
+				hitPoints = 1;
 				break;
 			
 			case "plane2":
 				body.setUserData(Assets.instance.plane2.plane2);
 				planeType = 2;
+				hitPoints = 1;
 				break;
 			
 			case "plane3":
 				body.setUserData(Assets.instance.plane3.plane3);
 				planeType = 3;
+				hitPoints = 1;
 				break;
 			
 			case "plane4":
 				body.setUserData(Assets.instance.plane4.plane4);
 				planeType = 4;
+				hitPoints = 10;
 				break;
 			
 			case "plane5":
@@ -250,6 +283,18 @@ public class Plane {
 		Vector2 vel = this.body.getLinearVelocity();
 		Vector2 pos = this.body.getPosition();
 		
+		if (body.getFixtureList().first().getUserData() == "hit") {
+			
+			hitPoints--;
+			body.getFixtureList().first().setUserData("plane" + planeType);
+			
+			if (hitPoints <= 0) {
+				
+				body.getFixtureList().first().setUserData("delete");
+			}
+			
+		}
+		
 		if (body.getFixtureList().first().getUserData() == "delete") {
 			
 			setDeleteFlag();
@@ -269,11 +314,11 @@ public class Plane {
 					break;
 			
 				case 3:
-					movePlane3();
+					movePlane3(cameraPosition, vel, pos);
 					break;
 			
 				case 4:
-					movePlane4(cameraPosition, vel, pos);
+					movePlane4(deltaTime, vel, pos);
 					break;
 			
 				case 5:
@@ -485,14 +530,112 @@ public class Plane {
 		this.body.setLinearVelocity(vel.x, vel.y);
 		
 	}
-	
-	private void movePlane3() {
+
+	private void movePlane3(Vector2 cameraPosition, Vector2 vel, Vector2 pos) {
 		
+		if (savePlaneOrigin.equals("NE2")) {
+			
+			movePlane3NE2(cameraPosition, vel, pos);
+			
+		}
+		
+		if (savePlaneOrigin.equals("NW2")) {
+			
+			movePlane3NW2(cameraPosition, vel, pos);
+			
+		}
 		
 	}
 	
-	private void movePlane4(Vector2 cameraPosition, Vector2 vel, Vector2 pos) {
+	private void movePlane3NE2(Vector2 cameraPosition, Vector2 vel, Vector2 pos) {
 		
+		// if plane below bottom of screen set for deletion
+		
+		if (pos.y < cameraPosition.y + (-Constants.GAMEBOARD_HEIGHT * .5f)) {
+			
+			setDeleteFlag();
+			vel.y = 0;
+			
+		}
+		
+		else {
+			
+			if (vel.y > - Constants.MAX_COMPUTER_VELOCITY) {
+				
+				// move plane down
+			
+				vel.y -= Constants.COMPUTER_VELOCITY_INC;
+		
+			}
+		
+			if (pos.y < cameraPosition.y) {
+		
+				
+				vel.x += Constants.COMPUTER_SIDE_VELOCITY_INC * .33f;
+						
+			}
+			
+			if (pos.y > cameraPosition.y) {
+				
+				vel.x -= Constants.COMPUTER_SIDE_VELOCITY_INC * .33f;
+				
+			}
+			
+		}
+		
+		
+		// apply movement
+		
+		this.body.setLinearVelocity(vel.x, vel.y);
+		
+	}
+	
+	private void movePlane3NW2(Vector2 cameraPosition, Vector2 vel, Vector2 pos) {
+		
+		// if plane below bottom of screen set for deletion
+		
+		if (pos.y < cameraPosition.y + (-Constants.GAMEBOARD_HEIGHT * .5f)) {
+			
+			setDeleteFlag();
+			vel.y = 0;
+			
+		}
+		
+		else {
+		
+			if (vel.y > - Constants.MAX_COMPUTER_VELOCITY) {
+		
+				// move plane down
+			
+				vel.y -= Constants.COMPUTER_VELOCITY_INC;
+		
+			}
+			
+			if (pos.y < cameraPosition.y) {
+		
+				
+				vel.x -= Constants.COMPUTER_SIDE_VELOCITY_INC * .33f;
+						
+			}
+			
+			if (pos.y > cameraPosition.y) {
+				
+				vel.x += Constants.COMPUTER_SIDE_VELOCITY_INC * .33f;
+				
+			}
+			
+		}
+
+		
+		// apply movement
+		
+		this.body.setLinearVelocity(vel.x, vel.y);
+		
+	}
+	
+	private void movePlane4(float deltaTime, Vector2 vel, Vector2 pos) {
+		
+		this.body.setLinearVelocity(0, deltaTime * Constants.SCROLL_SPEED * Constants.OBJECT_SCROLL_ADJUSTMENT);
 		
 	}
 	

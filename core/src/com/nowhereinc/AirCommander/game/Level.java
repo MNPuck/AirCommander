@@ -84,7 +84,7 @@ public class Level {
 		world.setContactListener(new AirCommanderContactListener());
 		
 		// player
-		player = new Player(world, new Vector2(0f,0f));
+		player = new Player(world, new Vector2(0f,0f), false);
 		
 		// planes
 		planes = new Array<Plane>();
@@ -383,7 +383,7 @@ public class Level {
 			else {
 				
 				player = null;
-				player = new Player(world, cameraPosition);
+				player = new Player(world, cameraPosition, true);
 				
 			}
 			
@@ -467,9 +467,12 @@ public class Level {
 	}
 
 	public void render (SpriteBatch batch, float deltaTime) {
-							
-		// draw player
-		player.render(batch);
+		
+		if (lives > 0) {
+						
+			player.render(batch);
+		
+		}
 		
 		// draw planes
 		for (Plane plane : planes)
