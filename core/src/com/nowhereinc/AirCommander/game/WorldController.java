@@ -122,8 +122,12 @@ public class WorldController extends InputAdapter {
 			
 			// set up camera vertical scroll of map
 			
-			cameraPosition = cameraHelper.getPosition();
-			cameraPosition.y += Constants.SCROLL_SPEED * deltaTime;
+			if (level.returnScrolling()) {
+			
+				cameraPosition = cameraHelper.getPosition();
+				cameraPosition.y += Constants.SCROLL_SPEED * deltaTime;
+				
+			}
 			
 			level.update(deltaTime, cameraPosition);
 			level.deleteFlaggedItems(cameraPosition);

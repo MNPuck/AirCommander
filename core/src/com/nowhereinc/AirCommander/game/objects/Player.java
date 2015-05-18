@@ -137,7 +137,7 @@ public class Player {
 			
 	}
 	
-	public void updateAndroid (float deltaTime, Vector2 cameraPosition) {
+	public void updateAndroid (float deltaTime, Vector2 cameraPosition, boolean isScrolling) {
 		
 		Vector2 vel = this.body.getLinearVelocity();
 		Vector2 pos = this.body.getPosition();
@@ -268,7 +268,18 @@ public class Player {
 			tsYAxis == -99) {
 			
 			vel.x = 0;
-			vel.y =  deltaTime * Constants.SCROLL_SPEED * Constants.OBJECT_SCROLL_ADJUSTMENT;
+			
+			if (isScrolling) {
+			
+				vel.y =  deltaTime * Constants.SCROLL_SPEED * Constants.OBJECT_SCROLL_ADJUSTMENT;
+				
+			}
+			
+			else {
+				
+				vel.y = 0f;
+				
+			}
 		
 		}
 		
@@ -276,7 +287,7 @@ public class Player {
 		
 	}
 	
-	public void updateDesktop (float deltaTime, Vector2 cameraPosition) {
+	public void updateDesktop (float deltaTime, Vector2 cameraPosition, boolean isScrolling) {
 		
 		Vector2 vel = this.body.getLinearVelocity();
 		Vector2 pos = this.body.getPosition();
@@ -410,8 +421,20 @@ public class Player {
 			leftXAxis < Constants.LEFTJOYADJUSTMENT &&
 			leftYAxis > - Constants.LEFTJOYADJUSTMENT &&
 			leftYAxis < Constants.LEFTJOYADJUSTMENT) {
-
-			this.body.setLinearVelocity(0, deltaTime * Constants.SCROLL_SPEED * Constants.OBJECT_SCROLL_ADJUSTMENT);
+			
+			if (isScrolling) {
+				
+				vel.y = deltaTime * Constants.SCROLL_SPEED * Constants.OBJECT_SCROLL_ADJUSTMENT;
+				
+			}
+			
+			else {
+				
+				vel.y = 0;
+				
+			}
+			
+			this.body.setLinearVelocity(0, vel.y);
 		
 		}
 		

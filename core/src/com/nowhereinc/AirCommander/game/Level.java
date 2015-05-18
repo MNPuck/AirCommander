@@ -66,6 +66,9 @@ public class Level {
 	// time since last bullet
 	private float timeSinceLastBulletComputer;
 	
+	// booelan to tell world controller if map should be scrolled
+	private boolean isScrolling;
+	
 	
 	public Level () {
 
@@ -116,6 +119,9 @@ public class Level {
 		// init time since last bullet to 0
 		timeSinceLastBulletComputer = 0;
 		
+		// set scrolling to true
+		isScrolling = true;
+		
 		newLevel();
 		
 	}
@@ -135,11 +141,11 @@ public class Level {
 		switch (Gdx.app.getType()) {
 		
 			case Desktop: 
-				player.updateDesktop(deltaTime, cameraPosition);
+				player.updateDesktop(deltaTime, cameraPosition, isScrolling);
 				break;
 			
 			case Android:
-				 player.updateAndroid(deltaTime, cameraPosition);
+				 player.updateAndroid(deltaTime, cameraPosition, isScrolling);
 				 break;
 			
 			default:
@@ -220,7 +226,7 @@ public class Level {
 			for (Plane plane : planes) {
 				
 				if (plane.body.isActive() &&
-					plane.bodyDefPlane.angle == 180f) {
+					plane.returnPlaneType() < 4) {
 				
 					planePosition = plane.returnPlanePosition();
 				
@@ -231,16 +237,33 @@ public class Level {
 				}
 				
 				if (plane.body.isActive() &&
-						plane.bodyDefPlane.angle == 0f) {
+					plane.returnPlaneType() == 4) {
 					
-						planePosition = plane.returnPlanePosition();
+					planePosition = plane.returnPlanePosition();
 					
-						bullet = null;
-						bullet = new Bullet(world, planePosition, Constants.MAX_COMPUTER_BULLET_VELOCITY, 2, Constants.N);
-						bullets.add((Bullet)bullet);
+					bullet = null;
+					bullet = new Bullet(world, planePosition, Constants.MAX_COMPUTER_BULLET_VELOCITY, 2, Constants.S);
+					bullets.add((Bullet)bullet);
+					
+					bullet = null;
+					bullet = new Bullet(world, planePosition, Constants.MAX_COMPUTER_BULLET_VELOCITY, 2, Constants.SE);
+					bullets.add((Bullet)bullet);
+					
+					bullet = null;
+					bullet = new Bullet(world, planePosition, Constants.MAX_COMPUTER_BULLET_VELOCITY, 2, Constants.SW);
+					bullets.add((Bullet)bullet);
+					
+					bullet = null;
+					bullet = new Bullet(world, planePosition, Constants.MAX_COMPUTER_BULLET_VELOCITY, 2, Constants.W);
+					bullets.add((Bullet)bullet);
+					
+					bullet = null;
+					bullet = new Bullet(world, planePosition, Constants.MAX_COMPUTER_BULLET_VELOCITY, 2, Constants.E);
+					bullets.add((Bullet)bullet);
 					
 				}
-							
+				
+				
 			}
 			
 			timeSinceLastBulletComputer = 0;
@@ -287,6 +310,7 @@ public class Level {
 					
 						addPlane(cameraPosition, "plane4", obj.getProperties().get("type", String.class));
 						obj.setName("done");
+						isScrolling = false;
 					}
 				
 					if ("plane5".equals(obj.getName()) ) {
@@ -358,6 +382,12 @@ public class Level {
 		
 	}
 	
+	public boolean returnScrolling() {
+		
+		return isScrolling;
+		
+	}
+	
 	public void deleteFlaggedItems(Vector2 cameraPosition) {
 		
 		for (Bullet bullet : bullets) {
@@ -392,6 +422,13 @@ public class Level {
 		for (Plane plane : planes) {
 			
 			if (plane.deletePlane(world)) {
+				
+				if (!isScrolling) {
+					
+					isScrolling = true;
+					
+				}
+				
 				planes.removeValue(plane, true);
 				
 			}

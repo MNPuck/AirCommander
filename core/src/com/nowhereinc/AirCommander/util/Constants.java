@@ -31,7 +31,7 @@ public class Constants {
 	public static final int NUMBEROFLEVELS = 1;
 	
 	// Amount of extra lives at level start
-	public static final int LIVES_START = 3;
+	public static final int LIVES_START = 9;
 	
 	// Amount of bombs at level start
 	public static final int BOMBS_START = 3;
@@ -114,11 +114,8 @@ public class Constants {
 	// Computer Side Velocity Inc
 	public static final float COMPUTER_SIDE_VELOCITY_INC = .10f;
 	
-	// Max Computer Side Velocity Up
-	public static final float MAX_COMPUTER_SIDE_VELOCITY_UP = 1.25f;
-	
 	// Max Computer Side Velocity Down
-	public static final float MAX_COMPUTER_SIDE_VELOCITY_DOWN = 3.0f;
+	public static final float MAX_COMPUTER_SIDE_VELOCITY = 3.0f;
 		
 	// Max Number of Bullets
 	public static final int MAX_BULLETS = 20;

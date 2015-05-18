@@ -99,9 +99,11 @@ public class Bullet {
 				break;
 			
 			case Constants.E:
+				body.applyLinearImpulse(bulletSpeed * .5f, - bulletSpeed, planePosition.x, planePosition.y, true);
 				break;
 			
 			case Constants.W:
+				body.applyLinearImpulse(- bulletSpeed * .5f, - bulletSpeed, planePosition.x, planePosition.y, true);
 				break;
 			
 			case Constants.S:
@@ -109,9 +111,11 @@ public class Bullet {
 				break;
 			
 			case Constants.SW:
+				body.applyLinearImpulse(- bulletSpeed * .25f, - bulletSpeed, planePosition.x, planePosition.y, true);
 				break;
 			
 			case Constants.SE:
+				body.applyLinearImpulse(bulletSpeed * .25f, - bulletSpeed, planePosition.x, planePosition.y, true);
 				break;
 			
 			case Constants.NIL:

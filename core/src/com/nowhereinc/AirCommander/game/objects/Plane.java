@@ -42,8 +42,7 @@ public class Plane {
 		
 		savePlaneOrigin = planeOrigin;
 		Vector2 pos = initOrigin(world, cameraPosition, planeOrigin);
-		float rotation = initRotation(world, planeOrigin);
-		init(world, planeNumber, pos, rotation);
+		init(world, planeNumber, pos);
 	}
 	
 	private Vector2 initOrigin(World world, Vector2 cameraPosition, String planeOrigin) {
@@ -85,81 +84,16 @@ public class Plane {
 			
 		}
 		
-		
-		if (planeOrigin.equals("SE")) {
-			
-			position.x = Constants.GAMEBOARD_WIDTH * .5f;
-			position.y = cameraPosition.y - (Constants.GAMEBOARD_HEIGHT * .5f);
-			
-		}
-		
-		if (planeOrigin.equals("SW")) {
-			
-			position.x = - (Constants.GAMEBOARD_WIDTH * .5f);
-			position.y = cameraPosition.y - (Constants.GAMEBOARD_HEIGHT * .5f);
-			
-		}
-		
 		return position;
 		
 	}
 	
-	private float initRotation(World world, String planeOrigin) {
-		
-		float rotation = 0f;
-		
-		if (planeOrigin.equals("NE")) {
-			
-			rotation = 180f;
-			
-		}
-		
-		if (planeOrigin.equals("NW")) {
-			
-			rotation = 180f;
-			
-		}
-		
-		if (planeOrigin.equals("N")) {
-			
-			rotation = 180f;
-			
-		}
-		
-		if (planeOrigin.equals("NE2")) {
-			
-			rotation = 180f;
-			
-		}
-		
-		if (planeOrigin.equals("NW2")) {
-			
-			rotation = 180f;
-			
-		}
-		
-		if (planeOrigin.equals("SE")) {
-			
-			rotation = 0f;
-			
-		}
-		
-		if (planeOrigin.equals("SW")) {
-			
-			rotation = 0f;
-			
-		}
-		
-		return rotation;
-		
-	}
-	
-	private void init(World world, String planeNumber, Vector2 pos, float rotation) {
+	private void init(World world, String planeNumber, Vector2 pos) {
 		
 		// create body def for player
 		bodyDefPlane = new BodyDef();
 		
-		bodyDefPlane.angle = rotation;
+		bodyDefPlane.angle = 180f;
 		bodyDefPlane.position.set(pos.x, pos.y);
 		bodyDefPlane.type = BodyDef.BodyType.DynamicBody;
 		body = world.createBody(bodyDefPlane);
@@ -252,6 +186,14 @@ public class Plane {
 		
 	}
 	
+
+	
+	public int returnPlaneType() {
+		
+		return planeType;
+		
+	}
+	
 	// return computer x bottom and y center to fire bullet from
 	
 	public Vector2 returnPlanePosition() {
@@ -260,17 +202,17 @@ public class Plane {
 		
 		planePos = new Vector2(0,0);
 		
-		if (this.bodyDefPlane.angle == 0f) {
+		if (planeType < 4) {
 		
 			planePos.x = this.body.getPosition().x;
-			planePos.y = this.body.getPosition().y + boxYSize * 2;
+			planePos.y = this.body.getPosition().y - boxYSize * 2f;
 			
 		}
 		
-		if (this.bodyDefPlane.angle == 180f) {
-		
+		else {
+			
 			planePos.x = this.body.getPosition().x;
-			planePos.y = this.body.getPosition().y - boxYSize * 2;
+			planePos.y = this.body.getPosition().y - boxYSize * 1.25f;
 			
 		}
 		
@@ -635,7 +577,56 @@ public class Plane {
 	
 	private void movePlane4(float deltaTime, Vector2 vel, Vector2 pos) {
 		
-		this.body.setLinearVelocity(0, deltaTime * Constants.SCROLL_SPEED * Constants.OBJECT_SCROLL_ADJUSTMENT);
+		// init vel y to 0
+		vel.y = 0;
+		
+		// move right if velocity is zero
+		
+		if (vel.x == 0) {
+			
+			vel.x = Constants.COMPUTER_SIDE_VELOCITY_INC;
+			
+		}
+		
+		// continue to move right if not to far over and less then max velocity
+		
+		if (vel.x > 0 &&
+			pos.x < Constants.GAMEBOARD_WIDTH * .25f &&
+			vel.x < Constants.MAX_COMPUTER_SIDE_VELOCITY) {
+			
+			vel.x += Constants.COMPUTER_SIDE_VELOCITY_INC;
+			
+		}
+		
+		// move left if moving right and past the turn around point
+		
+		if (vel.x > 0 &&
+			pos.x > Constants.GAMEBOARD_WIDTH * .25f) {
+			
+			vel.x = - Constants.COMPUTER_SIDE_VELOCITY_INC;
+			
+		}
+		
+		// continue to move left if not to far over and less then max velocity
+		
+		if (vel.x < 0 &&
+			pos.x > - Constants.GAMEBOARD_WIDTH * .25f &&
+			vel.x > - Constants.MAX_COMPUTER_SIDE_VELOCITY) {
+			
+			vel.x -= Constants.COMPUTER_SIDE_VELOCITY_INC;
+			
+		}
+		
+		// move right if moving left and past the turn around point
+		
+		if (vel.x < 0 &&
+			pos.x < - Constants.GAMEBOARD_WIDTH * .25f) {
+			
+			vel.x = Constants.COMPUTER_SIDE_VELOCITY_INC;
+			
+		} 
+
+		this.body.setLinearVelocity(vel.x, vel.y);
 		
 	}
 	
@@ -691,7 +682,7 @@ public class Plane {
 					return 10;
 			
 				case 4:
-					return 10;
+					return 100;
 			
 				case 5:
 					return 10;
@@ -753,20 +744,9 @@ public class Plane {
 			
 			float rotation = this.body.getAngle();
 			
-			if (rotation == 0f) {
-				
-				position.x = position.x - boxXSize;
-				position.y = position.y - boxYSize;
-			
-			}
-			
-			if (rotation == 180f) {
-				
-				position.x = position.x + boxXSize;
-				position.y = position.y + boxYSize;
-			
-			}
-			
+			position.x = position.x + boxXSize;
+			position.y = position.y + boxYSize;
+
 			Plane = (TextureRegion)this.body.getUserData();
 			batch.draw(Plane, position.x, position.y, 0, 0, boxXSize * 2, boxYSize * 2, 1, 1, rotation);
 				
