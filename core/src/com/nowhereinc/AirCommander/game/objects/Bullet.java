@@ -82,7 +82,18 @@ public class Bullet {
 		fixtureDefBullet = new FixtureDef();
 		fixtureDefBullet.shape = shape;
 		fixtureDefBullet.restitution = 1;
-		body.createFixture(fixtureDefBullet).setUserData("bullet");
+		
+		if (bulletColor == 1) {
+			
+			body.createFixture(fixtureDefBullet).setUserData("bullet1");
+		
+		}
+		
+		if (bulletColor == 2) {
+			
+			body.createFixture(fixtureDefBullet).setUserData("bullet2");
+		
+		}
 		
 		shape.dispose();
 		
@@ -129,13 +140,25 @@ public class Bullet {
 		
 		Vector2 pos = this.body.getPosition();
 
-		if (pos.y >= (cameraPosition.y + (Constants.GAMEBOARD_HEIGHT / 2))) {
+		if (pos.y >= (cameraPosition.y + (Constants.GAMEBOARD_HEIGHT * .5f))) {
 			
 			setDeleteFlag();
 			
 		}
 		
-		if (pos.y <= (cameraPosition.y - (Constants.GAMEBOARD_HEIGHT / 2))) {
+		if (pos.y <= (cameraPosition.y - (Constants.GAMEBOARD_HEIGHT * .5f))) {
+			
+			setDeleteFlag();
+			
+		}
+		
+		if (pos.x >= Constants.GAMEBOARD_WIDTH * .5f) {
+			
+			setDeleteFlag();
+			
+		}
+		
+		if (pos.x <= - Constants.GAMEBOARD_WIDTH * .5f) {
 			
 			setDeleteFlag();
 			

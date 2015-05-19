@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="9" height="128" tilewidth="32" tileheight="32" nextobjectid="95">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="9" height="128" tilewidth="32" tileheight="32" nextobjectid="99">
  <tileset firstgid="1" name="grass" tilewidth="32" tileheight="32">
   <image source="Tiles/grass.png" width="128" height="128"/>
  </tileset>
@@ -73,5 +73,9 @@
   <object id="92" name="plane2" type="NE" x="270" y="497"/>
   <object id="93" name="plane3" type="NE2" x="208" y="370"/>
   <object id="94" name="plane3" type="NE2" x="208" y="305"/>
+  <object id="95" name="tank1" type="N" x="146" y="3601"/>
+  <object id="96" name="tank1" type="N" x="144" y="3148"/>
+  <object id="97" name="tank1" type="N" x="147" y="2349"/>
+  <object id="98" name="tank1" type="N" x="146" y="1677"/>
  </objectgroup>
 </map>

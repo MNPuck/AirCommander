@@ -77,6 +77,14 @@ public class Constants {
 	public static final float PLANEXSIZE = .5f;
 	public static final float PLANEYSIZE = .5f;
 	
+	// Size of tanks
+	public static final float TANKXSIZE = .5f;
+	public static final float TANKYSIZE = .5f;
+	
+	// Size of turrets
+	public static final float TURRETXSIZE = .5f;
+	public static final float TURRETYSIZE = .5f;
+	
 	// Game preferences file
 	public static final String PREFERENCES = "pong.prefs";
 	

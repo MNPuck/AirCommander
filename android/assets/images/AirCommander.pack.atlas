@@ -6,232 +6,281 @@ filter: Nearest,Nearest
 repeat: none
 Aircraft
   rotate: false
-  xy: 2, 104
+  xy: 2, 128
   size: 110, 92
   orig: 110, 92
   offset: 0, 0
   index: 1
 Aircraft_01_normal
   rotate: false
-  xy: 2, 104
+  xy: 2, 128
   size: 110, 92
   orig: 110, 92
   offset: 0, 0
   index: -1
 Aircraft_01_hit
   rotate: false
-  xy: 114, 201
+  xy: 114, 225
   size: 110, 92
   orig: 110, 92
   offset: 0, 0
   index: -1
 Aircraft_01_shadow
   rotate: false
-  xy: 226, 298
+  xy: 226, 322
   size: 110, 92
   orig: 110, 92
   offset: 0, 0
   index: -1
 Aircraft_02_hit
   rotate: false
-  xy: 338, 400
+  xy: 338, 424
   size: 110, 86
   orig: 110, 86
   offset: 0, 0
   index: -1
 Aircraft_02_normal
   rotate: false
-  xy: 2, 16
+  xy: 2, 40
   size: 110, 86
   orig: 110, 86
   offset: 0, 0
   index: -1
 Aircraft_02_shadow
   rotate: false
-  xy: 114, 113
+  xy: 114, 137
   size: 110, 86
   orig: 110, 86
   offset: 0, 0
   index: -1
 Aircraft_03_hit
   rotate: false
-  xy: 226, 210
+  xy: 226, 234
   size: 110, 86
   orig: 110, 86
   offset: 0, 0
   index: -1
 Aircraft_03_normal
   rotate: false
-  xy: 338, 312
+  xy: 338, 336
   size: 110, 86
   orig: 110, 86
   offset: 0, 0
   index: -1
 Aircraft_03_shadow
   rotate: false
-  xy: 450, 400
+  xy: 450, 424
   size: 110, 86
   orig: 110, 86
   offset: 0, 0
   index: -1
 Aircraft_04_hit
   rotate: false
-  xy: 450, 314
+  xy: 450, 338
   size: 110, 84
   orig: 110, 84
   offset: 0, 0
   index: -1
 Aircraft_04_normal
   rotate: false
-  xy: 562, 402
+  xy: 562, 426
   size: 110, 84
   orig: 110, 84
   offset: 0, 0
   index: -1
 Aircraft_04_shadow
   rotate: false
-  xy: 226, 36
+  xy: 226, 60
   size: 110, 84
   orig: 110, 84
   offset: 0, 0
   index: -1
 Aircraft_05_hit
   rotate: false
-  xy: 2, 391
+  xy: 2, 415
   size: 110, 95
   orig: 110, 95
   offset: 0, 0
   index: -1
 Aircraft_05_normal
   rotate: false
-  xy: 2, 294
+  xy: 2, 318
   size: 110, 95
   orig: 110, 95
   offset: 0, 0
   index: -1
 Aircraft_05_shadow
   rotate: false
-  xy: 114, 391
+  xy: 114, 415
   size: 110, 95
   orig: 110, 95
   offset: 0, 0
   index: -1
 Aircraft_06_hit
   rotate: false
-  xy: 114, 25
+  xy: 114, 49
   size: 110, 86
   orig: 110, 86
   offset: 0, 0
   index: -1
 Aircraft_06_normal
   rotate: false
-  xy: 226, 122
+  xy: 226, 146
   size: 110, 86
   orig: 110, 86
   offset: 0, 0
   index: -1
 Aircraft_06_shadow
   rotate: false
-  xy: 338, 224
+  xy: 338, 248
   size: 110, 86
   orig: 110, 86
   offset: 0, 0
   index: -1
 Aircraft_07_hit
   rotate: false
-  xy: 338, 140
+  xy: 338, 164
   size: 110, 82
   orig: 110, 82
   offset: 0, 0
   index: -1
 Aircraft_07_normal
   rotate: false
-  xy: 450, 230
+  xy: 450, 254
   size: 110, 82
   orig: 110, 82
   offset: 0, 0
   index: -1
 Aircraft_07_shadow
   rotate: false
-  xy: 562, 318
+  xy: 562, 342
   size: 110, 82
   orig: 110, 82
   offset: 0, 0
   index: -1
 Aircraft_08_hit
   rotate: false
-  xy: 674, 410
+  xy: 674, 434
   size: 94, 76
   orig: 94, 76
   offset: 0, 0
   index: -1
 Aircraft_08_normal
   rotate: false
-  xy: 338, 62
+  xy: 338, 86
   size: 94, 76
   orig: 94, 76
   offset: 0, 0
   index: -1
 Aircraft_08_shadow
   rotate: false
-  xy: 450, 152
+  xy: 450, 176
   size: 94, 76
   orig: 94, 76
   offset: 0, 0
   index: -1
 Aircraft_09_hit
   rotate: false
-  xy: 2, 198
+  xy: 2, 222
   size: 110, 94
   orig: 110, 94
   offset: 0, 0
   index: -1
 Aircraft_09_normal
   rotate: false
-  xy: 114, 295
+  xy: 114, 319
   size: 110, 94
   orig: 110, 94
   offset: 0, 0
   index: -1
 Aircraft_09_shadow
   rotate: false
-  xy: 226, 392
+  xy: 226, 416
   size: 110, 94
   orig: 110, 94
   offset: 0, 0
   index: -1
 Aircraft_10_hit
   rotate: false
-  xy: 562, 240
+  xy: 562, 264
   size: 94, 76
   orig: 94, 76
   offset: 0, 0
   index: -1
 Aircraft_10_normal
   rotate: false
-  xy: 674, 332
+  xy: 674, 356
   size: 94, 76
   orig: 94, 76
   offset: 0, 0
   index: -1
 Aircraft_10_shadow
   rotate: false
-  xy: 770, 410
+  xy: 770, 434
   size: 94, 76
   orig: 94, 76
   offset: 0, 0
   index: -1
 bullet_blue0000
   rotate: false
-  xy: 2, 2
+  xy: 338, 72
   size: 12, 12
   orig: 12, 12
   offset: 0, 0
   index: -1
 bullet_orange0000
   rotate: false
-  xy: 338, 48
+  xy: 434, 150
   size: 12, 12
   orig: 12, 12
+  offset: 0, 0
+  index: -1
+tank1_body
+  rotate: false
+  xy: 962, 462
+  size: 34, 48
+  orig: 34, 48
+  offset: 0, 0
+  index: -1
+tank1_gun
+  rotate: false
+  xy: 226, 2
+  size: 56, 56
+  orig: 56, 56
+  offset: 0, 0
+  index: -1
+tank2_body
+  rotate: false
+  xy: 284, 10
+  size: 42, 48
+  orig: 42, 48
+  offset: 0, 0
+  index: -1
+tank2_gun
+  rotate: false
+  xy: 770, 366
+  size: 66, 66
+  orig: 66, 66
+  offset: 0, 0
+  index: -1
+truck1_body
+  rotate: false
+  xy: 866, 448
+  size: 30, 62
+  orig: 30, 62
+  offset: 0, 0
+  index: -1
+truck2_body
+  rotate: false
+  xy: 898, 448
+  size: 30, 62
+  orig: 30, 62
+  offset: 0, 0
+  index: -1
+truck3_body
+  rotate: false
+  xy: 930, 448
+  size: 30, 62
+  orig: 30, 62
   offset: 0, 0
   index: -1

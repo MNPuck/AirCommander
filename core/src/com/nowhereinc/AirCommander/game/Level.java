@@ -8,6 +8,8 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.nowhereinc.AirCommander.game.objects.Bullet;
 import com.nowhereinc.AirCommander.game.objects.Plane;
 import com.nowhereinc.AirCommander.game.objects.Player;
+import com.nowhereinc.AirCommander.game.objects.Tank;
+import com.nowhereinc.AirCommander.game.objects.Turret;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
@@ -36,6 +38,19 @@ public class Level {
 	// plane array
 	public Array<Plane> planes;
 	
+	// tank single
+	public Tank tank;
+	
+	// tank array
+	public Array<Tank> tanks;
+	
+	// turret single
+	public Turret turret;
+	
+	// turret array
+	public Array<Turret> turrets;
+	
+	
 	// level objects
 	public LevelBuilder levels;
 	
@@ -57,6 +72,12 @@ public class Level {
 	// plane position
 	private Vector2 planePosition;
 	
+	// tank position
+	private Vector2 tankPosition;
+	
+	// turret position
+	private Vector2 turretPosition;
+	
 	// game over boolean
 	public boolean isGameOver;
 	
@@ -69,6 +90,8 @@ public class Level {
 	// booelan to tell world controller if map should be scrolled
 	private boolean isScrolling;
 	
+	// tank Counter
+	private int tankCounter;
 	
 	public Level () {
 
@@ -92,6 +115,12 @@ public class Level {
 		// planes
 		planes = new Array<Plane>();
 		
+		// tanks
+		tanks = new Array<Tank>();
+		
+		// turrets
+		turrets = new Array<Turret>();
+		
 		// bullets
 		bullets = new Array<Bullet>();
 		
@@ -110,6 +139,12 @@ public class Level {
 		// init plane pos 
 		planePosition = new Vector2(0,0);
 		
+		// init tank pos
+		tankPosition = new Vector2(0,0);
+		
+		// init turret pos
+		turretPosition = new Vector2(0,0);
+		
 		// level game over init
 		isGameOver = false;
 		
@@ -122,6 +157,9 @@ public class Level {
 		// set scrolling to true
 		isScrolling = true;
 		
+		// set tank counter to 0
+		tankCounter = 0;
+		
 		newLevel();
 		
 	}
@@ -132,9 +170,9 @@ public class Level {
 		
 		world.step(deltaTime, 8, 3);
 		
-		// add planes that are on screen
+		// add plane and tank objects that are on screen
 		
-		addPlanes(cameraPosition);
+		addObjects(cameraPosition);
 		
 		// player update
 		
@@ -166,6 +204,15 @@ public class Level {
 			
 		}
 		
+		// tanks update
+		
+		for (Tank tank : tanks) {
+			
+			tank.update(deltaTime, cameraPosition, playerPosition);
+			score += tank.returnTankScore();
+			
+		}
+			
 		// bullets update
 		
 		for (Bullet bullet : bullets) {
@@ -246,14 +293,6 @@ public class Level {
 					bullets.add((Bullet)bullet);
 					
 					bullet = null;
-					bullet = new Bullet(world, planePosition, Constants.MAX_COMPUTER_BULLET_VELOCITY, 2, Constants.SE);
-					bullets.add((Bullet)bullet);
-					
-					bullet = null;
-					bullet = new Bullet(world, planePosition, Constants.MAX_COMPUTER_BULLET_VELOCITY, 2, Constants.SW);
-					bullets.add((Bullet)bullet);
-					
-					bullet = null;
 					bullet = new Bullet(world, planePosition, Constants.MAX_COMPUTER_BULLET_VELOCITY, 2, Constants.W);
 					bullets.add((Bullet)bullet);
 					
@@ -272,7 +311,7 @@ public class Level {
 		
 	}	
 	
-	private void addPlanes(Vector2 cameraPosition) {
+	private void addObjects(Vector2 cameraPosition) {
 		
 		// loop thru object layer and look for planes that are on screen
 		
@@ -331,21 +370,33 @@ public class Level {
 						obj.setName("done");
 					}
 				
-					if ("plane8".equals(obj.getProperties().get("name", String.class)) ) {
-					
+					if ("plane8".equals(obj.getName()) ) {
+						
 						addPlane(cameraPosition, "plane8", obj.getProperties().get("type", String.class));
 						obj.setName("done");
 					}
 				
-					if ("plane9".equals(obj.getProperties().get("name", String.class)) ) {
+					if ("plane9".equals(obj.getName()) ) {
 					
 						addPlane(cameraPosition, "plane9", obj.getProperties().get("type", String.class));
 						obj.setName("done");
 					}
 				
-					if ("plane10".equals(obj.getProperties().get("name", String.class)) ) {
+					if ("plane10".equals(obj.getName()) ) {
 					
 						addPlane(cameraPosition, "plane10", obj.getProperties().get("type", String.class));
+						obj.setName("done");
+					}
+					
+					if ("tank1".equals(obj.getName()) ) {
+						
+						addTank(cameraPosition, "tank1", obj.getProperties().get("type", String.class), tankCounter);
+						obj.setName("done");
+					}
+					
+					if ("tank2".equals(obj.getName()) ) {
+						
+						addTank(cameraPosition, "tank2", obj.getProperties().get("type", String.class), tankCounter);
 						obj.setName("done");
 					}
 				
@@ -379,6 +430,44 @@ public class Level {
 		plane = null;
 		plane = new Plane(world, cameraPosition, planeNumber, planeOrigin);
 		planes.add((Plane)plane);
+		
+	}
+	
+	private void addTank(Vector2 cameraPosition, String tankNumber, String tankOrigin, int tankCounter) {
+		
+		tank = null;
+		tank = new Tank(world, cameraPosition, tankNumber, tankOrigin, tankCounter);
+		tanks.add((Tank)tank);
+		
+		addTurret(cameraPosition, tankNumber, tankOrigin, tankCounter);
+		
+		// add 1 to tank counter for next new tank
+		
+		tankCounter++;
+		
+		
+	}
+	
+	private void addTurret(Vector2 cameraPosition, String tankNumber, String tankOrigin, int tankCounter) {
+		
+		String turretNumber = null;
+		
+		turret = null;
+		
+		if (tankNumber.equals("tank1")) {
+			
+			turretNumber = "turret1";
+			
+		}
+		
+		if (tankNumber.equals("tank2")) {
+			
+			turretNumber = "turret2";
+			
+		}
+		
+		turret = new Turret(world, cameraPosition, turretNumber, tankOrigin, tankCounter);
+		turrets.add((Turret)turret);
 		
 	}
 	
@@ -430,6 +519,33 @@ public class Level {
 				}
 				
 				planes.removeValue(plane, true);
+				
+			}
+			
+		}
+		
+		for (Tank tank : tanks) {
+			
+			if (tank.deleteTank(world)) {
+				
+				if (!isScrolling) {
+					
+					isScrolling = true;
+					
+				}
+				
+				for (Turret turret : turrets){
+					
+					if (tank.returnTankValue() == turret.returnTurretValue()) {
+						
+						turret.deleteTurret(world);
+						turrets.removeValue(turret, true);
+						
+					}
+					
+				}
+				
+				tanks.removeValue(tank, true);
 				
 			}
 			
@@ -514,6 +630,14 @@ public class Level {
 		// draw planes
 		for (Plane plane : planes)
 			plane.render(batch);
+		
+		// draw tanks
+		for (Tank tank : tanks)
+			tank.render(batch);
+		
+		// draw turret
+		for (Turret turret : turrets)
+			turret.render(batch);
 		
 		// draw bullets
 		for (Bullet bullet : bullets) 

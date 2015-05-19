@@ -50,6 +50,16 @@ public class Assets implements Disposable, AssetErrorListener {
 	public AssetPlane10 plane10;
 	public AssetPlane10Hit plane10Hit;	
 	
+	public AssetTank1 tank1;
+	public AssetTank2 tank2;
+	
+	public AssetTurret1 turret1;
+	public AssetTurret2 turret2;
+	
+	public AssetTruck1 truck1;
+	public AssetTruck2 truck2;
+	public AssetTruck3 truck3;
+	
 	public AssetSounds sounds;
 	
 
@@ -274,6 +284,111 @@ public class Assets implements Disposable, AssetErrorListener {
 		
 	}
 	
+	public class AssetTank1 {
+		public final AtlasRegion tank1;
+
+		public AssetTank1 (TextureAtlas atlas) {
+			tank1 = atlas.findRegion("tank1_body");
+			
+			if (tank1 == null) {
+				
+				Gdx.app.debug(TAG,"Tank1 is null");
+			}		
+			
+		}
+		
+	}
+	
+	public class AssetTank2 {
+		public final AtlasRegion tank2;
+
+		public AssetTank2 (TextureAtlas atlas) {
+			tank2 = atlas.findRegion("tank2_body");
+			
+			if (tank2 == null) {
+				
+				Gdx.app.debug(TAG,"Tank2 is null");
+			}		
+			
+		}
+		
+	}
+	
+	public class AssetTurret1 {
+		public final AtlasRegion turret1;
+
+		public AssetTurret1 (TextureAtlas atlas) {
+			turret1 = atlas.findRegion("tank1_gun");
+			
+			if (turret1 == null) {
+				
+				Gdx.app.debug(TAG,"Turret1 is null");
+			}		
+			
+		}
+		
+	}
+	
+	public class AssetTurret2 {
+		public final AtlasRegion turret2;
+
+		public AssetTurret2 (TextureAtlas atlas) {
+			turret2 = atlas.findRegion("tank2_gun");
+			
+			if (turret2 == null) {
+				
+				Gdx.app.debug(TAG,"Turret2 is null");
+			}		
+			
+		}
+		
+	}
+	
+	public class AssetTruck1 {
+		public final AtlasRegion truck1;
+
+		public AssetTruck1 (TextureAtlas atlas) {
+			truck1 = atlas.findRegion("truck1_body");
+			
+			if (truck1 == null) {
+				
+				Gdx.app.debug(TAG,"Truck1 is null");
+			}		
+			
+		}
+		
+	}
+	
+	public class AssetTruck2 {
+		public final AtlasRegion truck2;
+
+		public AssetTruck2 (TextureAtlas atlas) {
+			truck2 = atlas.findRegion("truck2_body");
+			
+			if (truck2 == null) {
+				
+				Gdx.app.debug(TAG,"Truck2 is null");
+			}		
+			
+		}
+		
+	}
+	
+	public class AssetTruck3 {
+		public final AtlasRegion truck3;
+
+		public AssetTruck3 (TextureAtlas atlas) {
+			truck3 = atlas.findRegion("truck3_body");
+			
+			if (truck3 == null) {
+				
+				Gdx.app.debug(TAG,"Truck3 is null");
+			}		
+			
+		}
+		
+	}
+	
 	public class AssetSounds {
 		
 		public final Sound shipShot;
@@ -354,6 +469,16 @@ public class Assets implements Disposable, AssetErrorListener {
 		plane10 = new AssetPlane10(atlas);
 		plane10Hit = new AssetPlane10Hit(atlas);
 		
+		tank1 = new AssetTank1(atlas);
+		tank2 = new AssetTank2(atlas);
+		
+		turret1 = new AssetTurret1(atlas);
+		turret2 = new AssetTurret2(atlas);
+		
+		truck1 = new AssetTruck1(atlas);
+		truck2 = new AssetTruck2(atlas);
+		truck3 = new AssetTruck3(atlas);
+	
 		sounds = new AssetSounds(assetManager);
 		
 	}
