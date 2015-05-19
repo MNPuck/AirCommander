@@ -621,6 +621,15 @@ public class Level {
 
 	public void render (SpriteBatch batch, float deltaTime) {
 		
+		// draw tanks
+		for (Tank tank : tanks)
+			tank.render(batch);
+		
+		// draw turret
+		for (Turret turret : turrets)
+			turret.render(batch);
+		
+		
 		if (lives > 0) {
 						
 			player.render(batch);
@@ -630,14 +639,6 @@ public class Level {
 		// draw planes
 		for (Plane plane : planes)
 			plane.render(batch);
-		
-		// draw tanks
-		for (Tank tank : tanks)
-			tank.render(batch);
-		
-		// draw turret
-		for (Turret turret : turrets)
-			turret.render(batch);
 		
 		// draw bullets
 		for (Bullet bullet : bullets) 
