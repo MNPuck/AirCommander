@@ -266,11 +266,45 @@ public class AirCommanderContactListener implements ContactListener {
 		
 		// ignore all collisions when player in spawn phase
 		
-		fixtureAShort = fixtureALong.substring(0, Math.min(fixtureALong.length(), 6));
-		fixtureBShort = fixtureBLong.substring(0, Math.min(fixtureBLong.length(), 6));
+		fixtureAShort = fixtureALong.substring(0, Math.min(fixtureALong.length(), 5));
+		fixtureBShort = fixtureBLong.substring(0, Math.min(fixtureBLong.length(), 5));
 		
 		if (fixtureAShort.equals("spawn") ||
 			fixtureBShort.equals("spawn")) {
+			
+			contact.setEnabled(false);
+			
+		}
+		
+		// ignore plane on plane collisions
+		
+		fixtureAShort = fixtureALong.substring(0, Math.min(fixtureALong.length(), 5));
+		fixtureBShort = fixtureBLong.substring(0, Math.min(fixtureBLong.length(), 5));
+		
+		if (fixtureAShort.equals("plane") ||
+			fixtureBShort.equals("plane")) {
+			
+			contact.setEnabled(false);
+			
+		}
+		
+		// ignore plane on tank collisions
+		
+		fixtureAShort = fixtureALong.substring(0, Math.min(fixtureALong.length(), 5));
+		fixtureBShort = fixtureBLong.substring(0, Math.min(fixtureBLong.length(), 4));
+		
+		if (fixtureAShort.equals("plane") ||
+			fixtureBShort.equals("tank")) {
+			
+			contact.setEnabled(false);
+			
+		}
+		
+		fixtureAShort = fixtureALong.substring(0, Math.min(fixtureALong.length(), 4));
+		fixtureBShort = fixtureBLong.substring(0, Math.min(fixtureBLong.length(), 5));
+		
+		if (fixtureAShort.equals("tank") ||
+			fixtureBShort.equals("plane")) {
 			
 			contact.setEnabled(false);
 			
