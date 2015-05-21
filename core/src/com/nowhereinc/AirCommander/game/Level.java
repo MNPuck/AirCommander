@@ -209,7 +209,22 @@ public class Level {
 		for (Tank tank : tanks) {
 			
 			tank.update(deltaTime, cameraPosition, playerPosition);
+			
+			Vector2 tankVelocity;
+			tankVelocity = new Vector2(0,0);
+			tankVelocity = tank.returnTankVelocity();
+			
 			score += tank.returnTankScore();
+			
+			for (Turret turret : turrets) {
+				
+				if (tank.returnTankValue() == turret.returnTurretValue()) {
+				
+					turret.update(deltaTime, tankVelocity);
+					
+				}
+				
+			}
 			
 		}
 			
@@ -305,6 +320,16 @@ public class Level {
 				
 			}
 			
+			for (Tank tank : tanks) {
+				
+				tankPosition = tank.returnTankPosition();
+				
+				bullet = null;
+				bullet = new Bullet(world, tankPosition, Constants.MAX_COMPUTER_BULLET_VELOCITY, 2, Constants.S);
+				bullets.add((Bullet)bullet);
+				
+			}
+			
 			timeSinceLastBulletComputer = 0;
 			
 		}
@@ -390,13 +415,13 @@ public class Level {
 					
 					if ("tank1".equals(obj.getName()) ) {
 						
-						addTank(cameraPosition, "tank1", obj.getProperties().get("type", String.class), tankCounter);
+						addTank(cameraPosition, "tank1", obj.getProperties().get("type", String.class));
 						obj.setName("done");
 					}
 					
 					if ("tank2".equals(obj.getName()) ) {
 						
-						addTank(cameraPosition, "tank2", obj.getProperties().get("type", String.class), tankCounter);
+						addTank(cameraPosition, "tank2", obj.getProperties().get("type", String.class));
 						obj.setName("done");
 					}
 				
@@ -433,7 +458,7 @@ public class Level {
 		
 	}
 	
-	private void addTank(Vector2 cameraPosition, String tankNumber, String tankOrigin, int tankCounter) {
+	private void addTank(Vector2 cameraPosition, String tankNumber, String tankOrigin) {
 		
 		tank = null;
 		tank = new Tank(world, cameraPosition, tankNumber, tankOrigin, tankCounter);
@@ -526,17 +551,13 @@ public class Level {
 		
 		for (Tank tank : tanks) {
 			
+			int saveTankValue = tank.returnTankValue();
+			
 			if (tank.deleteTank(world)) {
-				
-				if (!isScrolling) {
-					
-					isScrolling = true;
-					
-				}
 				
 				for (Turret turret : turrets){
 					
-					if (tank.returnTankValue() == turret.returnTurretValue()) {
+					if (saveTankValue == turret.returnTurretValue()) {
 						
 						turret.deleteTurret(world);
 						turrets.removeValue(turret, true);

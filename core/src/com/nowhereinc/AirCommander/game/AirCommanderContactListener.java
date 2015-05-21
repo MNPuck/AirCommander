@@ -68,6 +68,30 @@ public class AirCommanderContactListener implements ContactListener {
 			fixtureB.setUserData("delete");
 		
 		}
+		
+		// tank hits player block code
+		
+		fixtureAShort = fixtureALong.substring(0, Math.min(fixtureALong.length(), 4));
+		fixtureBShort = fixtureBLong.substring(0, Math.min(fixtureBLong.length(), 6));
+	
+		if (fixtureAShort.equals("tank") &&
+		    fixtureBShort.equals("player")) {
+			
+			fixtureA.setUserData("delete");
+			fixtureB.setUserData("delete");
+			
+		}
+		
+		fixtureAShort = fixtureALong.substring(0, Math.min(fixtureALong.length(), 6));
+		fixtureBShort = fixtureBLong.substring(0, Math.min(fixtureBLong.length(), 4));
+		
+		if (fixtureAShort.equals("player") &&
+			fixtureBShort.equals("tank")) {
+			
+			fixtureA.setUserData("delete");
+			fixtureB.setUserData("delete");
+		
+		}
 
 	}
 	

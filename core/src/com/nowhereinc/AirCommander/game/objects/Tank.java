@@ -107,13 +107,13 @@ public class Tank {
 			case "tank1":
 				body.setUserData(Assets.instance.tank1.tank1);
 				tankType = 1;
-				hitPoints = 3;
+				hitPoints = 2;
 				break;
 			
 			case "tank2":
 				body.setUserData(Assets.instance.tank2.tank2);
 				tankType = 2;
-				hitPoints = 3;
+				hitPoints = 2;
 				break;
 	
 		}
@@ -147,6 +147,7 @@ public class Tank {
 		
 	}
 	
+	
 	// return computer x bottom and y center to fire bullet from
 	
 	public Vector2 returnTankPosition() {
@@ -165,6 +166,12 @@ public class Tank {
 	public int returnTankValue() {
 		
 		return tankValue;
+		
+	}
+	
+	public Vector2 returnTankVelocity() {
+		
+		return this.body.getLinearVelocity();
 		
 	}
 	
@@ -211,57 +218,6 @@ public class Tank {
 	
 	private void moveTank1(Vector2 cameraPosition, Vector2 vel, Vector2 pos) {
 		
-		if (saveTankOrigin.equals("NE")) {
-			
-			moveTank1NE(cameraPosition, vel, pos);
-			
-		}
-		
-		if (saveTankOrigin.equals("NW")) {
-			
-			moveTank1NW(cameraPosition, vel, pos);
-			
-		}
-		
-	}
-	
-	private void moveTank1NE(Vector2 cameraPosition, Vector2 vel, Vector2 pos) {
-		
-		// if tank below bottom of screen set for deletion
-		
-		if (pos.y < cameraPosition.y + (-Constants.GAMEBOARD_HEIGHT * .5f)) {
-			
-			setDeleteFlag();
-			vel.y = 0;
-			
-		}
-		
-		else {
-		
-			if (pos.y < cameraPosition.y) {
-		
-				
-				vel.x += Constants.COMPUTER_SIDE_VELOCITY_INC;
-						
-			}
-			
-			if (pos.y > cameraPosition.y) {
-				
-				vel.x -= Constants.COMPUTER_SIDE_VELOCITY_INC;
-				
-			}
-			
-		}
-		
-		
-		// apply movement
-		
-		this.body.setLinearVelocity(vel.x, vel.y);
-		
-	}
-	
-	private void moveTank1NW(Vector2 cameraPosition, Vector2 vel, Vector2 pos) {
-		
 		// if tank below bottom of screen set for deletion
 		
 		if (pos.y < cameraPosition.y + (-Constants.GAMEBOARD_HEIGHT * .5f)) {
@@ -273,21 +229,13 @@ public class Tank {
 		
 		else {
 			
-			if (pos.y < cameraPosition.y) {
+			if (vel.y > - Constants.MAX_COMPUTER_TANK_DOWN_VELOCITY) {
 		
-				
-				vel.x -= Constants.COMPUTER_SIDE_VELOCITY_INC;
+				vel.y -= Constants.INC_COMPUTER_TANK_DOWN_VELOCITY;
 						
 			}
 			
-			if (pos.y > cameraPosition.y) {
-				
-				vel.x += Constants.COMPUTER_SIDE_VELOCITY_INC;
-				
-			}
-			
 		}
-
 		
 		// apply movement
 		

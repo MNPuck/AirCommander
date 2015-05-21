@@ -124,6 +124,12 @@ public class Constants {
 	
 	// Max Computer Side Velocity Down
 	public static final float MAX_COMPUTER_SIDE_VELOCITY = 3.0f;
+	
+	// Max Tank Velocity Down
+	public static final float MAX_COMPUTER_TANK_DOWN_VELOCITY = 1.0f;
+	
+	// Inc Tank Velocity Down
+	public static final float INC_COMPUTER_TANK_DOWN_VELOCITY = .5f;
 		
 	// Max Number of Bullets
 	public static final int MAX_BULLETS = 20;
@@ -131,8 +137,8 @@ public class Constants {
 	// Interval to fire bullets
 	public static final float BULLET_SPAWN_TIME_PLAYER = .33f;
 	
-	// Interval to fire bullets
-	public static final float BULLET_SPAWN_TIME_COMPUTER = 1f;
+	// Interval to fire computer bullets
+	public static final float BULLET_SPAWN_TIME_COMPUTER = 1.0f;
 	
 	// Object Scroll adjustment
 	public static final int OBJECT_SCROLL_ADJUSTMENT = 60;

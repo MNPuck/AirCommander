@@ -160,21 +160,24 @@ public class Turret {
 			
 	}
 	
-	public void update(float deltaTime, Vector2 cameraPosition, Vector2 playerPosition) {
+	public void update(float deltaTime, Vector2 tankVelocity) {
 		
 		Vector2 vel = this.body.getLinearVelocity();
 		Vector2 pos = this.body.getPosition();
 		
 		if (body.isActive()) {
 		
-			moveTurret(cameraPosition, vel, pos);
+			moveTurret(vel, pos, tankVelocity);
 			
 		}
 	
 	}
 	
-	private void moveTurret(Vector2 cameraPosition, Vector2 vel, Vector2 pos) {
+	private void moveTurret(Vector2 vel, Vector2 pos, Vector2 tankVelocity) {
 		
+		vel = tankVelocity;
+		
+		this.body.setLinearVelocity(vel.x, vel.y);
 		
 	}
 	
