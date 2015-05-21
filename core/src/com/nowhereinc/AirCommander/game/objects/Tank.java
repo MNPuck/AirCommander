@@ -113,7 +113,7 @@ public class Tank {
 			case "tank2":
 				body.setUserData(Assets.instance.tank2.tank2);
 				tankType = 2;
-				hitPoints = 2;
+				hitPoints = 3;
 				break;
 	
 		}
@@ -144,6 +144,12 @@ public class Tank {
 	public int returnTankType() {
 		
 		return tankType;
+		
+	}
+	
+	public Vector2 returnTankCenter() {
+		
+		return this.body.getPosition();
 		
 	}
 	
@@ -319,7 +325,7 @@ public class Tank {
 			switch (tankType) {
 		
 				case 1:
-					return 30;
+					return 20;
 			
 				case 2:
 					return 30;

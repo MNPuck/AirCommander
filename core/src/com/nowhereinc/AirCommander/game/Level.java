@@ -1,6 +1,9 @@
 package com.nowhereinc.AirCommander.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
+import com.badlogic.gdx.graphics.g2d.ParticleEffectPool;
+import com.badlogic.gdx.graphics.g2d.ParticleEffectPool.PooledEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.maps.MapObject;
@@ -93,6 +96,10 @@ public class Level {
 	// tank Counter
 	private int tankCounter;
 	
+	// enemy particle pool
+	public ParticleEffectPool pool1;
+	public Array<PooledEffect> activeEffects1;
+	
 	public Level () {
 
 		init();
@@ -123,6 +130,30 @@ public class Level {
 		
 		// bullets
 		bullets = new Array<Bullet>();
+		
+		// create enemy 1 Particle Pool
+		
+		ParticleEffect explosionEffect = new ParticleEffect();
+		
+		explosionEffect.load(Gdx.files.internal("particles/enemyExp.pfx"),
+				Gdx.files.internal("particles"));
+		
+		float pScale = Constants.PARTICLESCALE;
+
+	    float scaling = explosionEffect.getEmitters().get(0).getScale().getHighMax();
+	    explosionEffect.getEmitters().get(0).getScale().setHigh(scaling * pScale);
+
+	    scaling = explosionEffect.getEmitters().get(0).getScale().getLowMax();
+	    explosionEffect.getEmitters().get(0).getScale().setLow(scaling * pScale);
+	    
+	    scaling = explosionEffect.getEmitters().get(0).getVelocity().getHighMax();
+	    explosionEffect.getEmitters().get(0).getVelocity().setHigh(scaling * pScale);
+
+	    scaling = explosionEffect.getEmitters().get(0).getVelocity().getLowMax();
+	    explosionEffect.getEmitters().get(0).getVelocity().setLow(scaling * pScale);
+	    
+	    pool1 = new ParticleEffectPool(explosionEffect, 10 , 30);
+	    activeEffects1 = new Array<PooledEffect>();
 		
 		// set to new game
 		newGame = true;
@@ -322,11 +353,39 @@ public class Level {
 			
 			for (Tank tank : tanks) {
 				
+				boolean bulletShot = false;
 				tankPosition = tank.returnTankPosition();
 				
-				bullet = null;
-				bullet = new Bullet(world, tankPosition, Constants.MAX_COMPUTER_BULLET_VELOCITY, 2, Constants.S);
-				bullets.add((Bullet)bullet);
+				// if player is to the right of tank fire bullet SE
+				
+				if (tankPosition.x < playerPosition.x - Constants.PLAYERXSIZE * .5f) {
+					
+					bullet = null;
+					bullet = new Bullet(world, tankPosition, Constants.MAX_COMPUTER_BULLET_VELOCITY, 2, Constants.SE);
+					bullets.add((Bullet)bullet);
+					bulletShot = true;
+					
+				}
+				
+				// if player is to the left of tank fire bullet SW
+				
+				if (tankPosition.x > playerPosition.x + Constants.PLAYERXSIZE * .5f) {
+					
+					bullet = null;
+					bullet = new Bullet(world, tankPosition, Constants.MAX_COMPUTER_BULLET_VELOCITY, 2, Constants.SW);
+					bullets.add((Bullet)bullet);
+					bulletShot = true;
+					
+				}
+				
+				if (!bulletShot) {
+					
+					bullet = null;
+					bullet = new Bullet(world, tankPosition, Constants.MAX_COMPUTER_BULLET_VELOCITY, 2, Constants.S);
+					bullets.add((Bullet)bullet);
+					bulletShot = true;
+					
+				}
 				
 			}
 			
@@ -535,12 +594,21 @@ public class Level {
 		
 		for (Plane plane : planes) {
 			
+			Vector2 planeCenter = plane.returnPlaneCenter();
+			
 			if (plane.deletePlane(world)) {
 				
 				if (!isScrolling) {
 					
 					isScrolling = true;
 					
+				}
+				
+				PooledEffect effect = pool1.obtain();
+				
+				if (effect != null) {
+					activeEffects1.add(effect);
+					effect.setPosition(planeCenter.x, planeCenter.y);
 				}
 				
 				planes.removeValue(plane, true);
@@ -553,6 +621,8 @@ public class Level {
 			
 			int saveTankValue = tank.returnTankValue();
 			
+			Vector2 tankCenter = tank.returnTankCenter();
+			
 			if (tank.deleteTank(world)) {
 				
 				for (Turret turret : turrets){
@@ -564,6 +634,13 @@ public class Level {
 						
 					}
 					
+				}
+				
+				PooledEffect effect = pool1.obtain();
+				
+				if (effect != null) {
+					activeEffects1.add(effect);
+					effect.setPosition(tankCenter.x, tankCenter.y);
 				}
 				
 				tanks.removeValue(tank, true);
@@ -660,6 +737,24 @@ public class Level {
 		// draw planes
 		for (Plane plane : planes)
 			plane.render(batch);
+		
+		// draw enemy pooled particle effect
+		
+		for (int i = 0; i < activeEffects1.size; ) {
+			
+			PooledEffect effect = activeEffects1.get(i);
+			
+			if (effect.isComplete()) {
+				pool1.free(effect);
+				activeEffects1.removeIndex(i);
+			}
+			
+			else {
+				effect.draw(batch, deltaTime);
+				i++;
+			}
+			
+		}
 		
 		// draw bullets
 		for (Bullet bullet : bullets) 

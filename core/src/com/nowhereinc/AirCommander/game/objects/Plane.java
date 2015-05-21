@@ -194,6 +194,14 @@ public class Plane {
 		
 	}
 	
+	// return plane center
+	
+	public Vector2 returnPlaneCenter() {
+		
+		return this.body.getPosition();
+		
+	}
+	
 	// return computer x bottom and y center to fire bullet from
 	
 	public Vector2 returnPlanePosition() {
