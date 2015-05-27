@@ -181,6 +181,38 @@ public class Turret {
 		
 	}
 	
+	public void flashTurret(World world) {
+		
+		switch (turretType) {
+		
+			case 1:
+				body.setUserData(Assets.instance.turret1Hit.turret1Hit);
+				break;
+
+			case 2:
+				body.setUserData(Assets.instance.turret2Hit.turret2Hit);
+				break;
+		
+		}
+		
+	}
+	
+	public void normalTurret(World world) {
+		
+		switch (turretType) {
+		
+			case 1:
+				body.setUserData(Assets.instance.turret1.turret1);
+				break;
+
+			case 2:
+				body.setUserData(Assets.instance.turret2.turret2);
+				break;
+		
+		}
+		
+	}
+	
 	public void deleteTurret(World world) {
 	
 		// delete body

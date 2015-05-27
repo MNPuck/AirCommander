@@ -35,8 +35,11 @@ public class Tank {
 	// tank Origin
 	private String saveTankOrigin;
 	
-	// tank Hitpoints
+	// tank Hit points
 	private int hitPoints;
+	
+	// tank flash time
+	private float flashTime;
 	
 	// tank Value, which is counter from level that matches tank to turret
 	private int tankValue;
@@ -186,10 +189,51 @@ public class Tank {
 		Vector2 vel = this.body.getLinearVelocity();
 		Vector2 pos = this.body.getPosition();
 		
+		if (body.getFixtureList().first().getUserData().equals("flash")) {
+			
+			flashTime += deltaTime;
+			
+			if (flashTime < Constants.HITFLASHTIME) {
+			
+				switch (tankType) {
+			
+					case 1:
+						body.setUserData(Assets.instance.tank1Hit.tank1Hit);
+						break;
+			
+					case 2:
+						body.setUserData(Assets.instance.tank2Hit.tank2Hit);
+						break;
+					
+				}
+					
+			}
+			
+			else {
+				
+				body.getFixtureList().first().setUserData("tank" + tankType);
+				
+				switch (tankType) {
+				
+					case 1:
+						body.setUserData(Assets.instance.tank1.tank1);
+						break;
+		
+					case 2:
+						body.setUserData(Assets.instance.tank2.tank2);
+						break;
+				
+				}
+				
+			}
+	
+		}
+		
 		if (body.getFixtureList().first().getUserData() == "hit") {
 			
 			hitPoints--;
-			body.getFixtureList().first().setUserData("tank" + tankType);
+			flashTime = 0f;
+			body.getFixtureList().first().setUserData("flash");
 			
 			if (hitPoints <= 0) {
 				
@@ -338,6 +382,22 @@ public class Tank {
 		}
 		
 		return 0;
+		
+	}
+	
+	public boolean flashTank(World world) {
+		
+		if (body.getFixtureList().first().getUserData().equals("flash")) {
+			
+			return true;
+		
+		}
+		
+		else {
+			
+			return false;
+			
+		}
 		
 	}
 	

@@ -31,7 +31,7 @@ public class Constants {
 	public static final int NUMBEROFLEVELS = 1;
 	
 	// Amount of extra lives at level start
-	public static final int LIVES_START = 3;
+	public static final int LIVES_START = 9;
 	
 	// Amount of bombs at level start
 	public static final int BOMBS_START = 3;
@@ -151,5 +151,8 @@ public class Constants {
 	
 	// Particle effect scale
 	public static final float PARTICLESCALE = 0.0125f;
+	
+	// Hit flash time
+	public static final float HITFLASHTIME = .10f;
 		
 }

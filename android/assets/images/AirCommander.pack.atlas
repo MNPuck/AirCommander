@@ -223,21 +223,28 @@ Aircraft_10_shadow
   index: -1
 bullet_blue0000
   rotate: false
-  xy: 338, 72
+  xy: 546, 240
   size: 12, 12
   orig: 12, 12
   offset: 0, 0
   index: -1
 bullet_orange0000
   rotate: false
-  xy: 434, 150
+  xy: 658, 328
   size: 12, 12
   orig: 12, 12
   offset: 0, 0
   index: -1
 tank1_body
   rotate: false
-  xy: 962, 462
+  xy: 914, 394
+  size: 34, 48
+  orig: 34, 48
+  offset: 0, 0
+  index: -1
+tank1_body_hit
+  rotate: false
+  xy: 434, 114
   size: 34, 48
   orig: 34, 48
   offset: 0, 0
@@ -249,9 +256,16 @@ tank1_gun
   orig: 56, 56
   offset: 0, 0
   index: -1
+tank1_gun_hit
+  rotate: false
+  xy: 284, 2
+  size: 56, 56
+  orig: 56, 56
+  offset: 0, 0
+  index: -1
 tank2_body
   rotate: false
-  xy: 284, 10
+  xy: 870, 394
   size: 42, 48
   orig: 42, 48
   offset: 0, 0
@@ -263,23 +277,37 @@ tank2_gun
   orig: 66, 66
   offset: 0, 0
   index: -1
+tank2b_body_hit
+  rotate: false
+  xy: 950, 398
+  size: 42, 48
+  orig: 42, 48
+  offset: 0, 0
+  index: -1
+tank2b_gun_hit
+  rotate: false
+  xy: 866, 444
+  size: 66, 66
+  orig: 66, 66
+  offset: 0, 0
+  index: -1
 truck1_body
   rotate: false
-  xy: 866, 448
+  xy: 934, 448
   size: 30, 62
   orig: 30, 62
   offset: 0, 0
   index: -1
 truck2_body
   rotate: false
-  xy: 898, 448
+  xy: 966, 448
   size: 30, 62
   orig: 30, 62
   offset: 0, 0
   index: -1
 truck3_body
   rotate: false
-  xy: 930, 448
+  xy: 838, 370
   size: 30, 62
   orig: 30, 62
   offset: 0, 0

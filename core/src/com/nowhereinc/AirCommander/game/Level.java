@@ -623,6 +623,34 @@ public class Level {
 			
 			Vector2 tankCenter = tank.returnTankCenter();
 			
+			if (tank.flashTank(world)) {
+				
+				for (Turret turret : turrets){
+					
+					if (saveTankValue == turret.returnTurretValue()) {
+						
+						turret.flashTurret(world);
+				
+					}
+					
+				}
+				
+			}
+			
+			else {
+				
+				for (Turret turret : turrets){
+					
+					if (saveTankValue == turret.returnTurretValue()) {
+						
+						turret.normalTurret(world);
+				
+					}
+					
+				}
+				
+			}
+			
 			if (tank.deleteTank(world)) {
 				
 				for (Turret turret : turrets){

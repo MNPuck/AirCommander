@@ -309,6 +309,18 @@ public class AirCommanderContactListener implements ContactListener {
 			contact.setEnabled(false);
 			
 		}
+		
+		// ignore all collisions when in flash state
+		
+		fixtureAShort = fixtureALong.substring(0, Math.min(fixtureALong.length(), 6));
+		fixtureBShort = fixtureBLong.substring(0, Math.min(fixtureBLong.length(), 6));
+		
+		if (fixtureAShort.equals("flash") ||
+			fixtureBShort.equals("flash")) {
+			
+			contact.setEnabled(false);
+			
+		}
 	
 	}
 	

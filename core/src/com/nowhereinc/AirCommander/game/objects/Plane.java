@@ -35,8 +35,11 @@ public class Plane {
 	// plane Origin
 	private String savePlaneOrigin;
 	
-	// plane Hitpoints
+	// plane Hit points
 	private int hitPoints;
+	
+	// tank flash time
+	private float flashTime;
 	
 	public Plane (World world, Vector2 cameraPosition, String planeNumber, String planeOrigin) {
 		
@@ -233,10 +236,115 @@ public class Plane {
 		Vector2 vel = this.body.getLinearVelocity();
 		Vector2 pos = this.body.getPosition();
 		
+		if (body.getFixtureList().first().getUserData().equals("flash")) {
+			
+			flashTime += deltaTime;
+			
+			if (flashTime < Constants.HITFLASHTIME) {
+			
+				switch (planeType) {
+
+					case 1:
+						body.setUserData(Assets.instance.plane1Hit.plane1Hit);
+						break;
+				
+					case 2:
+						body.setUserData(Assets.instance.plane2Hit.plane2Hit);
+						break;
+				
+					case 3:
+						body.setUserData(Assets.instance.plane3Hit.plane3Hit);
+						break;
+				
+					case 4:
+						body.setUserData(Assets.instance.plane4Hit.plane4Hit);
+						break;
+				
+					case 5:
+						body.setUserData(Assets.instance.plane5Hit.plane5Hit);
+						break;
+				
+					case 6:
+						body.setUserData(Assets.instance.plane6Hit.plane6Hit);
+						break;
+				
+					case 7:
+						body.setUserData(Assets.instance.plane7Hit.plane7Hit);
+						break;
+				
+					case 8:
+						body.setUserData(Assets.instance.plane8Hit.plane8Hit);
+						break;
+				
+					case 9:
+						body.setUserData(Assets.instance.plane9Hit.plane9Hit);
+						break;
+				
+					case 10:
+						body.setUserData(Assets.instance.plane10Hit.plane10Hit);
+						break;
+					
+				}
+					
+			}
+			
+			else {
+				
+				body.getFixtureList().first().setUserData("plane" + planeType);
+				
+				switch (planeType) {
+				
+					case 1:
+						body.setUserData(Assets.instance.plane1.plane1);
+						break;
+			
+					case 2:
+						body.setUserData(Assets.instance.plane2.plane2);
+						break;
+			
+					case 3:
+						body.setUserData(Assets.instance.plane3.plane3);
+						break;
+			
+					case 4:
+						body.setUserData(Assets.instance.plane4.plane4);
+						break;
+				
+					case 5:
+						body.setUserData(Assets.instance.plane5.plane5);
+						break;
+			
+					case 6:
+						body.setUserData(Assets.instance.plane6.plane6);
+						break;
+			
+					case 7:
+						body.setUserData(Assets.instance.plane7.plane7);
+						break;
+			
+					case 8:
+						body.setUserData(Assets.instance.plane8.plane8);
+						break;
+			
+					case 9:
+						body.setUserData(Assets.instance.plane9.plane9);
+						break;
+			
+					case 10:
+						body.setUserData(Assets.instance.plane10.plane10);
+						break;
+				
+				}
+				
+			}
+	
+		}
+		
 		if (body.getFixtureList().first().getUserData() == "hit") {
 			
 			hitPoints--;
-			body.getFixtureList().first().setUserData("plane" + planeType);
+			flashTime = 0f;
+			body.getFixtureList().first().setUserData("flash");
 			
 			if (hitPoints <= 0) {
 				
