@@ -86,7 +86,7 @@ public class Constants {
 	public static final float TURRETYSIZE = .5f;
 	
 	// Game preferences file
-	public static final String PREFERENCES = "pong.prefs";
+	public static final String PREFERENCES = "AirCommander.prefs";
 	
 	// World to Box
 	public static final float WORLD_TO_BOX = .0083f;
@@ -109,9 +109,6 @@ public class Constants {
 		
 	// Player Velocity Increment Desktop
 	public static final float PLAYER_VELOCITY_INC_D = .80f;
-	
-	// Player spawnTime
-	public static final float PLAYER_SPAWN_TIME = 3f;
 	
 	// Max Computer Velocity
 	public static final float MAX_COMPUTER_VELOCITY = 5.0f;
@@ -149,10 +146,22 @@ public class Constants {
 	// Tile Size
 	public static final int TILE_SIZE = 32;
 	
-	// Particle effect scale
-	public static final float PARTICLESCALE = 0.0125f;
+	// Particle effect scale 1
+	public static final float PARTICLESCALE1 = 0.0075f;
+	
+	// Particle effect scale 2
+	public static final float PARTICLESCALE2 = 0.0150f;
 	
 	// Hit flash time
 	public static final float HITFLASHTIME = .10f;
+	
+	// Player spawnTime
+	public static final float PLAYER_SPAWN_TIME = 2f;
+	
+	// Player flash spawn time
+	public static final float PLAYER_FLASH_TIME = .25f;
+	
+	// Player delay time: to let particle effect finish
+	public static final float PLAYER_DELAY_TIME = 1.0f;
 		
 }

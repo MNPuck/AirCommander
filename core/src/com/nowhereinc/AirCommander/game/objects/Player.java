@@ -48,6 +48,12 @@ public class Player {
 	// spawn time counter
 	private float spawnTime;
 	
+	// spawn time counter
+	private float spawnFlashTime;
+	
+	// spawn hit boolean to determine which image is showing
+	private boolean isSpawnHit;
+	
 	// spawn boolean
 	private boolean isSpawning;
 
@@ -81,6 +87,8 @@ public class Player {
 			
 			isSpawning = true;
 			spawnTime = 0f;
+			spawnFlashTime = 0f;
+			isSpawnHit = true;
 			body.createFixture(fixtureDefPlayer).setUserData("spawn");
 			body.setUserData(Assets.instance.plane10Hit.plane10Hit);
 			
@@ -122,6 +130,14 @@ public class Player {
 	
 	}
 	
+	// return player center
+	
+	public Vector2 returnPlayerCenter() {
+		
+		return this.body.getPosition();
+			
+	}
+	
 	// return player x top and y center to fire bullet from
 	
 	public Vector2 returnPlayerPosition() {
@@ -157,6 +173,28 @@ public class Player {
 				isSpawning = false;
 				body.getFixtureList().first().setUserData("player");
 				body.setUserData(Assets.instance.plane10.plane10);
+				
+			}
+			
+			spawnFlashTime += deltaTime;
+			
+			if (spawnFlashTime > Constants.PLAYER_FLASH_TIME) {
+				
+				if (isSpawnHit) {
+					
+					isSpawnHit = false;
+					body.setUserData(Assets.instance.plane10.plane10);
+					
+				}
+				
+				else {
+					
+					isSpawnHit = true;
+					body.setUserData(Assets.instance.plane10Hit.plane10Hit);
+					
+				}
+				
+				spawnFlashTime = 0f;
 				
 			}
 			
@@ -307,6 +345,28 @@ public class Player {
 				isSpawning = false;
 				body.getFixtureList().first().setUserData("player");
 				body.setUserData(Assets.instance.plane10.plane10);
+				
+			}
+			
+			spawnFlashTime += deltaTime;
+			
+			if (spawnFlashTime > Constants.PLAYER_FLASH_TIME) {
+				
+				if (isSpawnHit) {
+					
+					isSpawnHit = false;
+					body.setUserData(Assets.instance.plane10.plane10);
+					
+				}
+				
+				else {
+					
+					isSpawnHit = true;
+					body.setUserData(Assets.instance.plane10Hit.plane10Hit);
+					
+				}
+				
+				spawnFlashTime = 0f;
 				
 			}
 			

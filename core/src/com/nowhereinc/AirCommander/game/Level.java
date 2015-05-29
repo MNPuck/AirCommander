@@ -96,9 +96,19 @@ public class Level {
 	// tank Counter
 	private int tankCounter;
 	
-	// enemy particle pool
+	// player delay time;
+	private float playerDelayTime;
+	
+	// player delay switch
+	private boolean playerDelaySwitch;
+	
+	// particle pool 1
 	public ParticleEffectPool pool1;
 	public Array<PooledEffect> activeEffects1;
+	
+	// particle pool 2
+	public ParticleEffectPool pool2;
+	public Array<PooledEffect> activeEffects2;
 	
 	public Level () {
 
@@ -131,29 +141,56 @@ public class Level {
 		// bullets
 		bullets = new Array<Bullet>();
 		
-		// create enemy 1 Particle Pool
+		// player delay switch
+		playerDelaySwitch = false;
 		
-		ParticleEffect explosionEffect = new ParticleEffect();
+		// Particle Pool 1
 		
-		explosionEffect.load(Gdx.files.internal("particles/enemyExp.pfx"),
+		ParticleEffect explosionEffect1 = new ParticleEffect();
+		
+		explosionEffect1.load(Gdx.files.internal("particles/enemyExp.pfx"),
 				Gdx.files.internal("particles"));
 		
-		float pScale = Constants.PARTICLESCALE;
+		float pScale = Constants.PARTICLESCALE1;
 
-	    float scaling = explosionEffect.getEmitters().get(0).getScale().getHighMax();
-	    explosionEffect.getEmitters().get(0).getScale().setHigh(scaling * pScale);
+	    float scaling = explosionEffect1.getEmitters().get(0).getScale().getHighMax();
+	    explosionEffect1.getEmitters().get(0).getScale().setHigh(scaling * pScale);
 
-	    scaling = explosionEffect.getEmitters().get(0).getScale().getLowMax();
-	    explosionEffect.getEmitters().get(0).getScale().setLow(scaling * pScale);
+	    scaling = explosionEffect1.getEmitters().get(0).getScale().getLowMax();
+	    explosionEffect1.getEmitters().get(0).getScale().setLow(scaling * pScale);
 	    
-	    scaling = explosionEffect.getEmitters().get(0).getVelocity().getHighMax();
-	    explosionEffect.getEmitters().get(0).getVelocity().setHigh(scaling * pScale);
+	    scaling = explosionEffect1.getEmitters().get(0).getVelocity().getHighMax();
+	    explosionEffect1.getEmitters().get(0).getVelocity().setHigh(scaling * pScale);
 
-	    scaling = explosionEffect.getEmitters().get(0).getVelocity().getLowMax();
-	    explosionEffect.getEmitters().get(0).getVelocity().setLow(scaling * pScale);
+	    scaling = explosionEffect1.getEmitters().get(0).getVelocity().getLowMax();
+	    explosionEffect1.getEmitters().get(0).getVelocity().setLow(scaling * pScale);
 	    
-	    pool1 = new ParticleEffectPool(explosionEffect, 10 , 30);
+	    pool1 = new ParticleEffectPool(explosionEffect1, 10 , 30);
 	    activeEffects1 = new Array<PooledEffect>();
+	    
+		// Particle Pool 2
+		
+		ParticleEffect explosionEffect2 = new ParticleEffect();
+		
+		explosionEffect2.load(Gdx.files.internal("particles/enemyExp.pfx"),
+				Gdx.files.internal("particles"));
+		
+		pScale = Constants.PARTICLESCALE2;
+
+	    scaling = explosionEffect2.getEmitters().get(0).getScale().getHighMax();
+	    explosionEffect2.getEmitters().get(0).getScale().setHigh(scaling * pScale);
+
+	    scaling = explosionEffect2.getEmitters().get(0).getScale().getLowMax();
+	    explosionEffect2.getEmitters().get(0).getScale().setLow(scaling * pScale);
+	    
+	    scaling = explosionEffect2.getEmitters().get(0).getVelocity().getHighMax();
+	    explosionEffect2.getEmitters().get(0).getVelocity().setHigh(scaling * pScale);
+
+	    scaling = explosionEffect2.getEmitters().get(0).getVelocity().getLowMax();
+	    explosionEffect2.getEmitters().get(0).getVelocity().setLow(scaling * pScale);
+	    
+	    pool2 = new ParticleEffectPool(explosionEffect2, 10 , 30);
+	    activeEffects2 = new Array<PooledEffect>();
 		
 		// set to new game
 		newGame = true;
@@ -205,59 +242,36 @@ public class Level {
 		
 		addObjects(cameraPosition);
 		
-		// player update
+		// see if player is in delay period
 		
-		switch (Gdx.app.getType()) {
+		if (playerDelaySwitch) {
+			
+			playerDelayTime += deltaTime;
+			
+			if (playerDelayTime > Constants.PLAYER_DELAY_TIME) {
+				
+				playerDelaySwitch = false;
+				
+				player = null;
+				player = new Player(world, cameraPosition, true);
+				
+			}
 		
-			case Desktop: 
-				player.updateDesktop(deltaTime, cameraPosition, isScrolling);
-				break;
-			
-			case Android:
-				 player.updateAndroid(deltaTime, cameraPosition, isScrolling);
-				 break;
-			
-			default:
-				 break;
-	
-		}	
+		}
 		
-		// get player position
+		if (!playerDelaySwitch) {
+		
+			playerUpdate(deltaTime, cameraPosition);
 			
-		playerPosition = player.returnPlayerPosition();
+		}
 		
 		// planes update
 		
-		for (Plane plane : planes) {
-			
-			plane.update(deltaTime, cameraPosition, playerPosition);
-			score += plane.returnPlaneScore();
-			
-		}
+		planesUpdate(deltaTime, cameraPosition);
 		
 		// tanks update
 		
-		for (Tank tank : tanks) {
-			
-			tank.update(deltaTime, cameraPosition, playerPosition);
-			
-			Vector2 tankVelocity;
-			tankVelocity = new Vector2(0,0);
-			tankVelocity = tank.returnTankVelocity();
-			
-			score += tank.returnTankScore();
-			
-			for (Turret turret : turrets) {
-				
-				if (tank.returnTankValue() == turret.returnTurretValue()) {
-				
-					turret.update(deltaTime, tankVelocity);
-					
-				}
-				
-			}
-			
-		}
+		tanksUpdate(deltaTime, cameraPosition);
 			
 		// bullets update
 		
@@ -269,130 +283,16 @@ public class Level {
 		
 		// player bullets spawn
 		
-		// if time since last bullet > constant, spawn a bullet
+		if (!playerDelaySwitch) {
 		
-		timeSinceLastBulletPlayer += deltaTime;
+			playerBulletsSpawn(deltaTime);
 		
-		if (timeSinceLastBulletPlayer > Constants.BULLET_SPAWN_TIME_PLAYER) {
-			
-			switch (Gdx.app.getType()) {
-			
-				case Desktop: 
-				
-					if (player.returnAButton()) {
-					
-						bullet = null;
-						bullet = new Bullet(world, playerPosition, Constants.MAX_PLAYER_BULLET_VELOCITY, 1, Constants.N);
-						bullets.add((Bullet)bullet);
-					
-						timeSinceLastBulletPlayer = 0;
-					
-					}
-				
-					break;
-				
-				case Android:
-				
-					bullet = null;
-					bullet = new Bullet(world, playerPosition, Constants.MAX_PLAYER_BULLET_VELOCITY, 1, Constants.N);
-					bullets.add((Bullet)bullet);
-				
-					timeSinceLastBulletPlayer = 0;
-				
-					break;
-				
-				default:
-					break;
-		
-			}
-			
 		}
 		
 		// computer bullets spawn
 		
-		timeSinceLastBulletComputer += deltaTime;
-		
-		if (timeSinceLastBulletComputer > Constants.BULLET_SPAWN_TIME_COMPUTER) {
+		computerBulletsSpawn(deltaTime);
 			
-			// loop thru active planes and get their coordinates and init shot
-			
-			for (Plane plane : planes) {
-				
-				if (plane.body.isActive() &&
-					plane.returnPlaneType() < 4) {
-				
-					planePosition = plane.returnPlanePosition();
-				
-					bullet = null;
-					bullet = new Bullet(world, planePosition, Constants.MAX_COMPUTER_BULLET_VELOCITY, 2, Constants.S);
-					bullets.add((Bullet)bullet);
-				
-				}
-				
-				if (plane.body.isActive() &&
-					plane.returnPlaneType() == 4) {
-					
-					planePosition = plane.returnPlanePosition();
-					
-					bullet = null;
-					bullet = new Bullet(world, planePosition, Constants.MAX_COMPUTER_BULLET_VELOCITY, 2, Constants.S);
-					bullets.add((Bullet)bullet);
-					
-					bullet = null;
-					bullet = new Bullet(world, planePosition, Constants.MAX_COMPUTER_BULLET_VELOCITY, 2, Constants.W);
-					bullets.add((Bullet)bullet);
-					
-					bullet = null;
-					bullet = new Bullet(world, planePosition, Constants.MAX_COMPUTER_BULLET_VELOCITY, 2, Constants.E);
-					bullets.add((Bullet)bullet);
-					
-				}
-				
-				
-			}
-			
-			for (Tank tank : tanks) {
-				
-				boolean bulletShot = false;
-				tankPosition = tank.returnTankPosition();
-				
-				// if player is to the right of tank fire bullet SE
-				
-				if (tankPosition.x < playerPosition.x - Constants.PLAYERXSIZE * .5f) {
-					
-					bullet = null;
-					bullet = new Bullet(world, tankPosition, Constants.MAX_COMPUTER_BULLET_VELOCITY, 2, Constants.SE);
-					bullets.add((Bullet)bullet);
-					bulletShot = true;
-					
-				}
-				
-				// if player is to the left of tank fire bullet SW
-				
-				if (tankPosition.x > playerPosition.x + Constants.PLAYERXSIZE * .5f) {
-					
-					bullet = null;
-					bullet = new Bullet(world, tankPosition, Constants.MAX_COMPUTER_BULLET_VELOCITY, 2, Constants.SW);
-					bullets.add((Bullet)bullet);
-					bulletShot = true;
-					
-				}
-				
-				if (!bulletShot) {
-					
-					bullet = null;
-					bullet = new Bullet(world, tankPosition, Constants.MAX_COMPUTER_BULLET_VELOCITY, 2, Constants.S);
-					bullets.add((Bullet)bullet);
-					bulletShot = true;
-					
-				}
-				
-			}
-			
-			timeSinceLastBulletComputer = 0;
-			
-		}
-		
 	}	
 	
 	private void addObjects(Vector2 cameraPosition) {
@@ -415,6 +315,7 @@ public class Level {
 			
 						addPlane(cameraPosition, "plane1", obj.getProperties().get("type", String.class));
 						obj.setName("done");
+					
 					}
 				
 					if ("plane2".equals(obj.getName()) ) {
@@ -561,6 +462,198 @@ public class Level {
 		
 	}
 	
+	private void playerUpdate(float deltaTime, Vector2 cameraPosition) {
+		
+		// player update
+		
+		switch (Gdx.app.getType()) {
+		
+			case Desktop: 
+				player.updateDesktop(deltaTime, cameraPosition, isScrolling);
+				break;
+			
+			case Android:
+				 player.updateAndroid(deltaTime, cameraPosition, isScrolling);
+				 break;
+			
+			default:
+				 break;
+	
+		}	
+		
+		// get player position
+			
+		playerPosition = player.returnPlayerPosition();
+	
+	}
+	
+	private void planesUpdate(float deltaTime, Vector2 cameraPosition) {
+		
+		for (Plane plane : planes) {
+			
+			plane.update(deltaTime, cameraPosition, playerPosition);
+			score += plane.returnPlaneScore();
+			
+		}
+	
+	}
+	
+	private void tanksUpdate(float deltaTime, Vector2 cameraPosition) {
+		
+		for (Tank tank : tanks) {
+			
+			tank.update(deltaTime, cameraPosition, playerPosition);
+			
+			Vector2 tankVelocity;
+			tankVelocity = new Vector2(0,0);
+			tankVelocity = tank.returnTankVelocity();
+			
+			score += tank.returnTankScore();
+			
+			for (Turret turret : turrets) {
+				
+				if (tank.returnTankValue() == turret.returnTurretValue()) {
+				
+					turret.update(deltaTime, tankVelocity);
+					
+				}
+				
+			}
+			
+		}
+		
+	}
+	
+	private void playerBulletsSpawn(float deltaTime) {
+		
+		// if time since last bullet > constant, spawn a bullet
+		
+		timeSinceLastBulletPlayer += deltaTime;
+		
+		if (timeSinceLastBulletPlayer > Constants.BULLET_SPAWN_TIME_PLAYER) {
+			
+			switch (Gdx.app.getType()) {
+			
+				case Desktop: 
+				
+					if (player.returnAButton()) {
+					
+						bullet = null;
+						bullet = new Bullet(world, playerPosition, Constants.MAX_PLAYER_BULLET_VELOCITY, 1, Constants.N);
+						bullets.add((Bullet)bullet);
+					
+						timeSinceLastBulletPlayer = 0;
+					
+					}
+				
+					break;
+				
+				case Android:
+				
+					bullet = null;
+					bullet = new Bullet(world, playerPosition, Constants.MAX_PLAYER_BULLET_VELOCITY, 1, Constants.N);
+					bullets.add((Bullet)bullet);
+				
+					timeSinceLastBulletPlayer = 0;
+				
+					break;
+				
+				default:
+					break;
+		
+			}
+			
+		}
+		
+	}
+	
+	private void computerBulletsSpawn(float deltaTime) {
+		
+		timeSinceLastBulletComputer += deltaTime;
+		
+		if (timeSinceLastBulletComputer > Constants.BULLET_SPAWN_TIME_COMPUTER) {
+			
+			// loop thru active planes and get their coordinates and init shot
+			
+			for (Plane plane : planes) {
+				
+				if (plane.body.isActive() &&
+					plane.returnPlaneType() < 4) {
+				
+					planePosition = plane.returnPlanePosition();
+				
+					bullet = null;
+					bullet = new Bullet(world, planePosition, Constants.MAX_COMPUTER_BULLET_VELOCITY, 2, Constants.S);
+					bullets.add((Bullet)bullet);
+				
+				}
+				
+				if (plane.body.isActive() &&
+					plane.returnPlaneType() == 4) {
+					
+					planePosition = plane.returnPlanePosition();
+					
+					bullet = null;
+					bullet = new Bullet(world, planePosition, Constants.MAX_COMPUTER_BULLET_VELOCITY, 2, Constants.S);
+					bullets.add((Bullet)bullet);
+					
+					bullet = null;
+					bullet = new Bullet(world, planePosition, Constants.MAX_COMPUTER_BULLET_VELOCITY, 2, Constants.W);
+					bullets.add((Bullet)bullet);
+					
+					bullet = null;
+					bullet = new Bullet(world, planePosition, Constants.MAX_COMPUTER_BULLET_VELOCITY, 2, Constants.E);
+					bullets.add((Bullet)bullet);
+					
+				}
+				
+				
+			}
+			
+			for (Tank tank : tanks) {
+				
+				boolean bulletShot = false;
+				tankPosition = tank.returnTankPosition();
+				
+				// if player is to the right of tank fire bullet SE
+				
+				if (tankPosition.x < playerPosition.x - Constants.PLAYERXSIZE * .5f) {
+					
+					bullet = null;
+					bullet = new Bullet(world, tankPosition, Constants.MAX_COMPUTER_BULLET_VELOCITY, 2, Constants.SE);
+					bullets.add((Bullet)bullet);
+					bulletShot = true;
+					
+				}
+				
+				// if player is to the left of tank fire bullet SW
+				
+				if (tankPosition.x > playerPosition.x + Constants.PLAYERXSIZE * .5f) {
+					
+					bullet = null;
+					bullet = new Bullet(world, tankPosition, Constants.MAX_COMPUTER_BULLET_VELOCITY, 2, Constants.SW);
+					bullets.add((Bullet)bullet);
+					bulletShot = true;
+					
+				}
+				
+				if (!bulletShot) {
+					
+					bullet = null;
+					bullet = new Bullet(world, tankPosition, Constants.MAX_COMPUTER_BULLET_VELOCITY, 2, Constants.S);
+					bullets.add((Bullet)bullet);
+					bulletShot = true;
+					
+				}
+				
+			}
+			
+			timeSinceLastBulletComputer = 0;
+			
+		}
+		
+	}
+	
 	public void deleteFlaggedItems(Vector2 cameraPosition) {
 		
 		for (Bullet bullet : bullets) {
@@ -573,7 +666,28 @@ public class Level {
 			
 		}
 		
+		if (!playerDelaySwitch) {
+		
+			Vector2 playerCenter = player.returnPlayerCenter();
+			deleteFlaggedPlayer(cameraPosition, playerCenter);
+		
+		}
+		
+		deleteFlaggedPlanes();
+		deleteFlaggedTanks();
+		
+	}
+	
+	private void deleteFlaggedPlayer(Vector2 cameraPosition, Vector2 playerCenter) {
+		
 		if (player.deletePlayer(world)) {
+			
+			PooledEffect effect = pool2.obtain();
+			
+			if (effect != null) {
+				activeEffects2.add(effect);
+				effect.setPosition(playerCenter.x, playerCenter.y);
+			}
 			
 			lives--;
 			
@@ -585,12 +699,16 @@ public class Level {
 			
 			else {
 				
-				player = null;
-				player = new Player(world, cameraPosition, true);
+				playerDelaySwitch = true;
+				playerDelayTime = 0f;
 				
 			}
 			
 		}
+		
+	}
+	
+	private void deleteFlaggedPlanes() {
 		
 		for (Plane plane : planes) {
 			
@@ -604,18 +722,49 @@ public class Level {
 					
 				}
 				
-				PooledEffect effect = pool1.obtain();
+				if (plane.returnPlaneType() < 4) {
 				
-				if (effect != null) {
-					activeEffects1.add(effect);
-					effect.setPosition(planeCenter.x, planeCenter.y);
+					PooledEffect effect = pool1.obtain();
+				
+					if (effect != null) {
+						activeEffects1.add(effect);
+						effect.setPosition(planeCenter.x, planeCenter.y);
+					}
+				
+				}
+				
+				else {
+					
+					PooledEffect effect = pool2.obtain();
+					
+					// middle
+					
+					if (effect != null) {
+						activeEffects2.add(effect);
+						effect.setPosition(planeCenter.x, planeCenter.y);
+					}
+					
 				}
 				
 				planes.removeValue(plane, true);
 				
 			}
 			
+			else {
+			
+				if (plane.removePlane(world)) {
+				
+					planes.removeValue(plane, true);
+					
+				}
+				
+			}
+			
 		}
+		
+	}
+	
+	private void deleteFlaggedTanks() {
 		
 		for (Tank tank : tanks) {
 			
@@ -672,6 +821,27 @@ public class Level {
 				}
 				
 				tanks.removeValue(tank, true);
+				
+			}
+			
+			else {
+				
+				if (tank.removeTank(world)) {
+					
+					for (Turret turret : turrets){
+						
+						if (saveTankValue == turret.returnTurretValue()) {
+							
+							turret.deleteTurret(world);
+							turrets.removeValue(turret, true);
+							
+						}
+						
+					}
+					
+					tanks.removeValue(tank, true);
+					
+				}
 				
 			}
 			
@@ -755,8 +925,8 @@ public class Level {
 		for (Turret turret : turrets)
 			turret.render(batch);
 		
-		
-		if (lives > 0) {
+		if (lives > 0 &&
+			!playerDelaySwitch) {
 						
 			player.render(batch);
 		
@@ -766,7 +936,7 @@ public class Level {
 		for (Plane plane : planes)
 			plane.render(batch);
 		
-		// draw enemy pooled particle effect
+		// draw pooled particle effect
 		
 		for (int i = 0; i < activeEffects1.size; ) {
 			
@@ -775,6 +945,22 @@ public class Level {
 			if (effect.isComplete()) {
 				pool1.free(effect);
 				activeEffects1.removeIndex(i);
+			}
+			
+			else {
+				effect.draw(batch, deltaTime);
+				i++;
+			}
+			
+		}
+		
+		for (int i = 0; i < activeEffects2.size; ) {
+			
+			PooledEffect effect = activeEffects2.get(i);
+			
+			if (effect.isComplete()) {
+				pool2.free(effect);
+				activeEffects2.removeIndex(i);
 			}
 			
 			else {

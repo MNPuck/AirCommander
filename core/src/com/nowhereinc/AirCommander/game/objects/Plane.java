@@ -431,7 +431,7 @@ public class Plane {
 		
 		if (pos.y < cameraPosition.y + (-Constants.GAMEBOARD_HEIGHT * .5f)) {
 			
-			setDeleteFlag();
+			setRemoveFlag();
 			vel.y = 0;
 			
 		}
@@ -474,7 +474,7 @@ public class Plane {
 		
 		if (pos.y < cameraPosition.y + (-Constants.GAMEBOARD_HEIGHT * .5f)) {
 			
-			setDeleteFlag();
+			setRemoveFlag();
 			vel.y = 0;
 			
 		}
@@ -533,7 +533,7 @@ public class Plane {
 		
 		if (pos.y < cameraPosition.y + (-Constants.GAMEBOARD_HEIGHT * .5f)) {
 			
-			setDeleteFlag();
+			setRemoveFlag();
 			vel.y = 0;
 			
 		}
@@ -564,7 +564,7 @@ public class Plane {
 		
 		if (pos.y < cameraPosition.y + (-Constants.GAMEBOARD_HEIGHT * .5f)) {
 			
-			setDeleteFlag();
+			setRemoveFlag();
 			vel.y = 0;
 			
 		}
@@ -611,7 +611,7 @@ public class Plane {
 		
 		if (pos.y < cameraPosition.y + (-Constants.GAMEBOARD_HEIGHT * .5f)) {
 			
-			setDeleteFlag();
+			setRemoveFlag();
 			vel.y = 0;
 			
 		}
@@ -654,7 +654,7 @@ public class Plane {
 		
 		if (pos.y < cameraPosition.y + (-Constants.GAMEBOARD_HEIGHT * .5f)) {
 			
-			setDeleteFlag();
+			setRemoveFlag();
 			vel.y = 0;
 			
 		}
@@ -782,6 +782,12 @@ public class Plane {
 
 	}
 	
+	public void setRemoveFlag() {
+		
+		body.setUserData("remove");
+		
+	}
+	
 	public int returnPlaneScore() {
 		
 		if (body.getUserData().equals("delete")) {
@@ -850,11 +856,35 @@ public class Plane {
 		}
 		
 	}
+	
+	public boolean removePlane(World world) {
+		
+		if(body.getUserData() == "remove") {
+		
+			// delete body
+		
+			body.setActive(false);
+			body.setUserData(null);
+			body = null;
+			
+			return true;
+		
+		}
+		
+		else {
+			
+			return false;
+			
+		}
+		
+	}
+
 
 	public void render (SpriteBatch batch) {
 			
 		if (body.getUserData() != "delete" &&
-			body.isActive() != false) {
+			body.isActive() != false &&
+			body.getUserData() != "remove") {
 					
 			Vector2 position = this.body.getPosition();
 			

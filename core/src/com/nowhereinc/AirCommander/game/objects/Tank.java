@@ -272,7 +272,7 @@ public class Tank {
 		
 		if (pos.y < cameraPosition.y + (-Constants.GAMEBOARD_HEIGHT * .5f)) {
 			
-			setDeleteFlag();
+			setRemoveFlag();
 			vel.y = 0;
 			
 		}
@@ -315,7 +315,7 @@ public class Tank {
 		
 		if (pos.y < cameraPosition.y + (-Constants.GAMEBOARD_HEIGHT * .5f)) {
 			
-			setDeleteFlag();
+			setRemoveFlag();
 			vel.y = 0;
 			
 		}
@@ -338,7 +338,7 @@ public class Tank {
 		
 		if (pos.y < cameraPosition.y + (-Constants.GAMEBOARD_HEIGHT * .5f)) {
 			
-			setDeleteFlag();
+			setRemoveFlag();
 			vel.y = 0;
 			
 		}
@@ -359,6 +359,12 @@ public class Tank {
 	public void setDeleteFlag() {
 		
 		body.setUserData("delete");
+
+	}
+	
+	public void setRemoveFlag() {
+		
+		body.setUserData("remove");
 
 	}
 	
@@ -422,11 +428,34 @@ public class Tank {
 		}
 		
 	}
+	
+	public boolean removeTank(World world) {
+		
+		if(body.getUserData() == "remove") {
+		
+			// delete body
+		
+			body.setActive(false);
+			body.setUserData(null);
+			body = null;
+			
+			return true;
+		
+		}
+		
+		else {
+			
+			return false;
+			
+		}
+		
+	}
 
 	public void render (SpriteBatch batch) {
 			
 		if (body.getUserData() != "delete" &&
-			body.isActive() != false) {
+			body.isActive() != false &&
+			body.getUserData() != "remove") {
 					
 			Vector2 position = this.body.getPosition();
 			
