@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="9" height="128" tilewidth="32" tileheight="32" nextobjectid="104">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="9" height="128" tilewidth="32" tileheight="32" nextobjectid="105">
  <tileset firstgid="1" name="grass" tilewidth="32" tileheight="32">
   <image source="Tiles/grass.png" width="128" height="128"/>
  </tileset>
@@ -29,28 +29,14 @@
   <object id="36" name="plane1" type="NW" x="20" y="748"/>
   <object id="38" name="plane1" type="NE" x="272" y="784"/>
   <object id="39" name="plane1" type="NW" x="20" y="1197"/>
-  <object id="40" name="plane1" type="NW" x="17" y="689"/>
   <object id="41" name="plane1" type="NE" x="271" y="2124"/>
   <object id="44" name="plane1" type="NW" x="16" y="3313"/>
-  <object id="47" name="plane1" type="NE" x="270" y="2960"/>
-  <object id="50" name="plane1" type="NW" x="15" y="2865"/>
-  <object id="53" name="plane1" type="NE" x="270" y="721"/>
   <object id="54" name="plane1" type="NW" x="15" y="623"/>
   <object id="55" name="plane1" type="NE" x="274" y="655"/>
-  <object id="58" name="plane1" type="NE" x="273" y="1713"/>
-  <object id="59" name="plane1" type="NE" x="269" y="1648"/>
-  <object id="60" name="plane2" type="NE" x="272" y="3534"/>
-  <object id="61" name="plane2" type="NW" x="17" y="3245"/>
   <object id="62" name="plane2" type="NE" x="272" y="3118"/>
   <object id="63" name="plane2" type="NW" x="14" y="3053"/>
-  <object id="64" name="plane2" type="NE" x="272" y="2639"/>
-  <object id="65" name="plane2" type="NE" x="270" y="2573"/>
-  <object id="66" name="plane2" type="NW" x="17" y="2512"/>
-  <object id="67" name="plane2" type="NW" x="16" y="2445"/>
   <object id="68" name="plane1" type="NW" x="17" y="2192"/>
   <object id="69" name="plane1" type="NE" x="274" y="2063"/>
-  <object id="70" name="plane2" type="NW" x="15" y="1932"/>
-  <object id="71" name="plane2" type="NE" x="274" y="1932"/>
   <object id="72" name="plane2" type="NW" x="14" y="1586"/>
   <object id="73" name="plane2" type="NW" x="18" y="1518"/>
   <object id="74" name="plane1" type="NE" x="271" y="1457"/>
@@ -58,28 +44,22 @@
   <object id="76" name="plane1" type="NE" x="270" y="1104"/>
   <object id="77" name="plane1" type="NE" x="273" y="1035"/>
   <object id="78" name="plane4" type="N" x="144" y="17"/>
-  <object id="80" name="plane3" type="NE2" x="208" y="3470"/>
-  <object id="81" name="plane3" type="NW2" x="78" y="3408"/>
   <object id="82" name="plane3" type="NW2" x="111" y="2000"/>
-  <object id="83" name="plane3" type="NW2" x="82" y="2707"/>
+  <object id="83" name="plane3" type="NW2" x="82" y="2675"/>
   <object id="84" name="plane3" type="NE2" x="209" y="1865"/>
   <object id="85" name="plane3" type="NW2" x="83" y="1807"/>
   <object id="86" name="plane3" type="NE2" x="210" y="911"/>
   <object id="87" name="plane3" type="NW2" x="84" y="880"/>
   <object id="88" name="plane2" type="NW" x="16" y="557"/>
-  <object id="89" name="plane2" type="NW" x="13" y="433"/>
   <object id="90" name="plane3" type="NW2" x="77" y="240"/>
   <object id="91" name="plane3" type="NW2" x="80" y="177"/>
   <object id="92" name="plane2" type="NE" x="270" y="497"/>
   <object id="93" name="plane3" type="NE2" x="208" y="370"/>
   <object id="94" name="plane3" type="NE2" x="208" y="305"/>
   <object id="95" name="tank1" type="N" x="148" y="461"/>
-  <object id="96" name="tank1" type="N" x="144" y="3148"/>
   <object id="97" name="tank1" type="N" x="147" y="2349"/>
   <object id="98" name="tank1" type="N" x="146" y="1677"/>
-  <object id="99" name="plane3" type="NE2" x="208" y="2189"/>
-  <object id="100" name="tank1" type="NE2" x="205" y="2732"/>
-  <object id="102" name="tank1" type="NE2" x="207" y="1423"/>
-  <object id="103" name="tank1" type="NW2" x="80" y="1330"/>
+  <object id="100" name="tank1" type="NE2" x="144" y="2865"/>
+  <object id="104" name="plane3" type="NW2" x="180" y="2543"/>
  </objectgroup>
 </map>

@@ -9,13 +9,12 @@ public class Constants {
 	public static final float VIEWPORT_HEIGHT = 16.0f;
 	
 	// GameWorld Border
-	
 	public static final float GAMEBOARD_WIDTH = 9.0f;
 	public static final float GAMEBOARD_HEIGHT = 16.0f;
 	
 	// Level Size Input Size
 	public static final float LEVEL_INPUT_WIDTH = 9.0f;
-	public static final float LEVEL_INPUT_HEIGHT = 64.0f;
+	public static final float LEVEL_INPUT_HEIGHT = 128.0f;
 
 	// GUI Width
 	public static final float VIEWPORT_GUI_WIDTH = 1920.0f;

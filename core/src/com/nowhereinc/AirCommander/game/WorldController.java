@@ -31,6 +31,8 @@ public class WorldController extends InputAdapter {
 	private float tsXAxis;
 	private float tsYAxis;
 	
+	private int levelNumber;
+	
 	public CameraHelper cameraHelper;
 	
 	Vector2 cameraPosition;
@@ -67,16 +69,19 @@ public class WorldController extends InputAdapter {
 		gameOver = false;
 		escPressed = false;
 		
+		levelNumber = 1;
+		
 		initLevel();
 		
 	}
 	
 	private void initLevel() {
 		
-		level = new Level();
+		level = new Level(levelNumber);
 		
 		// cameraHelper.setTarget(level.player.body);
 		
+		cameraHelper.setPosition(0, 0);
 		cameraPosition = cameraHelper.getPosition();
 	
 	}
@@ -126,6 +131,15 @@ public class WorldController extends InputAdapter {
 			
 				cameraPosition = cameraHelper.getPosition();
 				cameraPosition.y += Constants.SCROLL_SPEED * deltaTime;
+				
+				// camera is at the end of level, start new level
+				
+				if (cameraPosition.y > Constants.LEVEL_INPUT_HEIGHT - Constants.GAMEBOARD_HEIGHT * .5f) {
+					
+					levelNumber++;
+					initLevel();
+					
+				}
 				
 			}
 			

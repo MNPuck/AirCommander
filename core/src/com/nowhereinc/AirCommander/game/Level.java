@@ -6,8 +6,12 @@ import com.badlogic.gdx.graphics.g2d.ParticleEffectPool;
 import com.badlogic.gdx.graphics.g2d.ParticleEffectPool.PooledEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.nowhereinc.AirCommander.game.objects.Bullet;
 import com.nowhereinc.AirCommander.game.objects.Plane;
 import com.nowhereinc.AirCommander.game.objects.Player;
@@ -53,7 +57,6 @@ public class Level {
 	// turret array
 	public Array<Turret> turrets;
 	
-	
 	// level objects
 	public LevelBuilder levels;
 	
@@ -90,7 +93,7 @@ public class Level {
 	// time since last bullet
 	private float timeSinceLastBulletComputer;
 	
-	// booelan to tell world controller if map should be scrolled
+	// boolean to tell world controller if map should be scrolled
 	private boolean isScrolling;
 	
 	// tank Counter
@@ -110,15 +113,21 @@ public class Level {
 	public ParticleEffectPool pool2;
 	public Array<PooledEffect> activeEffects2;
 	
-	public Level () {
+	// tiled map
+	public TiledMap map;
+	
+	public MapObjects mapObjects;
+	public MapLayer mapObjectLayer;
+	
+	public Level (int levelNumberIn) {
 
-		init();
+		init(levelNumberIn);
 	}
 		
-	private void init() {
+	private void init(int levelNumberIn) {
 		
 		// level number
-		levelNumber = 0;
+		levelNumber = levelNumberIn;
 		
 		// world
 		world = new World(new Vector2(0f, 0f), true);
@@ -228,7 +237,15 @@ public class Level {
 		// set tank counter to 0
 		tankCounter = 0;
 		
-		newLevel();
+		loadLevel();
+		
+		// load tiled map
+		map = new TmxMapLoader().load("maps/AirCommander" + levelNumber + ".tmx");
+		
+		// assign objects
+		mapObjectLayer = map.getLayers().get("Object Layer 1");
+		
+		mapObjects = mapObjectLayer.getObjects();
 		
 	}
 	
@@ -299,96 +316,92 @@ public class Level {
 		
 		// loop thru object layer and look for planes that are on screen
 		
-		for (MapObject obj : Assets.instance.mapObjectLayer.getObjects()) {
+		for (MapObject obj : mapObjects) {
 			
-			if (obj instanceof RectangleMapObject) {
+			Rectangle rect = ((RectangleMapObject) obj).getRectangle();
+				
+			Vector2 conPos = new Vector2(rect.x, rect.y);
+				
+			conPos = ConvertPosition(conPos);
+				
+			if (conPos.y < cameraPosition.y + (Constants.GAMEBOARD_HEIGHT * .5f)) {
 			
-				Rectangle rect = ((RectangleMapObject) obj).getRectangle();
-				
-				Vector2 conPos = new Vector2(rect.x, rect.y);
-				
-				conPos = ConvertPosition(conPos);
-				
-				if (conPos.y < cameraPosition.y + (Constants.GAMEBOARD_HEIGHT * .5f)) {
+				if ("plane1".equals(obj.getName()) ) {
 			
-					if ("plane1".equals(obj.getName()) ) {
-			
-						addPlane(cameraPosition, "plane1", obj.getProperties().get("type", String.class));
-						obj.setName("done");
+					addPlane(cameraPosition, "plane1", obj.getProperties().get("type", String.class));
+					mapObjects.remove(obj);
 					
-					}
+				}
 				
-					if ("plane2".equals(obj.getName()) ) {
+				if ("plane2".equals(obj.getName()) ) {
 					
-						addPlane(cameraPosition, "plane2", obj.getProperties().get("type", String.class));
-						obj.setName("done");
-					}
-				
-					if ("plane3".equals(obj.getName()) ) {
-					
-						addPlane(cameraPosition, "plane3", obj.getProperties().get("type", String.class));
-						obj.setName("done");
-					}
-				
-					if ("plane4".equals(obj.getName()) ) {
-					
-						addPlane(cameraPosition, "plane4", obj.getProperties().get("type", String.class));
-						obj.setName("done");
-						isScrolling = false;
-					}
-				
-					if ("plane5".equals(obj.getName()) ) {
-					
-						addPlane(cameraPosition, "plane5", obj.getProperties().get("type", String.class));
-						obj.setName("done");
-					}
-				
-					if ("plane6".equals(obj.getName()) ) {
-					
-						addPlane(cameraPosition, "plane6", obj.getProperties().get("type", String.class));
-						obj.setName("done");
-					}
-				
-					if ("plane7".equals(obj.getName()) ) {
-					
-						addPlane(cameraPosition, "plane7", obj.getProperties().get("type", String.class));
-						obj.setName("done");
-					}
-				
-					if ("plane8".equals(obj.getName()) ) {
-						
-						addPlane(cameraPosition, "plane8", obj.getProperties().get("type", String.class));
-						obj.setName("done");
-					}
-				
-					if ("plane9".equals(obj.getName()) ) {
-					
-						addPlane(cameraPosition, "plane9", obj.getProperties().get("type", String.class));
-						obj.setName("done");
-					}
-				
-					if ("plane10".equals(obj.getName()) ) {
-					
-						addPlane(cameraPosition, "plane10", obj.getProperties().get("type", String.class));
-						obj.setName("done");
-					}
-					
-					if ("tank1".equals(obj.getName()) ) {
-						
-						addTank(cameraPosition, "tank1", obj.getProperties().get("type", String.class));
-						obj.setName("done");
-					}
-					
-					if ("tank2".equals(obj.getName()) ) {
-						
-						addTank(cameraPosition, "tank2", obj.getProperties().get("type", String.class));
-						obj.setName("done");
-					}
-				
+					addPlane(cameraPosition, "plane2", obj.getProperties().get("type", String.class));
+					mapObjects.remove(obj);
 				}
 			
-			}
+				if ("plane3".equals(obj.getName()) ) {
+					
+					addPlane(cameraPosition, "plane3", obj.getProperties().get("type", String.class));
+					mapObjects.remove(obj);
+				}
 				
+				if ("plane4".equals(obj.getName()) ) {
+					
+					addPlane(cameraPosition, "plane4", obj.getProperties().get("type", String.class));
+					mapObjects.remove(obj);
+					isScrolling = false;
+				}
+				
+				if ("plane5".equals(obj.getName()) ) {
+					
+					addPlane(cameraPosition, "plane5", obj.getProperties().get("type", String.class));
+					mapObjects.remove(obj);
+				}
+				
+				if ("plane6".equals(obj.getName()) ) {
+					
+					addPlane(cameraPosition, "plane6", obj.getProperties().get("type", String.class));
+					mapObjects.remove(obj);
+				}
+				
+				if ("plane7".equals(obj.getName()) ) {
+					
+					addPlane(cameraPosition, "plane7", obj.getProperties().get("type", String.class));
+					mapObjects.remove(obj);
+				}
+				
+				if ("plane8".equals(obj.getName()) ) {
+						
+					addPlane(cameraPosition, "plane8", obj.getProperties().get("type", String.class));
+					mapObjects.remove(obj);
+				}
+				
+				if ("plane9".equals(obj.getName()) ) {
+					
+					addPlane(cameraPosition, "plane9", obj.getProperties().get("type", String.class));
+					mapObjects.remove(obj);
+				}
+				
+				if ("plane10".equals(obj.getName()) ) {
+					
+					addPlane(cameraPosition, "plane10", obj.getProperties().get("type", String.class));
+					mapObjects.remove(obj);
+				}
+					
+				if ("tank1".equals(obj.getName()) ) {
+						
+					addTank(cameraPosition, "tank1", obj.getProperties().get("type", String.class));
+					mapObjects.remove(obj);
+				}
+					
+				if ("tank2".equals(obj.getName()) ) {
+						
+					addTank(cameraPosition, "tank2", obj.getProperties().get("type", String.class));
+					mapObjects.remove(obj);
+				}
+				
+			}
+			
 		}
 
 	}
@@ -845,27 +858,6 @@ public class Level {
 				
 			}
 			
-		}
-		
-	}
-
-	private void newLevel() {
-		
-		// inc level number 
-		levelNumber++;
-		
-		// if level greater then max level set game over
-		
-		if (levelNumber > Constants.NUMBEROFLEVELS) {
-			
-			isGameOver = true;
-			
-		}
-		
-		else {
-		
-			loadLevel();
-		
 		}
 		
 	}

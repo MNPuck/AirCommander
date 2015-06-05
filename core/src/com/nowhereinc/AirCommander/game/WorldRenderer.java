@@ -45,7 +45,7 @@ public class WorldRenderer implements Disposable {
 		cameraGUI.position.set(0, 0, 0);
 		cameraGUI.setToOrtho(true); // flip y-axis
 		cameraGUI.update();
-		renderer = new OrthogonalTiledMapRenderer(Assets.instance.map, 1f / 32f);
+		renderer = new OrthogonalTiledMapRenderer(worldController.level.map, 1f / 32f);
 		
 		//debugMatrix = new Matrix4(camera.combined);
 		//debugMatrix.scale(Constants.BOX_TO_WORLD, Constants.BOX_TO_WORLD, 1f);
