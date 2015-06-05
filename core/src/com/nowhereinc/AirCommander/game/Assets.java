@@ -28,10 +28,6 @@ public class Assets implements Disposable, AssetErrorListener {
 
 	private AssetManager assetManager;
 	
-	// public TiledMap map;
-	// public MapObjects mapObjects;
-	// public MapLayer mapObjectLayer;
-	
 	public AssetFonts fonts;
 	
 	public AssetBullet1 bullet1;
@@ -646,11 +642,6 @@ public class Assets implements Disposable, AssetErrorListener {
 		for (String a : assetManager.getAssetNames()) {
 			Gdx.app.debug(TAG, "asset: " + a);
 		}
-		
-		// map = assetManager.get("maps/AirCommander1.tmx");
-		// mapObjectLayer = map.getLayers().get("Object Layer 1");
-		
-		// mapObjects = mapObjectLayer.getObjects();
 		
 		TextureAtlas atlas = assetManager.get(Constants.TEXTURE_ATLAS_OBJECTS);
 

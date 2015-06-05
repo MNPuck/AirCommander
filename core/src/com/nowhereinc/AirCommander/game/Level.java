@@ -20,6 +20,7 @@ import com.nowhereinc.AirCommander.game.objects.Turret;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
+import com.nowhereinc.AirCommander.util.AudioManager;
 import com.nowhereinc.AirCommander.util.Constants;
 import com.nowhereinc.AirCommander.game.Assets;
 
@@ -554,6 +555,8 @@ public class Level {
 						bullet = null;
 						bullet = new Bullet(world, playerPosition, Constants.MAX_PLAYER_BULLET_VELOCITY, 1, Constants.N);
 						bullets.add((Bullet)bullet);
+						
+						AudioManager.instance.play(Assets.instance.sounds.shipShot, .5f);
 					
 						timeSinceLastBulletPlayer = 0;
 					
@@ -566,6 +569,8 @@ public class Level {
 					bullet = null;
 					bullet = new Bullet(world, playerPosition, Constants.MAX_PLAYER_BULLET_VELOCITY, 1, Constants.N);
 					bullets.add((Bullet)bullet);
+					
+					AudioManager.instance.play(Assets.instance.sounds.shipShot, .5f);
 				
 					timeSinceLastBulletPlayer = 0;
 				
@@ -702,6 +707,8 @@ public class Level {
 				effect.setPosition(playerCenter.x, playerCenter.y);
 			}
 			
+			AudioManager.instance.play(Assets.instance.sounds.shipExplosion, .5f);
+			
 			lives--;
 			
 			if (lives == 0) {
@@ -743,6 +750,8 @@ public class Level {
 						activeEffects1.add(effect);
 						effect.setPosition(planeCenter.x, planeCenter.y);
 					}
+					
+					AudioManager.instance.play(Assets.instance.sounds.enemyExplosion, .5f);
 				
 				}
 				
@@ -750,12 +759,12 @@ public class Level {
 					
 					PooledEffect effect = pool2.obtain();
 					
-					// middle
-					
 					if (effect != null) {
 						activeEffects2.add(effect);
 						effect.setPosition(planeCenter.x, planeCenter.y);
 					}
+					
+					AudioManager.instance.play(Assets.instance.sounds.enemyExplosion, .5f);
 					
 				}
 				
@@ -832,6 +841,8 @@ public class Level {
 					activeEffects1.add(effect);
 					effect.setPosition(tankCenter.x, tankCenter.y);
 				}
+				
+				AudioManager.instance.play(Assets.instance.sounds.enemyExplosion, .5f);
 				
 				tanks.removeValue(tank, true);
 				

@@ -136,9 +136,13 @@ public class WorldController extends InputAdapter {
 				
 				if (cameraPosition.y > Constants.LEVEL_INPUT_HEIGHT - Constants.GAMEBOARD_HEIGHT * .5f) {
 					
+					// destroy current level
+					
+					level = null;
+					
 					levelNumber++;
 					initLevel();
-					
+										
 				}
 				
 			}
